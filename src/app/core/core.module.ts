@@ -4,6 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [],
@@ -13,6 +14,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    SharedModule,
   ],
 })
 export class CoreModule {}
