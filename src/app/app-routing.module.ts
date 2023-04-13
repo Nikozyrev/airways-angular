@@ -9,6 +9,13 @@ const routes: Routes = [
         (m) => m.FlightSearchModule
       ),
   },
+  {
+    path: 'flights',
+    loadChildren: () =>
+      import('./flight-selection/flight-selection.module').then(
+        (m) => m.FlightSelectionModule
+      ),
+  },
 ];
 
 @NgModule({
