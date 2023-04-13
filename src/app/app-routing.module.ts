@@ -17,10 +17,17 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'booking-details',
+    path: 'details',
     loadChildren: () =>
       import('./booking-details/booking-details.module').then(
         (m) => m.BookingDetailsModule
+      ),
+  },
+  {
+    path: 'summary',
+    loadChildren: () =>
+      import('./booking-summary/booking-summary.module').then(
+        (m) => m.BookingSummaryModule
       ),
   },
 ];
