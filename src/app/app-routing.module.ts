@@ -16,6 +16,13 @@ const routes: Routes = [
         (m) => m.FlightSelectionModule
       ),
   },
+  {
+    path: 'booking-details',
+    loadChildren: () =>
+      import('./booking-details/booking-details.module').then(
+        (m) => m.BookingDetailsModule
+      ),
+  },
 ];
 
 @NgModule({
