@@ -44,6 +44,10 @@ const routes: Routes = [
         (m) => m.UserAccountModule
       ),
   },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({
