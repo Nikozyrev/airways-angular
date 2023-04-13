@@ -37,6 +37,13 @@ const routes: Routes = [
         (m) => m.ShoppingCartModule
       ),
   },
+  {
+    path: 'account',
+    loadChildren: () =>
+      import('./user-account/user-account.module').then(
+        (m) => m.UserAccountModule
+      ),
+  },
 ];
 
 @NgModule({
