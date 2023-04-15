@@ -1,0 +1,46 @@
+import { Component, OnInit } from '@angular/core';
+import { FormsArray } from '../models/header.models';
+import { NavigationEnd, Router } from '@angular/router';
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+})
+export class HeaderComponent implements OnInit {
+  selectedValue!: string;
+
+  selectedCurrencyValue!: string;
+
+  activeRout!: any;
+
+  dates: FormsArray[] = [
+    { value: 'MM/DD/YYYY', viewValue: 'MM/DD/YYYY' },
+    { value: 'DD/MM/YYYY', viewValue: 'DD/MM/YYYY' },
+    { value: 'YYYY/DD/MM', viewValue: 'YYYY/DD/MM' },
+    { value: 'YYYY/MM/DD', viewValue: 'YYYY/MM/DD' },
+  ];
+
+  currencies: FormsArray[] = [
+    { value: 'EUR', viewValue: 'EUR' },
+    { value: 'USA', viewValue: 'USA' },
+    { value: 'RUB', viewValue: 'RUB' },
+    { value: 'PLN', viewValue: 'PLN' },
+  ];
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.activeRout = this.router.url;
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url === '/') {
+          this.activeRout = false;
+          return;
+        }
+        this.activeRout = event.url;
+        console.log(this.activeRout);
+      }
+    });
+  }
+}
