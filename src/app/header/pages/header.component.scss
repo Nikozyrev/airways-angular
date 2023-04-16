@@ -1,5 +1,7 @@
+@import "../../../styles/variables.scss";
+
 .header {
-  background: rgba(116, 118, 122, 0.2);
+  background: $dark-grey-transparent;
   padding-top: 22px;
   padding-bottom: 24px;
 }
@@ -7,14 +9,17 @@
 .header__wraper {
   display: flex;
   align-items: center;
-  gap: 2.1rem;
+  gap: 2rem;
+}
+
+.header-logo {
+  min-width: 115px;
 }
 
 .header__title {
-  color: #fff;
-  font-size: 16px;
+  color: $white;
+  font-size: $font-size-main;
   line-height: 24px;
-  margin: 0;
 }
 
 .header__menu {
@@ -30,10 +35,10 @@
 
 .header__button {
   height: 40px;
-  background-color: rgba(241, 243, 246, 0.15);
+  background-color: $gray-transparent;
   padding: 10px 21px 10px 16px;
   gap: 0.813rem;
-  border: 0.5px solid #cecece;
+  border: 0.5px solid $white-grey;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -63,15 +68,15 @@
   border-radius: 100px;
   width: 16px;
   height: 16px;
-  background-color: #74767a;
-  font-weight: 600;
-  font-size: 12px;
-  color: #ffffff;
+  background-color: $light-gray;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-small;
+  color: $white;
 }
 
 .page__num-active {
   font-size: 0;
-  background-color: #0090bd;
+  background-color: $light-blue;
   background-image: url("/assets/active.svg");
   background-repeat: no-repeat;
   background-position: center;
@@ -79,15 +84,36 @@
 
 .page__num-active-complete {
   font-size: 0;
-  background-color: #0090bd;
+  background-color: $light-blue;
   background-image: url("/assets/complete.svg");
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.page__name {
+  font-size: $font-size-average;
+  font-weight: $font-weight-default;
+  letter-spacing: 0.1px;
+  line-height: 20px;
+  color: $light-gray;
 }
 
 .separator {
   height: 1px;
   background: rgba(116, 118, 122, 0.6);
   transform: matrix(1, 0, 0, -1, 0, 0);
-  width: 79.9px;
+  width: 79px;
+}
+
+.shopping_basket-img {
+  min-width: 22px;
+}
+
+@media (max-width: 1130px) {
+  .header__wraper{
+    gap: 0.8rem;
+  }
+  .separator{
+    width: 45px;
+  }
 }

@@ -1,0 +1,65 @@
+@import "../../../../styles/variables.scss";
+
+:host {
+  border-top: 1px solid #d0d9df;
+}
+
+._container {
+  min-height: 92px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (max-width: 840px) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+  }
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  color: $primary-blue;
+
+  @media screen and (max-width: 840px) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  span {
+    margin-right: 5px;
+  }
+}
+
+.developers {
+  display: flex;
+  gap: 7px;
+  padding: 5px;
+  border: 1px solid $primary-blue;
+  border-radius: 10px;
+}
+
+.gh-logo {
+  width: 25px;
+}
+
+.payment {
+  display: flex;
+}
+
+.payment__text {
+  margin-right: 30px;
+
+  @media screen and (max-width: 840px) {
+    display: none;
+  }
+}
+
+.payment__images {
+  display: flex;
+  gap: 16px;
+}

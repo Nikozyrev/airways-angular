@@ -1,0 +1,118 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$primary-palette: (
+  50: #e2e7f0,
+  100: #b8c4d8,
+  200: #889cbf,
+  300: #5874a5,
+  400: #355791,
+  500: #11397e,
+  600: #0f3376,
+  700: #0c2c6b,
+  800: #0a2461,
+  900: #05174e,
+  A100: #8298ff,
+  A200: #4f6eff,
+  A400: #1c45ff,
+  A700: #0330ff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$secondary-palette: (
+  50: #f9fafb,
+  100: #f1f4f5,
+  200: #e8ecef,
+  300: #dee4e9,
+  400: #d7dfe4,
+  500: #d0d9df,
+  600: #cbd5db,
+  700: #c4cfd7,
+  800: #becad2,
+  900: #b3c0ca,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffffff,
+  A700: #ffffff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$warn-palette: (
+  50: #f6e5e4,
+  100: #e8bebc,
+  200: #d9938f,
+  300: #ca6762,
+  400: #be4740,
+  500: #b3261e,
+  600: #ac221a,
+  700: #a31c16,
+  800: #9a1712,
+  900: #8b0d0a,
+  A100: #ffbab9,
+  A200: #ff8886,
+  A400: #ff5653,
+  A700: #ff3d3a,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #ffffff,
+  ),
+);
+
+$airways-primary: mat.define-palette($primary-palette);
+$airways-accent: mat.define-palette($secondary-palette);
+$airways-warn: mat.define-palette($warn-palette);
+
+$airways-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $airways-primary,
+      accent: $airways-accent,
+      warn: $airways-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($airways-theme);

@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit {
           return;
         }
         this.activeRout = event.url;
-        console.log(this.activeRout);
       }
     });
   }

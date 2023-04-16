@@ -1,6 +1,6 @@
 <form>
   <mat-form-field appearance="fill">
-    <mat-select [(ngModel)]="selectedValue" name="date">
+    <mat-select [(ngModel)]="selectedValue" name="date" (selectionChange)="select()">
       <mat-option *ngFor="let value of arrayFrom" [value]="value.value">
         {{value.viewValue}}
       </mat-option>
