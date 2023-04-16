@@ -36,8 +36,9 @@
           </div>
         </li>
       </ul>
-      <div class="header__forms" [ngStyle]="!activeRout || activeRout === '/cart'? {'gap': '2.5rem'} : {}">
-        <h2 *ngIf="!activeRout && activeRout!== '/cart'" class="header__title">
+      <div class="header__forms" [ngStyle]="!activeRout || activeRout === '/cart'? {'gap': '2.5rem'} : {}"
+        [ngClass]="{'header__forms-none': activeRout && activeRout !== '/cart'}">
+        <h2 *ngIf="!activeRout && activeRout !== '/cart'" class="header__title">
           Book flights
         </h2>
         <app-header-from [arrayFrom]="dates"></app-header-from>
@@ -51,6 +52,31 @@
             alt="shopping_basket" class="shopping_basket-img">
         </a>
       </div>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="menu-btn"
+        [ngClass]="{'menu-btn-block ': activeRout && activeRout !== '/cart'}">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <app-header-from [arrayFrom]="dates"></app-header-from>
+        </button>
+        <button mat-menu-item>
+          <app-header-from [arrayFrom]="currencies"></app-header-from>
+        </button>
+        <button mat-menu-item>
+          <button class="header__button">
+            <img src="assets/user-light.svg " alt="user" class="btn-user--img">
+            Sing in
+          </button>
+        </button>
+        <button mat-menu-item routerLink="/cart">
+          <a routerLink="/cart" class="header__shopping_basket-link">
+            <img src="assets/shopping_basket-Light.svg"
+              alt="shopping_basket" class="shopping_basket-img">
+          </a>
+        </button>
+      </mat-menu>
     </div>
   </div>
 </header>
