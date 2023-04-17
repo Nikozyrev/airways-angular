@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsArray } from '../../models/header.models';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthModalService } from '../../../auth/services/auth-modal.service';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +31,10 @@ export class HeaderComponent implements OnInit {
     { value: 'PLN', viewValue: 'PLN' },
   ];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authModalService: AuthModalService
+  ) {}
 
   ngOnInit() {
     this.activeRout = this.router.url;
@@ -43,5 +47,9 @@ export class HeaderComponent implements OnInit {
         this.activeRout = event.url;
       }
     });
+  }
+
+  openAuthDialog() {
+    this.authModalService.openDialog();
   }
 }

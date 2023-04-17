@@ -1,60 +1,105 @@
-<header class="header" [ngStyle]="activeRout ? {'background-color': '#fff'} : {}">
+<header
+  class="header"
+  [ngStyle]="activeRout ? { 'background-color': '#fff' } : {}"
+>
   <div class="_container">
-    <div class="header__wraper"
-      [ngStyle]="!activeRout || activeRout === '/cart' ? {'justify-content': 'space-between'} : {}">
+    <div
+      class="header__wraper"
+      [ngStyle]="
+        !activeRout || activeRout === '/cart'
+          ? { 'justify-content': 'space-between' }
+          : {}
+      "
+    >
       <a routerLink="/" class="header__logo-link">
-        <img src="assets/Logo.svg" alt="logo" class="header-logo">
+        <img src="assets/Logo.svg" alt="logo" class="header-logo" />
       </a>
       <ul *ngIf="activeRout && activeRout !== '/cart'" class="page__menu">
         <li class="page__menu-item">
-          <div class="page__num"
-            [ngClass]="{'page__num-active': activeRout === '/flights', 'page__num-active-complete': activeRout !== '/' && activeRout !== '/flights'}">
+          <div
+            class="page__num"
+            [ngClass]="{
+              'page__num-active': activeRout === '/flights',
+              'page__num-active-complete':
+                activeRout !== '/' && activeRout !== '/flights'
+            }"
+          >
             1
           </div>
-          <div class="page__name">
-            Flights
-          </div>
+          <div class="page__name">Flights</div>
         </li>
         <li class="separator"></li>
         <li class="page__menu-item">
-          <div class="page__num"
-            [ngClass]="{'page__num-active': activeRout !== '/' && activeRout !== '/flights', 'page__num-active-complete': activeRout === '/summary'}">
+          <div
+            class="page__num"
+            [ngClass]="{
+              'page__num-active':
+                activeRout !== '/' && activeRout !== '/flights',
+              'page__num-active-complete': activeRout === '/summary'
+            }"
+          >
             2
           </div>
-          <div class="page__name">
-            Passengers
-          </div>
+          <div class="page__name">Passengers</div>
         </li>
         <li class="separator"></li>
         <li class="page__menu-item">
-          <div class="page__num"
-            [ngClass]="{'page__num-active': activeRout !== '/' && activeRout !== '/flights' && activeRout !== '/details'}">
+          <div
+            class="page__num"
+            [ngClass]="{
+              'page__num-active':
+                activeRout !== '/' &&
+                activeRout !== '/flights' &&
+                activeRout !== '/details'
+            }"
+          >
             3
           </div>
-          <div class="page__name">
-            Review & Payment
-          </div>
+          <div class="page__name">Review & Payment</div>
         </li>
       </ul>
-      <div class="header__forms" [ngStyle]="!activeRout || activeRout === '/cart'? {'gap': '2.5rem'} : {}"
-        [ngClass]="{'header__forms-none': activeRout && activeRout !== '/cart'}">
+      <div
+        class="header__forms"
+        [ngStyle]="
+          !activeRout || activeRout === '/cart' ? { gap: '2.5rem' } : {}
+        "
+        [ngClass]="{
+          'header__forms-none': activeRout && activeRout !== '/cart'
+        }"
+      >
         <h2 *ngIf="!activeRout && activeRout !== '/cart'" class="header__title">
           Book flights
         </h2>
         <app-header-from [arrayFrom]="dates"></app-header-from>
         <app-header-from [arrayFrom]="currencies"></app-header-from>
-        <button class="header__button">
-          <img [src]="activeRout ? 'assets/user-light.svg' : 'assets/User.svg'" alt="user" class="btn-user--img">
-          Sing in
+        <button class="header__button" (click)="openAuthDialog()">
+          <img
+            [src]="activeRout ? 'assets/user-light.svg' : 'assets/User.svg'"
+            alt="user"
+            class="btn-user--img"
+          />
+          Sign in
         </button>
         <a routerLink="/cart" class="header__shopping_basket-link">
-          <img [src]="activeRout ? 'assets/shopping_basket-Light.svg' : 'assets/shopping_basket.svg'"
-            alt="shopping_basket" class="shopping_basket-img">
+          <img
+            [src]="
+              activeRout
+                ? 'assets/shopping_basket-Light.svg'
+                : 'assets/shopping_basket.svg'
+            "
+            alt="shopping_basket"
+            class="shopping_basket-img"
+          />
         </a>
       </div>
 
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="menu-btn"
-        [ngClass]="{'menu-btn-block ': activeRout && activeRout !== '/cart'}">
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+        class="menu-btn"
+        [ngClass]="{ 'menu-btn-block ': activeRout && activeRout !== '/cart' }"
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -65,15 +110,22 @@
           <app-header-from [arrayFrom]="currencies"></app-header-from>
         </button>
         <button mat-menu-item>
-          <button class="header__button">
-            <img src="assets/user-light.svg " alt="user" class="btn-user--img">
-            Sing in
+          <button class="header__button" (click)="openAuthDialog()">
+            <img
+              src="assets/user-light.svg "
+              alt="user"
+              class="btn-user--img"
+            />
+            Sign in
           </button>
         </button>
         <button mat-menu-item routerLink="/cart">
           <a routerLink="/cart" class="header__shopping_basket-link">
-            <img src="assets/shopping_basket-Light.svg"
-              alt="shopping_basket" class="shopping_basket-img">
+            <img
+              src="assets/shopping_basket-Light.svg"
+              alt="shopping_basket"
+              class="shopping_basket-img"
+            />
           </a>
         </button>
       </mat-menu>
