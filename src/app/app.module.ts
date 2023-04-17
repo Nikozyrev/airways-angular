@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { FooterModule } from './footer/footer.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
+    HeaderModule,
     FooterModule,
   ],
   providers: [],
