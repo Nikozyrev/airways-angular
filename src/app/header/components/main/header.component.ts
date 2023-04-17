@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsArray } from '../models/header.models';
+import { FormsArray } from '../../models/header.models';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
@@ -13,6 +13,8 @@ export class HeaderComponent implements OnInit {
   selectedCurrencyValue!: string;
 
   activeRout!: any;
+
+  elColor!: boolean;
 
   dates: FormsArray[] = [
     { value: 'MM/DD/YYYY', viewValue: 'MM/DD/YYYY' },

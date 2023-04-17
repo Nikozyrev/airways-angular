@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { HeaderComponent } from './pages/header.component';
+import { HeaderComponent } from './components/main/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
-import { HeaderFormComponent } from './components/form.components';
+import { HeaderFormComponent } from './components/select/form.components';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './redux/reducers/header-reducer';
+import { reducers } from './store/reducers/header-reducer';
 
 @NgModule({
   declarations: [HeaderComponent, HeaderFormComponent],
@@ -15,7 +15,7 @@ import { reducers } from './redux/reducers/header-reducer';
     SharedModule,
     FormsModule,
     RouterModule,
-    StoreModule.forFeature('header', reducers),
+    StoreModule.forFeature('global settings', reducers),
   ],
   exports: [HeaderComponent],
 })

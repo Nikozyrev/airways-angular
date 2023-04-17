@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormsArray } from '../models/header.models';
-import { AppState } from '../redux/header-state.model';
+import { FormsArray } from '../../models/header.models';
+import { AppState } from '../../store/header-state.model';
 import { Store } from '@ngrx/store';
 import {
   getCurrencySuccess,
   getDateSuccess,
-} from '../redux/actions/header-action';
+} from '../../store/actions/header-action';
 
 @Component({
   selector: 'app-header-from',

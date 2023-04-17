@@ -9,14 +9,9 @@ export const initialState: HeaderStateInterface = {
 
 export const reducers = createReducer(
   initialState,
-  on(HeaderAction.getDate, (state) => ({ ...state })),
   on(HeaderAction.getDateSuccess, (state, action) => ({
     ...state,
     date: action.date,
-  })),
-  on(HeaderAction.getDateFailed, (state, action) => ({
-    ...state,
-    error: action.error,
   })),
   on(HeaderAction.getCurrencySuccess, (state, action) => ({
     ...state,
