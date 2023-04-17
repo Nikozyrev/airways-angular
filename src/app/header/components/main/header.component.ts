@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   selectedCurrencyValue!: string;
 
-  activeRout!: any;
+  activeRout!: string | boolean;
 
   elColor!: boolean;
 

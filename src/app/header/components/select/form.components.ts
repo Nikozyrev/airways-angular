@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsArray } from '../../models/header.models';
-import { AppState } from '../../store/header-state.model';
 import { Store } from '@ngrx/store';
 import {
   getCurrencySuccess,
@@ -16,7 +15,7 @@ export class HeaderFormComponent implements OnInit {
 
   @Input() arrayFrom!: FormsArray[];
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.selectedValue = this.arrayFrom[0].value;
