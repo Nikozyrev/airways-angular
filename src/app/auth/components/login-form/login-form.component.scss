@@ -1,0 +1,56 @@
+.social {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+
+  .divider-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #e1e5eb;
+  }
+
+  span {
+    flex: 0 1 auto;
+    margin: 0 5px;
+  }
+}
+
+.login-form {
+  min-width: 446px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px 0px;
+}
+
+.input {
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  img {
+    aspect-ratio: 1;
+    width: 20px;
+    display: inline;
+  }
+}
+
+.password-recovery {
+  align-self: flex-end;
+}
