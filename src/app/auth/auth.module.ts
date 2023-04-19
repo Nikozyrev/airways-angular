@@ -8,6 +8,7 @@ import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.comp
 import { StoreModule } from '@ngrx/store';
 import { userReducers } from './store/reducers';
 import { PasswordInputComponent } from './components/password-input/password-input.component';
+import { EmailInputComponent } from './components/email-input/email-input.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PasswordInputComponent } from './components/password-input/password-inp
     LoginFormComponent,
     SignUpFormComponent,
     PasswordInputComponent,
+    EmailInputComponent,
   ],
   imports: [
     CommonModule,
