@@ -1,9 +1,5 @@
 <app-social-login-buttons></app-social-login-buttons>
-<div class="divider">
-  <span class="divider-line"></span>
-  <span>or sign up with your email</span>
-  <span class="divider-line"></span>
-</div>
+<app-divider text="or sign up with your email"></app-divider>
 <form class="sign-up-form" [formGroup]="signUpForm" (submit)="onSubmit($event)">
   <app-email-input [control]="signUpForm.controls.email"></app-email-input>
 

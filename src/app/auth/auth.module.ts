@@ -10,6 +10,7 @@ import { userReducers } from './store/reducers';
 import { PasswordInputComponent } from './components/password-input/password-input.component';
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { SocialLoginButtonsComponent } from './components/social-login-buttons/social-login-buttons.component';
+import { DividerComponent } from './components/divider/divider.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SocialLoginButtonsComponent } from './components/social-login-buttons/s
     PasswordInputComponent,
     EmailInputComponent,
     SocialLoginButtonsComponent,
+    DividerComponent,
   ],
   imports: [
     CommonModule,
