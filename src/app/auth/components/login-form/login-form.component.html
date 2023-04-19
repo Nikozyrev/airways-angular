@@ -18,40 +18,12 @@
   <span class="divider-line"></span>
 </div>
 <form class="login-form" [formGroup]="loginForm" (submit)="onSubmit($event)">
-  <mat-form-field appearance="outline" subscriptSizing="dynamic" class="input">
-    <mat-label>Email</mat-label>
-    <input
-      matInput
-      type="email"
-      placeholder="pat@example.com"
-      formControlName="email"
-      required
-    />
-    <mat-error *ngIf="email.invalid">
-      {{ getEmailErrorMessage() }}
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field appearance="outline" subscriptSizing="dynamic" class="input">
-    <mat-label>Password</mat-label>
-    <input
-      matInput
-      [type]="hidePassword ? 'password' : 'text'"
-      formControlName="password"
-      required
-    />
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="hidePassword = !hidePassword"
-      [attr.aria-label]="'Hide password'"
-      [attr.aria-pressed]="hidePassword"
-    >
-      <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
-    </button>
-    <mat-error *ngIf="password.invalid">
-      {{ getPasswordErrorMessage() }}
-    </mat-error>
-  </mat-form-field>
+  <app-email-input [control]="loginForm.controls.email"></app-email-input>
+
+  <app-password-input
+    [control]="loginForm.controls.password"
+  ></app-password-input>
+
   <button mat-button color="primary" class="password-recovery">
     Forgot password?
   </button>
