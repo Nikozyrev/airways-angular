@@ -24,6 +24,10 @@
 
   <app-gender-select [control]="signUpForm.controls.gender"></app-gender-select>
 
+  <app-phone-number-input
+    [group]="signUpForm.controls.phone"
+  ></app-phone-number-input>
+
   <button mat-flat-button color="primary" class="button" type="submit">
     Sign up
   </button>

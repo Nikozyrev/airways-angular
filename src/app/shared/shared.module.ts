@@ -18,6 +18,7 @@ import { DividerComponent } from './components/divider/divider.component';
 import { PasswordInputComponent } from './components/password-input/password-input.component';
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { SingleDateInputComponent } from './components/single-date-input/single-date-input.component';
+import { PhoneNumberInputComponent } from './components/phone-number-input/phone-number-input.component';
 
 const materialModules = [
   MatButtonModule,
@@ -41,6 +42,7 @@ const materialModules = [
     GenderSelectComponent,
     DividerComponent,
     SingleDateInputComponent,
+    PhoneNumberInputComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
   exports: [
@@ -51,6 +53,7 @@ const materialModules = [
     TextInputComponent,
     DividerComponent,
     SingleDateInputComponent,
+    PhoneNumberInputComponent,
   ],
 })
 export class SharedModule {}

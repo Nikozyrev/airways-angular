@@ -28,6 +28,18 @@ export class SignUpFormComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       birthDate: ['', [Validators.required]],
       gender: [Gender.male, [Validators.required]],
+      phone: this.formBuilder.group({
+        countryCode: ['', [Validators.required]],
+        phoneNumber: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('[0-9]*'),
+            Validators.minLength(9),
+            Validators.maxLength(9),
+          ],
+        ],
+      }),
     });
   }
 }
