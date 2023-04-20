@@ -1,0 +1,9 @@
+<mat-form-field appearance="outline" subscriptSizing="dynamic">
+  <mat-label>{{ label }}</mat-label>
+  <input matInput [matDatepicker]="picker" [formControl]="control" />
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  <mat-error *ngIf="control.invalid">
+    {{ getErrorMessage() }}
+  </mat-error>
+</mat-form-field>
