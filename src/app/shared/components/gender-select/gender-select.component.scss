@@ -1,0 +1,20 @@
+@import "../../../../styles/variables.scss";
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.mat-button-toggle-group {
+  width: 100%;
+}
+
+.mat-button-toggle {
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.mat-button-toggle-checked {
+  background-color: #f4f6f9;
+  color: $primary-blue;
+}

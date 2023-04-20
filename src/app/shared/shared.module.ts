@@ -9,6 +9,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { GenderSelectComponent } from './components/gender-select/gender-select.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const materialModules = [
   MatButtonModule,
@@ -20,11 +23,12 @@ const materialModules = [
   MatTabsModule,
   MatCardModule,
   MatFormFieldModule,
+  MatButtonToggleModule,
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, ...materialModules],
-  exports: [...materialModules],
+  declarations: [GenderSelectComponent],
+  imports: [CommonModule, ReactiveFormsModule, ...materialModules],
+  exports: [...materialModules, GenderSelectComponent],
 })
 export class SharedModule {}

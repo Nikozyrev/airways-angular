@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Gender } from '../../models/user.model';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -25,6 +26,7 @@ export class SignUpFormComponent implements OnInit {
       password: ['', [Validators.required]],
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      gender: [Gender.male, [Validators.required]],
     });
   }
 }
