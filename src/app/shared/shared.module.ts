@@ -12,6 +12,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { GenderSelectComponent } from './components/gender-select/gender-select.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TextInputComponent } from './components/text-input/text-input.component';
+import { DividerComponent } from './components/divider/divider.component';
+import { PasswordInputComponent } from './components/password-input/password-input.component';
+import { EmailInputComponent } from './components/email-input/email-input.component';
 
 const materialModules = [
   MatButtonModule,
@@ -27,8 +31,21 @@ const materialModules = [
 ];
 
 @NgModule({
-  declarations: [GenderSelectComponent],
+  declarations: [
+    EmailInputComponent,
+    PasswordInputComponent,
+    TextInputComponent,
+    GenderSelectComponent,
+    DividerComponent,
+  ],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
-  exports: [...materialModules, GenderSelectComponent],
+  exports: [
+    EmailInputComponent,
+    PasswordInputComponent,
+    GenderSelectComponent,
+    TextInputComponent,
+    DividerComponent,
+    ...materialModules,
+  ],
 })
 export class SharedModule {}
