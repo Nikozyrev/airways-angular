@@ -1,0 +1,126 @@
+@import "../../../../styles/variables.scss";
+
+.component__wraper {
+  margin-top: 62px;
+  background-color: $white;
+  max-width: 580px;
+  padding-top: 28px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 24px;
+}
+
+.radio {
+  display: flex;
+  gap: 3.875rem;
+}
+
+.forms__wraper {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+
+.mat-mdc-form-field {
+  background-color: #f4f6f9;
+  height: 56px;
+}
+
+.forms-change__btn {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(116, 118, 122, 0.6);
+  background-color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.date__wraper {
+  margin-top: 28px;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.tiket__wraper {
+  width: 201px;
+}
+
+.search__btn {
+  margin-top: 32px;
+  height: 60px;
+  padding: 12px 24px;
+  background: #11397e;
+  border: none;
+  border-radius: 4px;
+  color: $white;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+}
+
+.btn__wraper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tiket__element {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.tiket-control__panel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tiket__title, .tiket__element {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #11397e;
+}
+
+.tiket__btn {
+  color: #74767a;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.plus {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(#74767a, #74767a),
+    linear-gradient(#74767a, #74767a), $white;
+  background-position: center;
+  background-size: 100% 2px, 2px 100%; /*thickness = 2px, length = 50% (25px)*/
+  background-repeat: no-repeat;
+}
+
+.minus {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient(#74767a, #74767a), $white;
+  background-position: center;
+  background-size: 100% 2px; /*thickness = 2px, length = 50% (25px)*/
+  background-repeat: no-repeat;
+}
