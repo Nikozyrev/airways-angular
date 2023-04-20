@@ -7,6 +7,16 @@
     [control]="signUpForm.controls.password"
   ></app-password-input>
 
+  <app-text-input
+    [control]="signUpForm.controls.firstName"
+    label="First name"
+  ></app-text-input>
+
+  <app-text-input
+    [control]="signUpForm.controls.lastName"
+    label="Last name"
+  ></app-text-input>
+
   <button mat-flat-button color="primary" class="button" type="submit">
     Sign up
   </button>

@@ -11,6 +11,7 @@ import { PasswordInputComponent } from './components/password-input/password-inp
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { SocialLoginButtonsComponent } from './components/social-login-buttons/social-login-buttons.component';
 import { DividerComponent } from './components/divider/divider.component';
+import { TextInputComponent } from './components/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { DividerComponent } from './components/divider/divider.component';
     EmailInputComponent,
     SocialLoginButtonsComponent,
     DividerComponent,
+    TextInputComponent,
   ],
   imports: [
     CommonModule,
