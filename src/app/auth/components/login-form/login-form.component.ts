@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { IUserLogIn } from '../../models/user.model';
 
 @Component({
   selector: 'app-login-form',
@@ -7,12 +8,26 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent implements OnInit {
+  @Output()
+  private logIn = new EventEmitter<IUserLogIn>();
+
   public loginForm!: ReturnType<typeof this.createLoginForm>;
 
   constructor(private formBuilder: FormBuilder) {}
 
   public onSubmit(e: SubmitEvent) {
     e.preventDefault();
+
+    if (this.loginForm.valid) {
+      const formData = this.loginForm.value;
+      const userData: IUserLogIn = {
+        email: formData.email || '',
+        password: formData.password || '',
+      };
+      this.logIn.emit(userData);
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
   }
 
   public ngOnInit() {

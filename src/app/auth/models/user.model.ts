@@ -12,3 +12,12 @@ export interface IUser {
   phone: string;
   citizenship: string;
 }
+
+export interface IUserSignUp extends IUser {
+  password: string;
+}
+
+export interface IUserLogIn {
+  email: string;
+  password: string;
+}

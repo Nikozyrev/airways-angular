@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Gender } from '../../models/user.model';
+import { Gender, IUserSignUp } from '../../models/user.model';
 import { futureDateValidator } from '../../../core/validators/future-date.validator';
 
 @Component({
@@ -9,15 +9,31 @@ import { futureDateValidator } from '../../../core/validators/future-date.valida
   styleUrls: ['./sign-up-form.component.scss'],
 })
 export class SignUpFormComponent implements OnInit {
+  @Output()
+  private signUp = new EventEmitter<IUserSignUp>();
+
   public signUpForm!: ReturnType<typeof this.createSignUpForm>;
 
   constructor(private formBuilder: FormBuilder) {}
 
   public onSubmit(e: SubmitEvent) {
     e.preventDefault();
+
     const isAgreed = this.signUpForm.controls.agreement.value;
+
     if (this.signUpForm.valid && isAgreed) {
-      this.signUpForm.reset();
+      const formData = this.signUpForm.value;
+      const userData: IUserSignUp = {
+        email: formData.email || '',
+        password: formData.password || '',
+        firstName: formData.firstName || '',
+        lastName: formData.lastName || '',
+        birthDate: new Date(formData.birthDate || Date.now()),
+        gender: formData.gender || Gender.male,
+        phone: `${formData.phone?.countryCode}${formData.phone?.phoneNumber}`,
+        citizenship: formData.citizenship || '',
+      };
+      this.signUp.emit(userData);
     } else {
       this.signUpForm.markAllAsTouched();
     }
