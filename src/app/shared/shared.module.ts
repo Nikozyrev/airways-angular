@@ -19,6 +19,8 @@ import { PasswordInputComponent } from './components/password-input/password-inp
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { SingleDateInputComponent } from './components/single-date-input/single-date-input.component';
 import { PhoneNumberInputComponent } from './components/phone-number-input/phone-number-input.component';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
 
 const materialModules = [
   MatButtonModule,
@@ -54,6 +56,10 @@ const materialModules = [
     DividerComponent,
     SingleDateInputComponent,
     PhoneNumberInputComponent,
+  ],
+  providers: [
+    { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS },
   ],
 })
 export class SharedModule {}
