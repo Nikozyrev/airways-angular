@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Gender } from '../../models/user.model';
+import { futureDateValidator } from '../../../core/validators/future-date.validator';
 
 @Component({
   selector: 'app-sign-up-form',
@@ -26,7 +27,7 @@ export class SignUpFormComponent implements OnInit {
       password: ['', [Validators.required]],
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
-      birthDate: ['', [Validators.required]],
+      birthDate: ['', [Validators.required, futureDateValidator]],
       gender: [Gender.male, [Validators.required]],
       phone: this.formBuilder.group({
         countryCode: ['', [Validators.required]],

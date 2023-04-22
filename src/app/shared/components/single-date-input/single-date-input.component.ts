@@ -19,6 +19,10 @@ export class SingleDateInputComponent {
       return 'You must enter a value';
     }
 
+    if (this.control.hasError('futureDate')) {
+      return this.control.errors?.['futureDate'].message;
+    }
+
     return '';
   }
 }
