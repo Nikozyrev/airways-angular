@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { GenderSelectComponent } from './components/gender-select/gender-select.component';
 import { TextInputComponent } from './components/text-input/text-input.component';
 import { DividerComponent } from './components/divider/divider.component';
@@ -35,6 +36,7 @@ const materialModules = [
   MatFormFieldModule,
   MatButtonToggleModule,
   MatDatepickerModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({

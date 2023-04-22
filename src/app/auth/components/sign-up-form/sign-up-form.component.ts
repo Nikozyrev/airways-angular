@@ -15,7 +15,8 @@ export class SignUpFormComponent implements OnInit {
 
   public onSubmit(e: SubmitEvent) {
     e.preventDefault();
-    if (this.signUpForm.valid) {
+    const isAgreed = this.signUpForm.controls.agreement.value;
+    if (this.signUpForm.valid && isAgreed) {
       this.signUpForm.reset();
     } else {
       this.signUpForm.markAllAsTouched();
@@ -47,6 +48,7 @@ export class SignUpFormComponent implements OnInit {
         ],
       }),
       citizenship: ['', [Validators.required]],
+      agreement: [false, [Validators.required]],
     });
   }
 }

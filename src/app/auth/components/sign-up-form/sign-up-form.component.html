@@ -32,6 +32,10 @@
     [control]="signUpForm.controls.citizenship"
   ></app-citizenship-input>
 
+  <mat-checkbox [formControl]="signUpForm.controls.agreement">
+    I agree to Airway's Privacy Policy and Terms of Use
+  </mat-checkbox>
+
   <button mat-flat-button color="primary" class="button" type="submit">
     Sign up
   </button>
