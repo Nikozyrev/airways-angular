@@ -21,6 +21,7 @@ import { SingleDateInputComponent } from './components/single-date-input/single-
 import { PhoneNumberInputComponent } from './components/phone-number-input/phone-number-input.component';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
+import { CitizenshipInputComponent } from './components/citizenship-input/citizenship-input.component';
 
 const materialModules = [
   MatButtonModule,
@@ -45,6 +46,7 @@ const materialModules = [
     DividerComponent,
     SingleDateInputComponent,
     PhoneNumberInputComponent,
+    CitizenshipInputComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, ...materialModules],
   exports: [
@@ -56,6 +58,7 @@ const materialModules = [
     DividerComponent,
     SingleDateInputComponent,
     PhoneNumberInputComponent,
+    CitizenshipInputComponent,
   ],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },

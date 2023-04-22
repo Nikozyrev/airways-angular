@@ -15,6 +15,11 @@ export class SignUpFormComponent implements OnInit {
 
   public onSubmit(e: SubmitEvent) {
     e.preventDefault();
+    if (this.signUpForm.valid) {
+      this.signUpForm.reset();
+    } else {
+      this.signUpForm.markAllAsTouched();
+    }
   }
 
   public ngOnInit() {
@@ -41,6 +46,7 @@ export class SignUpFormComponent implements OnInit {
           ],
         ],
       }),
+      citizenship: ['', [Validators.required]],
     });
   }
 }
