@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-single-date-input',
   templateUrl: './single-date-input.component.html',
   styleUrls: ['./single-date-input.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleDateInputComponent {
   @Input()

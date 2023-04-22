@@ -1,6 +1,6 @@
 <mat-form-field appearance="outline" subscriptSizing="dynamic">
   <mat-label>Country code</mat-label>
-  <mat-select [value]="countryCodes[0].value">
+  <mat-select [formControl]="group.controls.countryCode">
     <mat-option *ngFor="let code of countryCodes" [value]="code.value">
       {{ code.viewValue }}
     </mat-option>

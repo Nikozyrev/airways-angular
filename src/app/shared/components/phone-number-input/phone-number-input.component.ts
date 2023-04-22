@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ISelectOption } from '../../models/select-option.model';
 
@@ -6,7 +6,6 @@ import { ISelectOption } from '../../models/select-option.model';
   selector: 'app-phone-number-input',
   templateUrl: './phone-number-input.component.html',
   styleUrls: ['./phone-number-input.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PhoneNumberInputComponent {
   @Input()
