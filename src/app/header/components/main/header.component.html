@@ -72,25 +72,14 @@
         </h2>
         <app-header-from [arrayFrom]="dates"></app-header-from>
         <app-header-from [arrayFrom]="currencies"></app-header-from>
-        <button class="header__button" (click)="openAuthDialog()">
-          <img
-            [src]="activeRout ? 'assets/user-light.svg' : 'assets/User.svg'"
-            alt="user"
-            class="btn-user--img"
-          />
-          Sign in
-        </button>
-        <a routerLink="/cart" class="header__shopping_basket-link">
-          <img
-            [src]="
-              activeRout
-                ? 'assets/shopping_basket-Light.svg'
-                : 'assets/shopping_basket.svg'
-            "
-            alt="shopping_basket"
-            class="shopping_basket-img"
-          />
-        </a>
+        <ng-container
+          *ngTemplateOutlet="
+            (isLogged$ | async) ? userAccountButton : signInButton
+          "
+        ></ng-container>
+        <ng-container *ngIf="isLogged$ | async">
+          <ng-container *ngTemplateOutlet="cartButton"></ng-container>
+        </ng-container>
       </div>
 
       <button
@@ -110,25 +99,52 @@
           <app-header-from [arrayFrom]="currencies"></app-header-from>
         </button>
         <button mat-menu-item>
-          <button class="header__button" (click)="openAuthDialog()">
-            <img
-              src="assets/user-light.svg "
-              alt="user"
-              class="btn-user--img"
-            />
-            Sign in
-          </button>
+          <ng-container
+            *ngTemplateOutlet="
+              (isLogged$ | async) ? userAccountButton : signInButton
+            "
+          ></ng-container>
         </button>
-        <button mat-menu-item routerLink="/cart">
-          <a routerLink="/cart" class="header__shopping_basket-link">
-            <img
-              src="assets/shopping_basket-Light.svg"
-              alt="shopping_basket"
-              class="shopping_basket-img"
-            />
-          </a>
+        <button mat-menu-item *ngIf="isLogged$ | async" routerLink="/cart">
+          <ng-container *ngTemplateOutlet="cartButton"></ng-container>
         </button>
       </mat-menu>
     </div>
   </div>
 </header>
+
+<ng-template #signInButton>
+  <button class="header__button" (click)="openAuthDialog()">
+    <img
+      [src]="activeRout ? 'assets/user-light.svg' : 'assets/User.svg'"
+      alt="user"
+      class="btn-user--img"
+    />
+    Sign in
+  </button>
+</ng-template>
+
+<ng-template #userAccountButton>
+  <button routerLink="/account" class="header__button">
+    <img
+      [src]="activeRout ? 'assets/user-light.svg' : 'assets/User.svg'"
+      alt="user"
+      class="btn-user--img"
+    />
+    {{ currentUserName$ | async }}
+  </button>
+</ng-template>
+
+<ng-template #cartButton>
+  <a routerLink="/cart" class="header__shopping_basket-link">
+    <img
+      [src]="
+        activeRout
+          ? 'assets/shopping_basket-Light.svg'
+          : 'assets/shopping_basket.svg'
+      "
+      alt="shopping_basket"
+      class="shopping_basket-img"
+    />
+  </a>
+</ng-template>

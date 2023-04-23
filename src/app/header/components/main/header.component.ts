@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsArray } from '../../models/header.models';
 import { NavigationEnd, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { FormsArray } from '../../models/header.models';
 import { AuthModalService } from '../../../auth/services/auth-modal.service';
+import * as UserSelectors from '../../../auth/store/selectors';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +12,10 @@ import { AuthModalService } from '../../../auth/services/auth-modal.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  isLogged$!: Observable<boolean>;
+
+  currentUserName$!: Observable<string>;
+
   selectedValue!: string;
 
   selectedCurrencyValue!: string;
@@ -33,10 +40,14 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authModalService: AuthModalService
+    private authModalService: AuthModalService,
+    private store: Store
   ) {}
 
   ngOnInit() {
+    this.isLogged$ = this.store.select(UserSelectors.selectIsLogged);
+    this.currentUserName$ = this.store.select(UserSelectors.selectUserName);
+
     this.activeRout = this.router.url;
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
