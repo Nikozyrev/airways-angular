@@ -20,7 +20,7 @@ import { SocialLoginButtonsComponent } from './components/social-login-buttons/s
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
-    StoreModule.forFeature('user', userReducers),
+    StoreModule.forFeature('auth', userReducers),
   ],
 })
 export class AuthModule {}
