@@ -35,13 +35,14 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 0.5px solid rgba(116, 118, 122, 0.6);
+  border: 0.5px solid $dark-grey-transparent;
   background-color: $white;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 .date__wraper {
@@ -58,7 +59,7 @@
   margin-top: 32px;
   height: 60px;
   padding: 12px 24px;
-  background: #11397e;
+  background: $blue;
   border: none;
   border-radius: 4px;
   color: $white;
@@ -87,15 +88,16 @@
   gap: 1rem;
 }
 
-.tiket__title, .tiket__element {
+.tiket__title,
+.tiket__element {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #11397e;
+  color: $blue;
 }
 
 .tiket__btn {
-  color: #74767a;
+  color: $light-gray;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -108,10 +110,10 @@
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: linear-gradient(#74767a, #74767a),
-    linear-gradient(#74767a, #74767a), $white;
+  background: linear-gradient($light-gray, $light-gray),
+    linear-gradient($light-gray, $light-gray), $white;
   background-position: center;
-  background-size: 100% 2px, 2px 100%; /*thickness = 2px, length = 50% (25px)*/
+  background-size: 100% 2px, 2px 100%;
   background-repeat: no-repeat;
 }
 
@@ -119,8 +121,16 @@
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: linear-gradient(#74767a, #74767a), $white;
+  background: linear-gradient($light-gray, $light-gray), $white;
   background-position: center;
-  background-size: 100% 2px; /*thickness = 2px, length = 50% (25px)*/
+  background-size: 100% 2px;
   background-repeat: no-repeat;
+}
+
+.country__input {
+  transition: all 0.3s;
+}
+
+:disabled{
+  background-color: $light-gray;
 }

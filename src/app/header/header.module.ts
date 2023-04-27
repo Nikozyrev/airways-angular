@@ -15,7 +15,7 @@ import { reducers } from './store/reducers/header-reducer';
     SharedModule,
     FormsModule,
     RouterModule,
-    StoreModule.forFeature('global settings', reducers),
+    StoreModule.forFeature('globalSettings', reducers),
   ],
   exports: [HeaderComponent],
 })

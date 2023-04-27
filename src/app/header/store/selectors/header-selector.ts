@@ -1,7 +1,7 @@
-import { AppState } from '../header-state.model';
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { HeaderStateInterface } from '../header-state.model';
 
-export const selectDate = createSelector(
-  (state: AppState) => state.globalSettings.date,
-  (date) => date
-);
+export const selectFeature =
+  createFeatureSelector<HeaderStateInterface>('global settings');
+
+export const selectDate = createSelector(selectFeature, (state) => state.date);

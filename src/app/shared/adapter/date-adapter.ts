@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { NativeDateAdapter } from '@angular/material/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../app/header/store/header-state.model';
 import { selectDate } from '../../../app/header/store/selectors/header-selector';
 
 @Injectable()
 export class AppDateAdapter extends NativeDateAdapter {
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store) {
     super('en-US');
   }
 
