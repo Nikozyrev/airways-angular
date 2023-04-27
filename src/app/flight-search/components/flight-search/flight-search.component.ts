@@ -150,13 +150,15 @@ export class FlightSearchComponent implements OnInit {
 
     this.toppings.patchValue(array);
 
-    this.toppingsObj.forEach((val) => {
+    const newToppings = this.toppingsObj.map((val) => {
       if (val.type === tiketName) {
-        val.amount = value;
+        return { ...val, amount: value };
       }
+      return val;
     });
+    this.toppingsObj = newToppings;
 
-    this.tiketForm.get('toppings')?.setValue(this.toppingsObj);
+    this.tiketForm.get('toppings')?.setValue(newToppings);
   }
 
   decrease(event: Event) {
@@ -179,11 +181,13 @@ export class FlightSearchComponent implements OnInit {
       this.toppings.setValue(filterArray);
     }
 
-    this.toppingsObj.forEach((val) => {
+    const newToppings = this.toppingsObj.map((val) => {
       if (val.type === tiketName) {
-        val.amount = +value;
+        return { ...val, amount: +value };
       }
+      return val;
     });
+    this.toppingsObj = newToppings;
 
     this.tiketForm.get('toppings')?.setValue(this.toppingsObj);
   }

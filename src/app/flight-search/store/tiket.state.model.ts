@@ -5,7 +5,6 @@ export interface AppTiketState {
 }
 
 export interface TiketStateInterface {
-  get(arg0: string): unknown;
   tripType: string;
   from: string;
   to: string;

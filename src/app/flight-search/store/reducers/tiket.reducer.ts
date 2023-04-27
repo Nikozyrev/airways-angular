@@ -7,7 +7,20 @@ const obj: TiketStateInterface = {
   from: '',
   to: '',
   date: null,
-  toppings: [''],
+  toppings: [
+    {
+      type: 'Adult',
+      amount: 0,
+    },
+    {
+      type: 'Child',
+      amount: 0,
+    },
+    {
+      type: 'Infant',
+      amount: 0,
+    },
+  ],
 };
 
 export const initialState: AppTiketState = {
