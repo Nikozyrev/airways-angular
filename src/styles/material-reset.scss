@@ -12,17 +12,19 @@
   gap: 0.5rem;
 }
 
-.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
-    .mdc-text-field--textarea
-  )
-  .mat-mdc-form-field-infix {
-  padding-top: 8px;
-  padding-bottom: 0;
-}
+.header__wraper {
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
+      .mdc-text-field--textarea
+    )
+    .mat-mdc-form-field-infix {
+    padding-top: 8px;
+    padding-bottom: 0;
+  }
 
-.mat-mdc-form-field-infix {
-  min-height: 0;
-  height: 40px;
+  .mat-mdc-form-field-infix {
+    min-height: 0;
+    height: 40px;
+  }
 }
 
 .tiket__wraper {
@@ -59,9 +61,10 @@
   line-height: 20px;
 }
 
-.mat-mdc-form-field-subscript-dynamic-size .mat-mdc-form-field-hint-wrapper,
-.mat-mdc-form-field-subscript-dynamic-size .mat-mdc-form-field-error-wrapper {
-  position: absolute !important;
+.date__wraper {
+  .mat-mdc-form-field-hint-wrapper, .mat-mdc-form-field-error-wrapper {
+    position: absolute !important;
+  }
 }
 
 @media (max-width: 1100px) {

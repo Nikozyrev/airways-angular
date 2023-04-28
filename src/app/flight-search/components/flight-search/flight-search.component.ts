@@ -6,6 +6,7 @@ import { TiketStateInterface } from '../../store/tiket.state.model';
 import { dateValidator } from '../../../shared/validators/date.validator';
 import { tiketValidator } from '../../../shared/validators/tiket.validator';
 import { selectDate } from '../../../header/store/selectors/header-selector';
+import { Router } from '@angular/router';
 
 export interface Toppings {
   type: string;
@@ -56,7 +57,7 @@ export class FlightSearchComponent implements OnInit {
 
   @ViewChild('fromInput') btnInput!: ElementRef;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
     this.selectedType = this.tripType[0];
@@ -123,7 +124,6 @@ export class FlightSearchComponent implements OnInit {
             tiketInfo: formValue,
           })
         );
-        return;
       } else {
         this.store.dispatch(
           setTiketInfoSuccess({
@@ -131,6 +131,7 @@ export class FlightSearchComponent implements OnInit {
           })
         );
       }
+      this.router.navigate(['./flights']);
     }
   }
 
