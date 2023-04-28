@@ -1,0 +1,12 @@
+<mat-card>
+  <mat-card-content class="content" mat-dialog-content>
+    <mat-tab-group>
+      <mat-tab label="Log in">
+        <app-login-form (logIn)="onLogIn($event)" />
+      </mat-tab>
+      <mat-tab label="Sign up">
+        <app-sign-up-form (signUp)="onSignUp($event)" />
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
