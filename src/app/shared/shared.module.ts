@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
@@ -20,9 +20,14 @@ import { PasswordInputComponent } from './components/password-input/password-inp
 import { EmailInputComponent } from './components/email-input/email-input.component';
 import { SingleDateInputComponent } from './components/single-date-input/single-date-input.component';
 import { PhoneNumberInputComponent } from './components/phone-number-input/phone-number-input.component';
-import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
 import { CitizenshipInputComponent } from './components/citizenship-input/citizenship-input.component';
+import { MatRadioModule } from '@angular/material/radio';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MatNativeDateModule,
+} from '@angular/material/core';
+import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
 
 const materialModules = [
   MatButtonModule,
@@ -37,6 +42,9 @@ const materialModules = [
   MatButtonToggleModule,
   MatDatepickerModule,
   MatCheckboxModule,
+  MatRadioModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 ];
 
 @NgModule({
@@ -50,9 +58,10 @@ const materialModules = [
     PhoneNumberInputComponent,
     CitizenshipInputComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, ...materialModules],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, ...materialModules],
   exports: [
     ...materialModules,
+    FormsModule,
     EmailInputComponent,
     PasswordInputComponent,
     GenderSelectComponent,

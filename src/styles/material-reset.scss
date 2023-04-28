@@ -1,0 +1,71 @@
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgba(241, 243, 246, 0.15) !important;
+  border: 0.5px solid #cecece;
+  border-radius: 4px;
+}
+
+.mat-mdc-form-field-infix {
+  width: max-content !important;
+}
+
+.mat-mdc-select-trigger {
+  gap: 0.5rem;
+}
+
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
+    .mdc-text-field--textarea
+  )
+  .mat-mdc-form-field-infix {
+  padding-top: 8px;
+  padding-bottom: 0;
+}
+
+.mat-mdc-form-field-infix {
+  min-height: 0;
+  height: 40px;
+}
+
+.tiket__wraper {
+  .mat-pseudo-checkbox {
+    display: none !important;
+  }
+}
+
+.mdc-line-ripple::before,
+.mdc-line-ripple::after {
+  border-bottom: none !important;
+}
+
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled
+  + .mdc-radio__background
+  .mdc-radio__inner-circle {
+  border-color: #11397e !important;
+}
+
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled:checked
+  + .mdc-radio__background
+  .mdc-radio__outer-circle {
+  border-color: #11397e !important;
+}
+
+.mdc-form-field > label {
+  color: #11397e;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.mat-mdc-form-field-subscript-dynamic-size .mat-mdc-form-field-hint-wrapper,
+.mat-mdc-form-field-subscript-dynamic-size .mat-mdc-form-field-error-wrapper {
+  position: absolute !important;
+}
+
+@media (max-width: 1100px) {
+  .mdc-text-field {
+    padding: 0 8px !important;
+  }
+}
