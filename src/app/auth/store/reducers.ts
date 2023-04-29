@@ -4,6 +4,7 @@ import * as UserActions from './actions';
 
 const initialState: UserStateInterface = {
   user: null,
+  error: null,
 };
 
 export const userReducers = createReducer(
@@ -13,6 +14,13 @@ export const userReducers = createReducer(
     (state, { user }): UserStateInterface => ({
       ...state,
       user,
+    })
+  ),
+  on(
+    UserActions.setError,
+    (state, { error }): UserStateInterface => ({
+      ...state,
+      error,
     })
   )
 );

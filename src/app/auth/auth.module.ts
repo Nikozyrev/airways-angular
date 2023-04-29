@@ -8,6 +8,8 @@ import { AuthDialogComponent } from './components/auth-dialog/auth-dialog.compon
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SignUpFormComponent } from './components/sign-up-form/sign-up-form.component';
 import { SocialLoginButtonsComponent } from './components/social-login-buttons/social-login-buttons.component';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/effects';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { SocialLoginButtonsComponent } from './components/social-login-buttons/s
     ReactiveFormsModule,
     SharedModule,
     StoreModule.forFeature('auth', userReducers),
+    EffectsModule.forFeature([AuthEffects]),
   ],
 })
 export class AuthModule {}
