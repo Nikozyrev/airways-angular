@@ -17,6 +17,10 @@ export class PasswordInputComponent {
       return 'You must enter a value';
     }
 
+    if (this.control.hasError('minlength')) {
+      return 'Password is too short';
+    }
+
     return '';
   }
 }
