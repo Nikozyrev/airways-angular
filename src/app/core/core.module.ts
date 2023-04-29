@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { ApiInterceptor } from './interceptors/api.interceptor';
   imports: [
     CommonModule,
     HttpClientModule,
+    MatSnackBarModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
