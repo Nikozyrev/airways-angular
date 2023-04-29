@@ -9,8 +9,8 @@ export class AlertService {
 
   showAlert(message: string) {
     this._snackBar.open(message, undefined, {
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
+      horizontalPosition: 'start',
+      verticalPosition: 'bottom',
       duration: 3000,
     });
   }
