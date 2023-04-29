@@ -4,6 +4,7 @@ import { catchError, map, mergeMap, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import * as AuthActions from './actions';
 import { AuthModalService } from '../services/auth-modal.service';
+import { AlertService } from '../../core/services/alert.service';
 
 @Injectable()
 export class AuthEffects {
@@ -19,6 +20,7 @@ export class AuthEffects {
           catchError((error) => {
             const err =
               error.status === 0 ? `Server is unavailable` : error.error;
+            this.alertService.showAlert(err);
             return of(AuthActions.setError({ error: err }));
           })
         )
@@ -38,6 +40,7 @@ export class AuthEffects {
           catchError((error) => {
             const err =
               error.status === 0 ? `Server is unavailable` : error.error;
+            this.alertService.showAlert(err);
             return of(AuthActions.setError({ error: err }));
           })
         )
@@ -48,6 +51,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private authModalService: AuthModalService
+    private authModalService: AuthModalService,
+    private alertService: AlertService
   ) {}
 }
