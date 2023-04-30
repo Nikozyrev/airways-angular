@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { IUserLogIn, IUserSignUp } from '../../models/user.model';
 import { Store } from '@ngrx/store';
+import { IUserLogIn, IUserSignUp } from '../../models/user.model';
 import * as UserActions from '../../store/actions';
 
 @Component({
@@ -10,19 +9,13 @@ import * as UserActions from '../../store/actions';
   styleUrls: ['./auth-dialog.component.scss'],
 })
 export class AuthDialogComponent {
-  constructor(
-    private dialogRef: MatDialogRef<AuthDialogComponent>,
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
   public onLogIn(userData: IUserLogIn) {
-    console.log(userData);
-    this.dialogRef.close();
+    this.store.dispatch(UserActions.login({ userData }));
   }
 
   public onSignUp(userData: IUserSignUp) {
-    console.log(userData);
-    this.store.dispatch(UserActions.setUser({ user: userData }));
-    this.dialogRef.close();
+    this.store.dispatch(UserActions.signUp({ userData }));
   }
 }
