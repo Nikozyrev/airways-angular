@@ -2,8 +2,10 @@ import { createReducer, on } from '@ngrx/store';
 import { UserStateInterface } from './user-state.model';
 import * as UserActions from './actions';
 
+const savedUser = localStorage.getItem('user');
+
 const initialState: UserStateInterface = {
-  user: null,
+  user: savedUser ? JSON.parse(savedUser) : null,
   error: null,
 };
 

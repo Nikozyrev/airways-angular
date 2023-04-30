@@ -21,4 +21,19 @@ export class AuthService {
   public login(userData: IUserLogIn) {
     return this.http.post<IAuthResponse>(this.endpoints.login, userData);
   }
+
+  public saveUser(res: IAuthResponse) {
+    const { accessToken, user } = res;
+    localStorage.setItem('token', accessToken);
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  public logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
+  public getAccessToken() {
+    return localStorage.getItem('token') || '';
+  }
 }

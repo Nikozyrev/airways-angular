@@ -4,22 +4,38 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
+  HttpStatusCode,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   private baseURL = 'http://localhost:3000';
 
+  constructor(private authService: AuthService) {}
+
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    return next.handle(
-      request.clone({
-        url: `${this.baseURL}${request.url}`,
-        setHeaders: { Authorization: `Bearer` },
-      })
-    );
+    const token = this.authService.getAccessToken();
+
+    return next
+      .handle(
+        request.clone({
+          url: `${this.baseURL}${request.url}`,
+          setHeaders: { Authorization: `Bearer ${token}` },
+        })
+      )
+      .pipe(
+        tap({
+          error: (err) => {
+            if (err.status === HttpStatusCode.Unauthorized) {
+              this.authService.logout();
+            }
+          },
+        })
+      );
   }
 }

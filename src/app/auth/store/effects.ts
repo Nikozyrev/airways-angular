@@ -6,7 +6,7 @@ import { AuthService } from '../services/auth.service';
 import * as AuthActions from './actions';
 import { AuthModalService } from '../services/auth-modal.service';
 import { AlertService } from '../../core/services/alert.service';
-import { IUser } from '../models/user.model';
+import { IAuthResponse } from '../models/user-server-data.model';
 
 @Injectable()
 export class AuthEffects {
@@ -15,7 +15,7 @@ export class AuthEffects {
       ofType(AuthActions.signUp),
       mergeMap(({ userData }) =>
         this.authService.signUp(userData).pipe(
-          map(({ user }) => this.handleSuccessAuth(user)),
+          map((res) => this.handleSuccessAuth(res)),
           catchError((error) => this.handleError(error))
         )
       )
@@ -27,7 +27,7 @@ export class AuthEffects {
       ofType(AuthActions.login),
       mergeMap(({ userData }) =>
         this.authService.login(userData).pipe(
-          map(({ user }) => this.handleSuccessAuth(user)),
+          map((res) => this.handleSuccessAuth(res)),
           catchError((error) => this.handleError(error))
         )
       )
@@ -41,10 +41,11 @@ export class AuthEffects {
     private alertService: AlertService
   ) {}
 
-  private handleSuccessAuth(user: IUser) {
+  private handleSuccessAuth(res: IAuthResponse) {
+    this.authService.saveUser(res);
     this.alertService.showAlert('You have logged in');
     this.authModalService.closeDialog();
-    return AuthActions.setUser({ user });
+    return AuthActions.setUser({ user: res.user });
   }
 
   private handleError(error: HttpErrorResponse) {
