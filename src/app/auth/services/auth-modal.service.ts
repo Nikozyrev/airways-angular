@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ModalService } from '../../core/services/modal.service';
 import { AuthDialogComponent } from '../components/auth-dialog/auth-dialog.component';
 
@@ -6,9 +7,16 @@ import { AuthDialogComponent } from '../components/auth-dialog/auth-dialog.compo
   providedIn: 'root',
 })
 export class AuthModalService {
+  private dialogRef?: MatDialogRef<unknown>;
+
   constructor(private modalService: ModalService) {}
 
   public openDialog() {
-    return this.modalService.openDialog(AuthDialogComponent);
+    this.dialogRef = this.modalService.openDialog(AuthDialogComponent);
+    return this.dialogRef;
+  }
+
+  public closeDialog() {
+    this.dialogRef?.close();
   }
 }
