@@ -1,11 +1,11 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
-import { IFlightSeats } from '../models/flight.model';
+import { ITicketSeats } from '../models/ticket.model';
 
 @Directive({
   selector: '[appFlightSeatsAvailability]',
 })
 export class FlightSeatsAvailabilityDirective implements OnInit {
-  @Input() public appFlightSeatsAvailability!: IFlightSeats;
+  @Input() public appFlightSeatsAvailability!: ITicketSeats;
 
   private element: HTMLElement;
 
