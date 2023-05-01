@@ -6,14 +6,21 @@ import { FlightSelectionPageComponent } from './pages/flight-selection-page/flig
 import { DateSelectCardComponent } from './components/date-select-card/date-select-card.component';
 import { FlightDateSelectComponent } from './components/flight-date-select/flight-date-select.component';
 import { FlightSeatsAvailabilityDirective } from './directives/flight-seats-availability.directive';
+import { FlightSelectionComponent } from './components/flight-selection/flight-selection.component';
+import { SharedModule } from '../shared/shared.module';
+import { TicketSelectComponent } from './components/ticket-select/ticket-select.component';
+import { TicketComponent } from './components/ticket/ticket.component';
 
 @NgModule({
   declarations: [
     FlightSelectionPageComponent,
     DateSelectCardComponent,
     FlightDateSelectComponent,
+    FlightSelectionComponent,
     FlightSeatsAvailabilityDirective,
+    TicketSelectComponent,
+    TicketComponent,
   ],
-  imports: [CommonModule, FlightSelectionRoutingModule],
+  imports: [CommonModule, FlightSelectionRoutingModule, SharedModule],
 })
 export class FlightSelectionModule {}
