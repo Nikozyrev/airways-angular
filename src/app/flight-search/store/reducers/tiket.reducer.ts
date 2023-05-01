@@ -6,7 +6,8 @@ const obj: TiketStateInterface = {
   tripType: '',
   from: '',
   to: '',
-  date: null,
+  startDate: '',
+  endDate: '',
   toppings: [
     {
       type: 'Adult',
