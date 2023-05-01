@@ -1,9 +1,15 @@
-<div class="content">
-  <div class="flights">
-    <app-ticket-select></app-ticket-select>
+<div class="error" *ngIf="error$ | async as error">{{ error }}</div>
+
+<div class="loader" *ngIf="isLoading$ | async; else content">Loading...</div>
+
+<ng-template #content>
+  <div class="content">
+    <div class="flights">
+      <app-ticket-select></app-ticket-select>
+    </div>
+    <div class="buttons">
+      <button mat-button color="primary">Back</button>
+      <button mat-raised-button color="primary">Continue</button>
+    </div>
   </div>
-  <div class="buttons">
-    <button mat-button color="primary">Back</button>
-    <button mat-raised-button color="primary">Continue</button>
-  </div>
-</div>
+</ng-template>

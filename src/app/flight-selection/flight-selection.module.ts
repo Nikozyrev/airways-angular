@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
 
 import { FlightSelectionRoutingModule } from './flight-selection-routing.module';
 import { FlightSelectionPageComponent } from './pages/flight-selection-page/flight-selection-page.component';
@@ -10,6 +11,9 @@ import { FlightSelectionComponent } from './components/flight-selection/flight-s
 import { SharedModule } from '../shared/shared.module';
 import { TicketSelectComponent } from './components/ticket-select/ticket-select.component';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { ticketsReducers } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { TicketsEffects } from './store/effects';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,12 @@ import { TicketComponent } from './components/ticket/ticket.component';
     TicketSelectComponent,
     TicketComponent,
   ],
-  imports: [CommonModule, FlightSelectionRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    FlightSelectionRoutingModule,
+    SharedModule,
+    StoreModule.forFeature('tickets', ticketsReducers),
+    EffectsModule.forFeature([TicketsEffects]),
+  ],
 })
 export class FlightSelectionModule {}
