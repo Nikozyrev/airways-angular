@@ -7,6 +7,8 @@ import { dateValidator } from '../../../shared/validators/date.validator';
 import { tiketValidator } from '../../../shared/validators/tiket.validator';
 import { selectDate } from '../../../header/store/selectors/header-selector';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { selectTiket } from '../../store/selectors/tiket.selector';
 
 export interface Toppings {
   type: string;
@@ -23,7 +25,7 @@ export class FlightSearchComponent implements OnInit {
 
   tripType: string[] = ['Round Trip', 'One Way'];
 
-  countries = ['Ireland', 'Finland', 'England', 'Denmark']; //swith to api countries
+  countries = [''];
 
   toppings = new FormControl(['']);
 
@@ -57,10 +59,37 @@ export class FlightSearchComponent implements OnInit {
 
   @ViewChild('fromInput') btnInput!: ElementRef;
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
+    this.http.get<string[]>('/cities').subscribe((cities) => {
+      this.countries = cities;
+    });
+
     this.selectedType = this.tripType[0];
+
+    const tiket = this.store.select(selectTiket);
+    tiket.subscribe((value) => {
+      if (value.tripType !== '') {
+        this.tiketForm.get('tripType')?.setValue(value.tripType);
+        this.tiketForm.get('from')?.setValue(value.from);
+        this.tiketForm.get('to')?.setValue(value.to);
+        this.tiketForm.get('startDate')?.setValue(value.startDate);
+        this.tiketForm.get('endDate')?.setValue(value.endDate);
+        this.selectedType = value.tripType;
+        this.toppingsObj = value.toppings;
+        this.tiketForm.get('toppings')?.setValue(this.toppingsObj);
+        const toppingsValue = this.toppingsObj
+          .filter((v) => v.amount > 0)
+          .map((el) => el.type);
+        this.toppings.value?.push(...toppingsValue);
+      }
+    });
+
     const date$ = this.store.select(selectDate);
     date$.subscribe(() => {
       const endDate = this.tiketForm.get('endDate')?.value;

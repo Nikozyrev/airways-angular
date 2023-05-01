@@ -11,7 +11,7 @@ import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-  private baseURL = 'http://localhost:3000';
+  private baseURL = 'https://jsonairways.onrender.com';
 
   constructor(private authService: AuthService) {}
 
