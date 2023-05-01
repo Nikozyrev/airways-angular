@@ -1,6 +1,16 @@
-<div class="error" *ngIf="error$ | async as error">{{ error }}</div>
+<div class="loader" *ngIf="isLoading$ | async; else container">Loading...</div>
 
-<div class="loader" *ngIf="isLoading$ | async; else content">Loading...</div>
+<ng-template #container>
+  <ng-container
+    *ngTemplateOutlet="(error$ | async) ? error : content"
+  ></ng-container>
+</ng-template>
+
+<ng-template #error>
+  <div class="error">
+    {{ error$ | async }}
+  </div>
+</ng-template>
 
 <ng-template #content>
   <div class="content">
