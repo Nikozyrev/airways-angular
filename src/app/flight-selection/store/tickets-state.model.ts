@@ -1,7 +1,8 @@
 import { ITicket } from '../models/ticket.model';
 
 export interface TicketsStateInterface {
-  tickets: ITicket[];
+  destinationTickets: ITicket[];
+  returnTickets: ITicket[];
   isLoading: boolean;
   error: string | null;
 }

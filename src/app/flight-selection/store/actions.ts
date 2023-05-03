@@ -7,7 +7,7 @@ export const fetchTickets = createAction(`${source} Fetch Tickets`);
 
 export const fetchTicketsSuccess = createAction(
   `${source} Fetch Tickets Success`,
-  props<{ tickets: ITicket[] }>()
+  props<{ destinationTickets: ITicket[]; returnTickets?: ITicket[] }>()
 );
 
 export const fetchTicketsError = createAction(

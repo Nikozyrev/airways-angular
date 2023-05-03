@@ -1,25 +1,11 @@
-<div class="loader" *ngIf="isLoading$ | async; else container">Loading...</div>
-
-<ng-template #container>
-  <ng-container
-    *ngTemplateOutlet="(error$ | async) ? error : content"
-  ></ng-container>
-</ng-template>
-
-<ng-template #error>
-  <div class="error">
-    {{ error$ | async }}
-  </div>
-</ng-template>
-
-<ng-template #content>
-  <div class="content">
-    <div class="flights">
-      <app-ticket-select></app-ticket-select>
-    </div>
-    <div class="buttons">
-      <button mat-button color="primary">Back</button>
-      <button mat-raised-button color="primary">Continue</button>
-    </div>
-  </div>
-</ng-template>
+<div class="flights">
+  <app-ticket-select ticketType="destination"></app-ticket-select>
+  <app-ticket-select
+    ticketType="return"
+    *ngIf="(tripType$ | async) === 'Round Trip'"
+  ></app-ticket-select>
+</div>
+<div class="buttons">
+  <button mat-button color="primary">Back</button>
+  <button mat-raised-button color="primary">Continue</button>
+</div>

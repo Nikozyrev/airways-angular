@@ -3,7 +3,8 @@ import { TicketsStateInterface } from './tickets-state.model';
 import * as TicketsActions from './actions';
 
 const initialState: TicketsStateInterface = {
-  tickets: [],
+  destinationTickets: [],
+  returnTickets: [],
   error: null,
   isLoading: false,
 };
@@ -20,9 +21,10 @@ export const ticketsReducers = createReducer(
   ),
   on(
     TicketsActions.fetchTicketsSuccess,
-    (state, { tickets }): TicketsStateInterface => ({
+    (state, { destinationTickets, returnTickets }): TicketsStateInterface => ({
       ...state,
-      tickets,
+      destinationTickets,
+      returnTickets: returnTickets ?? [],
       isLoading: false,
     })
   ),

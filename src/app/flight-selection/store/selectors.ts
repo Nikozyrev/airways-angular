@@ -4,9 +4,14 @@ import { TicketsStateInterface } from './tickets-state.model';
 export const selectFeature =
   createFeatureSelector<TicketsStateInterface>('tickets');
 
-export const selectTickets = createSelector(
+export const selectDestinationTickets = createSelector(
   selectFeature,
-  (state) => state.tickets
+  (state) => state.destinationTickets
+);
+
+export const selectReturnTickets = createSelector(
+  selectFeature,
+  (state) => state.returnTickets
 );
 
 export const selectError = createSelector(

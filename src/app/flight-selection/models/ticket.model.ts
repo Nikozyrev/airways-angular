@@ -27,12 +27,6 @@ export interface ITicket {
   locations: ITicketLocations;
   seats: ITicketSeats;
   price: ITicketPrice;
-}
-
-export interface ITicketBasicInfo {
-  ticketDate: Date;
-  ticketPrice: ITicketPrice;
-  ticketSeats: ITicketSeats;
   selected?: boolean;
 }
 
@@ -45,3 +39,5 @@ export interface ITicketResponse {
   price: ITicketPrice;
   seats: ITicketSeats;
 }
+
+export type TicketType = 'destination' | 'return';

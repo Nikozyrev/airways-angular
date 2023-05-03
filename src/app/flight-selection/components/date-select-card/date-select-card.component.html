@@ -1,14 +1,14 @@
 <div class="date-card" [ngClass]="{ selected: ticketInfo.selected }">
   <div class="info">
-    <p class="date">{{ ticketInfo.ticketDate | date : "dd MMM" }}</p>
-    <p class="weekday">{{ ticketInfo.ticketDate | date : "EEEE" }}</p>
+    <p class="date">{{ ticketInfo.dates.departure | date : "dd MMM" }}</p>
+    <p class="weekday">{{ ticketInfo.dates.departure | date : "EEEE" }}</p>
     <p class="price" *ngIf="currencyCode$ | async as currencyCode">
-      {{ ticketInfo.ticketPrice[currencyCode] | currency : currencyCode }}
+      {{ ticketInfo.price[currencyCode] | currency : currencyCode }}
     </p>
   </div>
   <div
     class="indicator"
     *ngIf="ticketInfo.selected"
-    [appFlightSeatsAvailability]="ticketInfo.ticketSeats"
+    [appFlightSeatsAvailability]="ticketInfo.seats"
   ></div>
 </div>
