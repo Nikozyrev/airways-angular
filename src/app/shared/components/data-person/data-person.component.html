@@ -1,5 +1,4 @@
 <div class="data-person" [formGroup]="createCardForm">
-  <!-- <div [formGroupName]="formGroupName"> -->
   <mat-form-field appearance="outline" class="data-person__form-field">
     <mat-label>First name</mat-label>
     <input
@@ -14,8 +13,10 @@
       matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
       matTooltipClass="data-person__form-field__icon__tooltip"
       [ngClass]="{
-          errorTrue: controlsInput.get('firstName')?.errors?.['required'] && controlsInput.get('firstName')?.value
-        }"
+        errorTrue:
+          controlsInput.get('firstName')?.invalid &&
+          controlsInput.get('firstName')?.value
+      }"
     >
       error
     </mat-icon>
@@ -38,7 +39,7 @@
       matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
       matTooltipClass="data-person__form-field__icon__tooltip"
       [ngClass]="{
-            errorTrue: (controlsInput.get('lastName')?.errors && controlsInput.get('lastName')?.value),
+            errorTrue: (controlsInput.get('lastName')?.invalid && controlsInput.get('lastName')?.value),
           }"
     >
       error
@@ -128,8 +129,3 @@
     </mat-form-field>
   </div>
 </div>
-
-<!-- <div class="data-person__baggage-cabin"> -->
-<!-- <div class="data-person__baggage-checked"></div> -->
-<!-- </div> -->
-<!-- </div> -->
