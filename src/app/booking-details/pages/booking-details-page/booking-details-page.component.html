@@ -1,1 +1,128 @@
-<p>booking-details-page works!</p>
+<form
+  class="container-booking"
+  [formGroup]="createCardForm"
+  (ngSubmit)="onSubmit()"
+  autocomplete="off"
+>
+  <div class="booking-passengers">
+    <div class="booking-passengers__header">
+      <img
+        src="../../../../assets/vector-man.svg"
+        alt="vector-man"
+        class="booking-passengers__header__img"
+      />
+      <h2 class="booking-passengers__header__h2">Passengers</h2>
+    </div>
+  </div>
+
+  <span class="booking-passengers__title">
+    Enter the passenger's names as they appear on document (passport or ID).
+  </span>
+
+  <div class="booking-passengers__adult" *ngIf="adult.length">
+    <h3 class="adult__h3">1.Adult</h3>
+    <div formArrayName="adult">
+      <div *ngFor="let item of adult; let i = index">
+        <app-data-person
+          [createCardForm111]="createCardForm"
+          [index]="i"
+          typePassenger="adult"
+        ></app-data-person>
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-passengers__adult" *ngIf="child.length">
+    <h3 class="adult__h3">2.Child</h3>
+    <div formArrayName="child">
+      <div *ngFor="let item of child; let i = index">
+        <app-data-person
+          [createCardForm111]="createCardForm"
+          [index]="i"
+          typePassenger="child"
+        ></app-data-person>
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-passengers__adult" *ngIf="infant.length">
+    <h3 class="adult__h3">{{ child.length ? "3.Infant" : "2.Infant" }}</h3>
+    <div formArrayName="infant">
+      <div *ngFor="let item of infant; let i = index">
+        <app-data-person
+          [createCardForm111]="createCardForm"
+          [index]="i"
+          typePassenger="infant"
+        ></app-data-person>
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-passengers booking-contact">
+    <div class="booking-passengers__header">
+      <img
+        src="../../../../assets/Vector-contact.svg"
+        alt="vector-contact"
+        class="booking-passengers__header__img"
+      />
+      <h2 class="booking-passengers__header__h2">Contact details</h2>
+    </div>
+  </div>
+
+  <span class="booking-passengers__title">
+    We need contact details to be able to deliver the latest information
+    regarding your flight.
+  </span>
+
+  <div class="booking-contact__form">
+    <mat-form-field appearance="outline" class="booking-contact__form__input">
+      <mat-label>Country code</mat-label>
+      <mat-select required formControlName="code">
+        <mat-option *ngFor="let code of countryCodes" [value]="code.dial_code">
+          {{ code.name + " (" + code.dial_code + ")" }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="createCardForm.controls['code'].errors">
+        Invalid character
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="booking-contact__form__input">
+      <mat-label>Mobile phone number</mat-label>
+      <input
+        type="tel"
+        matInput
+        placeholder="555-555-1234"
+        formControlName="telephone"
+        required
+      />
+      <mat-error *ngIf="createCardForm.controls['telephone'].errors">
+        Invalid character
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      class="booking-contact__form__input input-email"
+    >
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+        placeholder="Ex. pat@example.com"
+        required
+      />
+      <mat-error *ngIf="createCardForm.controls['email'].errors">
+        Invalid character
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="button-control">
+    <button routerLink="" class="button-control__back" (click)="goBack()">
+      Back
+    </button>
+    <button type="submit" class="button-control__continue">Continue</button>
+  </div>
+</form>

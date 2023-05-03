@@ -1,0 +1,135 @@
+<div class="data-person" [formGroup]="createCardForm">
+  <!-- <div [formGroupName]="formGroupName"> -->
+  <mat-form-field appearance="outline" class="data-person__form-field">
+    <mat-label>First name</mat-label>
+    <input
+      matInput
+      formControlName="firstName"
+      required
+      class="data-person__form-field__name"
+    />
+    <mat-icon
+      matSuffix
+      class="data-person__form-field__icon"
+      matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
+      matTooltipClass="data-person__form-field__icon__tooltip"
+      [ngClass]="{
+          errorTrue: controlsInput.get('firstName')?.errors?.['required'] && controlsInput.get('firstName')?.value
+        }"
+    >
+      error
+    </mat-icon>
+    <mat-error *ngIf="controlsInput.get('firstName')?.invalid">
+      Invalid character
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="data-person__form-field">
+    <mat-label>Last name</mat-label>
+    <input
+      matInput
+      formControlName="lastName"
+      required
+      class="data-person__form-field__name"
+    />
+    <mat-icon
+      matSuffix
+      class="data-person__form-field__icon"
+      matTooltip="Add the passenger's name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
+      matTooltipClass="data-person__form-field__icon__tooltip"
+      [ngClass]="{
+            errorTrue: (controlsInput.get('lastName')?.errors && controlsInput.get('lastName')?.value),
+          }"
+    >
+      error
+    </mat-icon>
+    <mat-error *ngIf="controlsInput.get('lastName')?.errors">
+      Invalid character
+    </mat-error>
+  </mat-form-field>
+
+  <mat-button-toggle-group
+    formControlName="gender"
+    name="fontStyle"
+    aria-label="Font Style"
+    class="data-person__gender"
+  >
+    <mat-button-toggle class="data-person__gender__btn male-btn" value="Male">
+      <img
+        src="../../../../assets/icon.svg"
+        alt="icon"
+        class="data-person__gender__btn__img"
+        [ngClass]="{
+          'active-img': controlsInput.get('gender')?.value === 'Male',
+        }"
+      />
+      <span
+        class="data-person__gender__btn__span"
+        [ngClass]="{
+        'active-btn': controlsInput.get('gender')?.value === 'Male',
+      }"
+      >
+        Male
+      </span>
+    </mat-button-toggle>
+    <mat-button-toggle class="data-person__gender__btn" value="Female">
+      <img
+        src="../../../../assets/icon.svg"
+        alt="icon"
+        class="data-person__gender__btn__img"
+        [ngClass]="{
+            'active-img': controlsInput.get('gender')?.value === 'Female',
+          }"
+      />
+      <span
+        class="data-person__gender__btn__span"
+        [ngClass]="{
+          'active-btn': controlsInput.get('gender')?.value === 'Female',
+        }"
+      >
+        Female
+      </span>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-form-field
+    appearance="outline"
+    class="data-person__form-field form-field__date"
+  >
+    <mat-label>Date of birth</mat-label>
+    <input matInput [matDatepicker]="picker" required formControlName="date" />
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="controlsInput.get('date')?.errors">
+      Invalid character
+    </mat-error>
+  </mat-form-field>
+
+  <div class="data-person__help" *ngIf="typePassenger !== 'infant'">
+    <mat-slide-toggle color="Primary" formControlName="help"></mat-slide-toggle>
+    <img
+      src="../../../../assets/Vector-help.svg"
+      alt="Vector-help"
+      class="data-person__help__img"
+    />
+    <span class="data-person__help__span">Need special assistance?</span>
+  </div>
+
+  <div class="data-person__baggage-checked" *ngIf="typePassenger !== 'infant'">
+    <mat-form-field
+      appearance="outline"
+      class="data-person__form-field form-field__baggage-checked"
+    >
+      <mat-label>Baggage checked</mat-label>
+      <input matInput formControlName="baggageChecked" type="number" />
+      <mat-error *ngIf="controlsInput.get('baggageChecked')?.errors">
+        Invalid character
+      </mat-error>
+    </mat-form-field>
+  </div>
+</div>
+
+<!-- <div class="data-person__baggage-cabin"> -->
+<!-- <div class="data-person__baggage-checked"></div> -->
+<!-- </div> -->
+<!-- </div> -->
