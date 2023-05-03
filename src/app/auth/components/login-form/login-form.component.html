@@ -1,0 +1,16 @@
+<app-social-login-buttons></app-social-login-buttons>
+<app-divider text="or log in with your email"></app-divider>
+<form class="login-form" [formGroup]="loginForm" (submit)="onSubmit($event)">
+  <app-email-input [control]="loginForm.controls.email"></app-email-input>
+
+  <app-password-input
+    [control]="loginForm.controls.password"
+  ></app-password-input>
+
+  <button mat-button color="primary" class="password-recovery">
+    Forgot password?
+  </button>
+  <button mat-flat-button color="primary" class="button" type="submit">
+    Log in
+  </button>
+</form>

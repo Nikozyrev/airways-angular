@@ -1,0 +1,42 @@
+<app-social-login-buttons></app-social-login-buttons>
+<app-divider text="or sign up with your email"></app-divider>
+<form class="sign-up-form" [formGroup]="signUpForm" (submit)="onSubmit($event)">
+  <app-email-input [control]="signUpForm.controls.email"></app-email-input>
+
+  <app-password-input
+    [control]="signUpForm.controls.password"
+  ></app-password-input>
+
+  <app-text-input
+    [control]="signUpForm.controls.firstName"
+    label="First name"
+  ></app-text-input>
+
+  <app-text-input
+    [control]="signUpForm.controls.lastName"
+    label="Last name"
+  ></app-text-input>
+
+  <app-single-date-input
+    [control]="signUpForm.controls.birthDate"
+    label="Date of birth"
+  ></app-single-date-input>
+
+  <app-gender-select [control]="signUpForm.controls.gender"></app-gender-select>
+
+  <app-phone-number-input
+    [group]="signUpForm.controls.phone"
+  ></app-phone-number-input>
+
+  <app-citizenship-input
+    [control]="signUpForm.controls.citizenship"
+  ></app-citizenship-input>
+
+  <mat-checkbox [formControl]="signUpForm.controls.agreement">
+    I agree to Airway's Privacy Policy and Terms of Use
+  </mat-checkbox>
+
+  <button mat-flat-button color="primary" class="button" type="submit">
+    Sign up
+  </button>
+</form>

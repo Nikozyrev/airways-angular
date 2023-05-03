@@ -9,6 +9,7 @@ import {
 @Component({
   selector: 'app-header-from',
   templateUrl: './header-form.component.html',
+  styleUrls: ['./header-form.component.scss'],
 })
 export class HeaderFormComponent implements OnInit {
   selectedValue!: string;

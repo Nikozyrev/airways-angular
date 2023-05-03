@@ -1,5 +1,5 @@
 export interface AppState {
-  header: HeaderStateInterface;
+  globalSettings: HeaderStateInterface;
 }
 
 export interface HeaderStateInterface {
