@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { DataPersonComponent } from './components/data-person/data-person.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
@@ -26,10 +29,14 @@ import {
   DateAdapter,
   MAT_DATE_FORMATS,
   MatNativeDateModule,
+  MatRippleModule,
 } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
 
 const materialModules = [
+  MatRippleModule,
+  MatTooltipModule,
+  MatSlideToggleModule,
   MatButtonModule,
   MatSelectModule,
   MatInputModule,
@@ -57,10 +64,12 @@ const materialModules = [
     SingleDateInputComponent,
     PhoneNumberInputComponent,
     CitizenshipInputComponent,
+    DataPersonComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, ...materialModules],
+  imports: [...materialModules, CommonModule, ReactiveFormsModule, FormsModule],
   exports: [
     ...materialModules,
+    DataPersonComponent,
     FormsModule,
     EmailInputComponent,
     PasswordInputComponent,

@@ -1,0 +1,153 @@
+.container-booking {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 1128px;
+  margin: 0 auto;
+}
+
+.booking-passengers {
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-passengers__header {
+  display: flex;
+}
+
+.booking-passengers__header__h2 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #11397e;
+  margin-left: 14px;
+}
+
+.booking-passengers__title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  color: #49454f;
+}
+
+.list-passengers {
+  list-style: auto;
+}
+
+.booking-passengers__adult {
+  margin: 20px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px 44px;
+  background: #ffffff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.adult__h3 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #10264c;
+}
+
+.booking-contact {
+  margin-top: 48px;
+}
+
+.booking-contact__form {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 32px 44px;
+  margin-top: 20px;
+
+  width: 1128px;
+  height: 120px;
+
+  background: #ffffff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.booking-contact__form__input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 252px;
+  background: #f4f6f9;
+  height: 56px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 0;
+  margin-right: 20px;
+}
+
+.input-email {
+  width: 418px;
+}
+
+.button-control {
+  display: flex;
+  align-self: flex-end;
+  margin-top: 40px;
+  margin-bottom: 100px;
+}
+
+.button-control__continue {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  width: 126px;
+  height: 60px;
+  background: #11397e;
+  border-radius: 4px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.button-control__continue:active {
+  background: #0b2654;
+}
+
+.button-control__back {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #11397e;
+  margin-right: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.button-control__back:active {
+  color: #0b2654;
+}
