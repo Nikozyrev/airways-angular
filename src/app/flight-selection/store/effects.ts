@@ -20,21 +20,14 @@ export class TicketsEffects {
             catchError((error) => this.handleError(error))
           );
         }
-        // const arrivalDate = new Date(
-        //   Date.parse(params.departure_gte) + 3600
-        // ).toISOString();
-        // console.log(arrivalDate);
-
-        return this.ticketsService
-          .getTickets({ ...params, departure_lte: '' })
-          .pipe(
-            map((res) =>
-              TicketsActions.fetchTicketsSuccess({
-                destinationTickets: res,
-              })
-            ),
-            catchError((error) => this.handleError(error))
-          );
+        return this.ticketsService.getTickets(params).pipe(
+          map((res) =>
+            TicketsActions.fetchTicketsSuccess({
+              destinationTickets: res,
+            })
+          ),
+          catchError((error) => this.handleError(error))
+        );
       })
     );
   });

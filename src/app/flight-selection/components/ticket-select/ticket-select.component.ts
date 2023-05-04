@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ITicket, TicketType } from '../../models/ticket.model';
+import { ITicketsData, TicketType } from '../../models/ticket.model';
 import * as TicketSelectors from '../../store/selectors';
 
 @Component({
@@ -13,11 +13,7 @@ export class TicketSelectComponent implements OnInit {
   @Input()
   public ticketType!: TicketType;
 
-  public tickets$!: Observable<ITicket[]>;
-
-  public error$!: Observable<string | null>;
-
-  public isLoading$!: Observable<boolean>;
+  public ticketsData$!: Observable<ITicketsData>;
 
   constructor(private store: Store) {}
 
@@ -26,12 +22,8 @@ export class TicketSelectComponent implements OnInit {
   }
 
   private initState() {
-    this.tickets$ = this.store.select(
-      this.ticketType === 'destination'
-        ? TicketSelectors.selectDestinationTickets
-        : TicketSelectors.selectReturnTickets
+    this.ticketsData$ = this.store.select(
+      TicketSelectors.selectTicketsData(this.ticketType)
     );
-    this.error$ = this.store.select(TicketSelectors.selectError);
-    this.isLoading$ = this.store.select(TicketSelectors.selectIsLoading);
   }
 }

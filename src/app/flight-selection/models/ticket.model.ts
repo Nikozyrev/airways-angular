@@ -41,3 +41,12 @@ export interface ITicketResponse {
 }
 
 export type TicketType = 'destination' | 'return';
+
+export interface ITicketsData {
+  from: string;
+  to: string;
+  selectedDate: string | null;
+  tickets: ITicket[];
+  error: string | null;
+  isLoading: boolean;
+}
