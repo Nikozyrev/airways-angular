@@ -27,12 +27,12 @@ export class FlightSearchComponent implements OnInit {
 
   countries = [''];
 
-  toppings = new FormControl(['']);
+  toppings = new FormControl(['Adult']);
 
   toppingsObj: Toppings[] = [
     {
       type: 'Adult',
-      amount: 0,
+      amount: 1,
     },
     {
       type: 'Child',
