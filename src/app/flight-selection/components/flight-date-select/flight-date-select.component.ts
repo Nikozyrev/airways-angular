@@ -11,9 +11,16 @@ export class FlightDateSelectComponent {
   public flightDates: IViewDate[] = [];
 
   @Output()
-  private moveDates = new EventEmitter<1 | -1>();
+  private moveDatesEmitter = new EventEmitter<1 | -1>();
+
+  @Output()
+  private selectDateEmitter = new EventEmitter<IViewDate>();
 
   public move(direction: 1 | -1) {
-    this.moveDates.emit(direction);
+    this.moveDatesEmitter.emit(direction);
+  }
+
+  public selectDate(date: IViewDate) {
+    this.selectDateEmitter.emit(date);
   }
 }

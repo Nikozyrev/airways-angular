@@ -16,9 +16,13 @@ export class TicketSelectComponent implements OnInit {
 
   public ticketsData$!: Observable<ITicketsData>;
 
-  private selectedDate$ = new BehaviorSubject(new Date());
-
   private dates$ = new BehaviorSubject<Date[]>([]);
+
+  public selectedViewDate$ = new BehaviorSubject<IViewDate>({
+    date: new Date(),
+    selected: false,
+    tickets: [],
+  });
 
   public viewDates$!: Observable<IViewDate[]>;
 
@@ -39,12 +43,20 @@ export class TicketSelectComponent implements OnInit {
         this.getDateFrom(selectedDate, -2),
         5
       );
-      this.selectedDate$.next(selectedDate);
+      this.selectedViewDate$.next({
+        date: selectedDate,
+        selected: true,
+        tickets: data.tickets.filter(
+          (ticket) =>
+            ticket.dates.departure.toDateString() ===
+            selectedDate.toDateString()
+        ),
+      });
       this.dates$.next(dates);
     });
 
     this.viewDates$ = combineLatest([
-      this.selectedDate$,
+      this.selectedViewDate$,
       this.dates$,
       this.ticketsData$,
     ]).pipe(
@@ -57,12 +69,16 @@ export class TicketSelectComponent implements OnInit {
           return {
             date,
             tickets,
-            selected: day === selectedDate.toDateString(),
+            selected: day === selectedDate.date.toDateString(),
           } as IViewDate;
         });
         return viewDates;
       })
     );
+  }
+
+  public selectDate(date: IViewDate) {
+    this.selectedViewDate$.next(date);
   }
 
   public moveDates(direction: -1 | 1) {

@@ -23,9 +23,13 @@
       <app-flight-date-select
         *ngIf="viewDates$ | async as viewDates"
         [flightDates]="viewDates"
-        (moveDates)="moveDates($event)"
+        (moveDatesEmitter)="moveDates($event)"
+        (selectDateEmitter)="selectDate($event)"
       ></app-flight-date-select>
-      <app-ticket></app-ticket>
+      <app-ticket
+        *ngIf="selectedViewDate$ | async as viewDate"
+        [selectedDate]="viewDate"
+      ></app-ticket>
     </div>
   </ng-template>
 </div>

@@ -2,6 +2,7 @@
   <app-date-select-card
     *ngFor="let card of flightDates"
     [ticketInfo]="card"
+    (click)="selectDate(card)"
   ></app-date-select-card>
 </div>
 <div class="arrows">
