@@ -19,7 +19,7 @@
     Enter the passenger's names as they appear on document (passport or ID).
   </span>
 
-  <div class="booking-passengers__adult" *ngIf="adult.length">
+  <div class="booking-passengers__adult" *ngIf="adult?.length">
     <h3 class="adult__h3">1.Adult</h3>
     <div formArrayName="adult">
       <div *ngFor="let item of adult; let i = index">
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="booking-passengers__adult" *ngIf="child.length">
+  <div class="booking-passengers__adult" *ngIf="child?.length">
     <h3 class="adult__h3">2.Child</h3>
     <div formArrayName="child">
       <div *ngFor="let item of child; let i = index">
@@ -45,8 +45,8 @@
     </div>
   </div>
 
-  <div class="booking-passengers__adult" *ngIf="infant.length">
-    <h3 class="adult__h3">{{ child.length ? "3.Infant" : "2.Infant" }}</h3>
+  <div class="booking-passengers__adult" *ngIf="infant?.length">
+    <h3 class="adult__h3">{{ child?.length ? "3.Infant" : "2.Infant" }}</h3>
     <div formArrayName="infant">
       <div *ngFor="let item of infant; let i = index">
         <app-data-person

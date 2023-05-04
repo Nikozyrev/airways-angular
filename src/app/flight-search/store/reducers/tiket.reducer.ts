@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import { AppTiketState, TiketStateInterface } from '../tiket.state.model';
 import * as TiketAction from '../actions/tiket.action';
 
@@ -11,15 +11,15 @@ const obj: TiketStateInterface = {
   toppings: [
     {
       type: 'Adult',
-      amount: 0,
+      amount: 1,
     },
     {
       type: 'Child',
-      amount: 0,
+      amount: 1,
     },
     {
       type: 'Infant',
-      amount: 0,
+      amount: 1,
     },
   ],
 };
@@ -38,3 +38,6 @@ export const reducers = createReducer(
     })
   )
 );
+
+export const selectCardFeatureSelector =
+  createFeatureSelector<AppTiketState>('TiketInfo');

@@ -5,7 +5,9 @@
     {
       "files": ["*.ts"],
       "parserOptions": {
-        "project": ["tsconfig.(app|spec).json"]
+        "ecmaVersion": "latest",
+        "parser": "@typescript-eslint/parser",
+        "project": ["tsconfig.json"]
       },
       "extends": [
         "eslint:recommended",

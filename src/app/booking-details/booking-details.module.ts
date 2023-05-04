@@ -14,6 +14,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store/reducers/passengers.reducer';
 
 @NgModule({
   declarations: [BookingDetailsPageComponent],
@@ -33,6 +35,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatNativeDateModule,
     MatSlideToggleModule,
     SharedModule,
+    StoreModule.forFeature('passengers', reducers),
   ],
   exports: [
     MatButtonModule,
