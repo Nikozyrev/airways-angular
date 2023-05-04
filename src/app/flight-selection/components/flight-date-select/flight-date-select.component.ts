@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ITicket } from '../../models/ticket.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IViewDate } from '../../models/ticket.model';
 
 @Component({
   selector: 'app-flight-date-select',
@@ -8,5 +8,12 @@ import { ITicket } from '../../models/ticket.model';
 })
 export class FlightDateSelectComponent {
   @Input()
-  public flightDates: ITicket[] = [];
+  public flightDates: IViewDate[] = [];
+
+  @Output()
+  private moveDates = new EventEmitter<1 | -1>();
+
+  public move(direction: 1 | -1) {
+    this.moveDates.emit(direction);
+  }
 }

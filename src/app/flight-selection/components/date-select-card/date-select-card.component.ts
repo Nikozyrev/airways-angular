@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ITicket } from '../../models/ticket.model';
+import { IViewDate } from '../../models/ticket.model';
 import { selectCurrency } from '../../../header/store/selectors/header-selector';
 
 @Component({
@@ -11,7 +11,7 @@ import { selectCurrency } from '../../../header/store/selectors/header-selector'
 })
 export class DateSelectCardComponent implements OnInit {
   @Input()
-  public ticketInfo!: ITicket;
+  public ticketInfo!: IViewDate;
 
   public currencyCode$!: Observable<string>;
 

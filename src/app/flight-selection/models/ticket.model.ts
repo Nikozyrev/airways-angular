@@ -50,3 +50,9 @@ export interface ITicketsData {
   error: string | null;
   isLoading: boolean;
 }
+
+export interface IViewDate {
+  date: Date;
+  tickets: ITicket[];
+  selected: boolean;
+}

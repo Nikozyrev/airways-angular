@@ -1,4 +1,14 @@
-<app-date-select-card
-  *ngFor="let card of flightDates"
-  [ticketInfo]="card"
-></app-date-select-card>
+<div class="cards">
+  <app-date-select-card
+    *ngFor="let card of flightDates"
+    [ticketInfo]="card"
+  ></app-date-select-card>
+</div>
+<div class="arrows">
+  <span (click)="move(-1)">
+    <img src="assets/images/icon_arrow_left.svg" alt="" />
+  </span>
+  <span (click)="move(1)">
+    <img src="assets/images/icon_arrow_right.svg" alt="" />
+  </span>
+</div>
