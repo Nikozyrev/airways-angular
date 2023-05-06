@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Toppings } from '../../../flight-search/components/flight-search/flight-search.component';
@@ -14,7 +15,9 @@ import { setTicketInfoSuccess } from '../../../flight-search/store/actions/tiket
   templateUrl: './second-menu.component.html',
   styleUrls: ['./second-menu.component.scss'],
 })
-export class SecondMenuComponent implements OnInit {
+export class SecondMenuComponent implements OnInit, OnDestroy {
+  public ticketSub: Subscription | undefined;
+
   ticketsAmount = 0;
 
   startDate = '';
@@ -63,7 +66,7 @@ export class SecondMenuComponent implements OnInit {
 
   ngOnInit() {
     const ticket$ = this.store.select(selectTicket);
-    ticket$.subscribe((val: TicketStateInterface) => {
+    this.ticketSub = ticket$.subscribe((val: TicketStateInterface) => {
       this.ticketForm.get('from')?.setValue(val.from);
       this.ticketForm.get('to')?.setValue(val.to);
       this.from = val.from;
@@ -93,6 +96,10 @@ export class SecondMenuComponent implements OnInit {
         this.onFormChange(value as TicketStateInterface);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.ticketSub?.unsubscribe();
   }
 
   increase(event: Event) {
