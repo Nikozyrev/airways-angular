@@ -1,9 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppTiketState } from '../tiket.state.model';
+import { AppTicketState } from '../tiket.state.model';
 
-export const selectFeature = createFeatureSelector<AppTiketState>('TiketInfo');
+export const selectFeature =
+  createFeatureSelector<AppTicketState>('TicketInfo');
 
-export const selectTiket = createSelector(
+export const selectTicket = createSelector(
   selectFeature,
-  (state) => state.tiketInfo
+  (state) => state.ticketInfo
 );

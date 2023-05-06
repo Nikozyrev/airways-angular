@@ -1,13 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { AppTiketState, TiketStateInterface } from '../tiket.state.model';
-import * as TiketAction from '../actions/tiket.action';
+import { AppTicketState, TicketStateInterface } from '../tiket.state.model';
+import * as TicketAction from '../actions/tiket.action';
 
-const obj: TiketStateInterface = {
+const obj: TicketStateInterface = {
   tripType: '',
   from: '',
   to: '',
-  startDate: '',
-  endDate: '',
+  startDate: null,
+  endDate: null,
   toppings: [
     {
       type: 'Adult',
@@ -24,17 +24,17 @@ const obj: TiketStateInterface = {
   ],
 };
 
-export const initialState: AppTiketState = {
-  tiketInfo: obj,
+export const initialState: AppTicketState = {
+  ticketInfo: obj,
 };
 
 export const reducers = createReducer(
   initialState,
   on(
-    TiketAction.setTiketInfoSuccess,
-    (state, action): AppTiketState => ({
+    TicketAction.setTicketInfoSuccess,
+    (state, action): AppTicketState => ({
       ...state,
-      tiketInfo: action.tiketInfo,
+      ticketInfo: action.ticketInfo,
     })
   )
 );

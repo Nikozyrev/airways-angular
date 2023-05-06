@@ -28,6 +28,7 @@ import {
   MatNativeDateModule,
 } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
+import { SecondMenuComponent } from './components/second-menu/second-menu.component';
 
 const materialModules = [
   MatButtonModule,
@@ -57,6 +58,7 @@ const materialModules = [
     SingleDateInputComponent,
     PhoneNumberInputComponent,
     CitizenshipInputComponent,
+    SecondMenuComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, ...materialModules],
   exports: [
@@ -70,6 +72,7 @@ const materialModules = [
     SingleDateInputComponent,
     PhoneNumberInputComponent,
     CitizenshipInputComponent,
+    SecondMenuComponent,
   ],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
