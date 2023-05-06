@@ -5,7 +5,7 @@ import { ITicketSeats } from '../models/ticket.model';
   selector: '[appFlightSeatsAvailability]',
 })
 export class FlightSeatsAvailabilityDirective implements OnInit {
-  @Input() public appFlightSeatsAvailability!: ITicketSeats;
+  @Input() public appFlightSeatsAvailability!: ITicketSeats | null;
 
   private element: HTMLElement;
 
@@ -19,10 +19,13 @@ export class FlightSeatsAvailabilityDirective implements OnInit {
 
   private applyColor() {
     const color = this.pickColor();
-    this.element.classList.add(color);
+    if (color) {
+      this.element.classList.add(color);
+    }
   }
 
   private pickColor() {
+    if (!this.appFlightSeatsAvailability) return '';
     if (this.appFlightSeatsAvailability.available <= 10) return 'red';
     if (
       this.appFlightSeatsAvailability.available /

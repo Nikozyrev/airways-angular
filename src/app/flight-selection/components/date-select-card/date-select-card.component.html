@@ -2,17 +2,23 @@
   <div class="info">
     <p class="date">{{ ticketInfo.date | date : "dd MMM" }}</p>
     <p class="weekday">{{ ticketInfo.date | date : "EEEE" }}</p>
-    <ng-container *ngIf="ticketInfo.tickets[0] as ticket">
+    <ng-container *ngIf="ticketInfo.tickets[0] as ticket; else noFlight">
       <p class="price" *ngIf="currencyCode$ | async as currencyCode">
         {{ ticket.price[currencyCode] | currency : currencyCode }}
       </p>
     </ng-container>
+    <ng-template #noFlight>
+      <div class="no-flight">
+        <img src="assets/images/icon_no_flight.svg" alt="" />
+      </div>
+    </ng-template>
   </div>
-  <ng-container *ngIf="ticketInfo.tickets[0] as ticket">
-    <div
-      class="indicator"
-      *ngIf="ticketInfo.selected"
-      [appFlightSeatsAvailability]="ticket.seats"
-    ></div>
-  </ng-container>
+  <div
+    class="indicator"
+    [appFlightSeatsAvailability]="
+      ticketInfo.selected && ticketInfo.tickets[0]
+        ? ticketInfo.tickets[0].seats
+        : null
+    "
+  ></div>
 </div>

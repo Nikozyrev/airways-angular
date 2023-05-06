@@ -8,6 +8,7 @@
 }
 
 .date-card {
+  padding-top: 5px;
   cursor: pointer;
 
   &.selected {
@@ -32,6 +33,12 @@
   font-weight: 700;
   color: $primary-blue;
   line-height: 2rem;
+}
+
+.no-flight {
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
 }
 
 .indicator {
