@@ -1,27 +1,28 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { AppTiketState } from '../tiket.state.model';
+import { AppTicketState } from '../tiket.state.model';
 import { daysShift } from '../../../common/date-time.constants';
 
-export const selectFeature = createFeatureSelector<AppTiketState>('TiketInfo');
+export const selectFeature =
+  createFeatureSelector<AppTicketState>('TicketInfo');
 
-export const selectTiket = createSelector(
+export const selectTicket = createSelector(
   selectFeature,
-  (state) => state.tiketInfo
+  (state) => state.ticketInfo
 );
 
 export const selectSearchParams = createSelector(selectFeature, (state) => {
-  const departureGte = state.tiketInfo.startDate
-    ? new Date(Date.parse(state.tiketInfo.startDate) - daysShift)
+  const departureGte = state.ticketInfo.startDate
+    ? new Date(Date.parse(state.ticketInfo.startDate) - daysShift)
     : new Date(Date.now() - daysShift);
 
-  const departureLte = state.tiketInfo.endDate
-    ? new Date(Date.parse(state.tiketInfo.endDate) + daysShift)
+  const departureLte = state.ticketInfo.endDate
+    ? new Date(Date.parse(state.ticketInfo.endDate) + daysShift)
     : new Date(departureGte.getTime() + daysShift * 2);
 
   return {
-    tripType: state.tiketInfo.tripType,
-    from: state.tiketInfo.from,
-    to: state.tiketInfo.to,
+    tripType: state.ticketInfo.tripType,
+    from: state.ticketInfo.from,
+    to: state.ticketInfo.to,
     departure_gte: departureGte.toISOString(),
     departure_lte: departureLte.toISOString(),
   };
@@ -29,5 +30,5 @@ export const selectSearchParams = createSelector(selectFeature, (state) => {
 
 export const selectTripType = createSelector(
   selectFeature,
-  (state) => state.tiketInfo.tripType
+  (state) => state.ticketInfo.tripType
 );

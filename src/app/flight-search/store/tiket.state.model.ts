@@ -1,10 +1,10 @@
 import { Toppings } from '../components/flight-search/flight-search.component';
 
-export interface AppTiketState {
-  tiketInfo: TiketStateInterface;
+export interface AppTicketState {
+  ticketInfo: TicketStateInterface;
 }
 
-export interface TiketStateInterface {
+export interface TicketStateInterface {
   tripType: string;
   from: string;
   to: string;

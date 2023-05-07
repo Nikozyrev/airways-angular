@@ -16,7 +16,7 @@ import { reducers } from './store/reducers/tiket.reducer';
     FlightSearchRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('TiketInfo', reducers),
+    StoreModule.forFeature('TicketInfo', reducers),
   ],
 })
 export class FlightSearchModule {}
