@@ -37,7 +37,7 @@ export class TicketSelectComponent implements OnInit {
       TicketSelectors.selectTicketsData(this.ticketType)
     );
 
-    this.ticketsData$.pipe(take(1)).subscribe((data) => {
+    this.ticketsData$.pipe(take(2)).subscribe((data) => {
       const selectedDate = new Date(data.selectedDate || Date.now());
       const dates = this.createDatesArray(
         this.getDateFrom(selectedDate, -2),

@@ -1,11 +1,13 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { ITicketSeats } from '../models/ticket.model';
 
 @Directive({
   selector: '[appFlightSeatsAvailability]',
 })
-export class FlightSeatsAvailabilityDirective implements OnInit {
+export class FlightSeatsAvailabilityDirective implements OnInit, OnChanges {
   @Input() public appFlightSeatsAvailability!: ITicketSeats | null;
+
+  private colors = ['green', 'orange', 'red'] as const;
 
   private element: HTMLElement;
 
@@ -14,6 +16,15 @@ export class FlightSeatsAvailabilityDirective implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.applyColor();
+  }
+
+  public ngOnChanges() {
+    this.replaceColor();
+  }
+
+  private replaceColor() {
+    this.element.classList.remove(...this.colors);
     this.applyColor();
   }
 
@@ -26,13 +37,13 @@ export class FlightSeatsAvailabilityDirective implements OnInit {
 
   private pickColor() {
     if (!this.appFlightSeatsAvailability) return '';
-    if (this.appFlightSeatsAvailability.available <= 10) return 'red';
+    if (this.appFlightSeatsAvailability.available <= 10) return this.colors[2];
     if (
       this.appFlightSeatsAvailability.available /
         this.appFlightSeatsAvailability.total <=
       0.5
     )
-      return 'orange';
-    return 'green';
+      return this.colors[1];
+    return this.colors[0];
   }
 }

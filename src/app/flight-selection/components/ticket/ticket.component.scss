@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+  background-color: white;
+}
+
+.ticket {
+  display: flex;
+}
+
+.cuopon {
+  display: flex;
+}
+
+.seats {
+  &.red {
+    background-color: rgba(179, 38, 30, 0.3);
+  }
+
+  &.orange {
+    background-color: rgba(241, 201, 51, 0.3);
+  }
+
+  &.green {
+    background-color: rgba(93, 158, 7, 0.7);
+  }
+}
+
+.no-ticket {
+  padding: 15px;
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.5rem;
+}

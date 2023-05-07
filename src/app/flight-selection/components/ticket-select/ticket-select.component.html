@@ -21,12 +21,14 @@
         {{ ticketsData.from }} to {{ ticketsData.to }}
       </h3>
       <app-flight-date-select
+        class="date-select"
         *ngIf="viewDates$ | async as viewDates"
         [flightDates]="viewDates"
         (moveDatesEmitter)="moveDates($event)"
         (selectDateEmitter)="selectDate($event)"
       ></app-flight-date-select>
       <app-ticket
+        class="ticket"
         *ngIf="selectedViewDate$ | async as viewDate"
         [selectedDate]="viewDate"
       ></app-ticket>
