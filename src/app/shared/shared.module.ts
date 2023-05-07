@@ -32,6 +32,7 @@ import {
   MatRippleModule,
 } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
+import { SecondMenuComponent } from './components/second-menu/second-menu.component';
 
 const materialModules = [
   MatRippleModule,
@@ -64,6 +65,7 @@ const materialModules = [
     SingleDateInputComponent,
     PhoneNumberInputComponent,
     CitizenshipInputComponent,
+    SecondMenuComponent,
     DataPersonComponent,
   ],
   imports: [...materialModules, CommonModule, ReactiveFormsModule, FormsModule],
@@ -79,6 +81,7 @@ const materialModules = [
     SingleDateInputComponent,
     PhoneNumberInputComponent,
     CitizenshipInputComponent,
+    SecondMenuComponent,
   ],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },
