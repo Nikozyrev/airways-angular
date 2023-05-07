@@ -29,7 +29,7 @@ export const selectIsLoading = createSelector(
 export const selectTicketsData = (ticketType: TicketType) =>
   createSelector(
     selectFeature,
-    TicketInfo.selectTiket,
+    TicketInfo.selectTicket,
     (tickets, ticketInfo) => {
       const destTicket = ticketType === 'destination';
       return {
