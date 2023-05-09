@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { setTicketInfoSuccess } from '../../store/actions/tiket.action';
@@ -9,6 +15,7 @@ import { selectDate } from '../../../header/store/selectors/header-selector';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { selectTicket } from '../../store/selectors/tiket.selector';
+import { Subscription } from 'rxjs';
 
 export interface Toppings {
   type: string;
@@ -20,7 +27,7 @@ export interface Toppings {
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.scss'],
 })
-export class FlightSearchComponent implements OnInit {
+export class FlightSearchComponent implements OnInit, OnDestroy {
   selectedType!: string;
 
   tripType: string[] = ['Round Trip', 'One Way'];
@@ -57,6 +64,10 @@ export class FlightSearchComponent implements OnInit {
     toppings: new FormControl(this.toppingsObj, [tiketValidator]),
   });
 
+  tiket$: Subscription | undefined;
+
+  preLoad = true;
+
   @ViewChild('fromInput') btnInput!: ElementRef;
 
   constructor(
@@ -68,12 +79,12 @@ export class FlightSearchComponent implements OnInit {
   ngOnInit(): void {
     this.http.get<string[]>('/cities').subscribe((cities) => {
       this.countries = cities;
+      this.preLoad = false;
     });
 
     this.selectedType = this.tripType[0];
 
-    const tiket = this.store.select(selectTicket);
-    tiket.subscribe((value) => {
+    this.tiket$ = this.store.select(selectTicket).subscribe((value) => {
       if (value.tripType !== '') {
         this.ticketForm.get('tripType')?.setValue(value.tripType);
         this.ticketForm.get('from')?.setValue(value.from);
@@ -98,6 +109,10 @@ export class FlightSearchComponent implements OnInit {
       this.ticketForm.get('startDate')?.setValue(startDate as string);
     });
     this.ticketForm.get('toppings')?.markAsTouched();
+  }
+
+  ngOnDestroy(): void {
+    this.tiket$?.unsubscribe();
   }
 
   change() {

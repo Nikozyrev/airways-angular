@@ -33,6 +33,7 @@ import {
 } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
 import { SecondMenuComponent } from './components/second-menu/second-menu.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const materialModules = [
   MatRippleModule,
@@ -53,6 +54,7 @@ const materialModules = [
   MatRadioModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({

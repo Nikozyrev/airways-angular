@@ -1,4 +1,7 @@
-<div class="component__wraper" [formGroup]="ticketForm">
+<div class="pre-loader" *ngIf="preLoad">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component__wraper" [formGroup]="ticketForm" *ngIf="!preLoad">
   <div class="radip__wrap">
     <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="tripType"
       [(ngModel)]="selectedType" class="radio" subscriptSizing="dynamic" (change)="tripTypeChange()">
