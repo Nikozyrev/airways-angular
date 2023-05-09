@@ -1,17 +1,104 @@
+@import "../../../../styles/variables.scss";
+
 :host {
   display: flex;
   background-color: white;
+  border-radius: 5px;
 }
 
 .ticket {
+  width: 100%;
   display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.flight-info {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 10px;
+}
+
+.departure {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 5px;
+}
+
+.duration {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.arrival {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0 5px;
+}
+
+.date {
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  color: #74767a;
+}
+
+.time {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+.location {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.flight-number {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+
+  span {
+    &:last-child {
+      font-weight: 700;
+    }
+  }
 }
 
 .cuopon {
   display: flex;
+  border-left: 2px dashed #d0d9df;
+}
+
+.cuopon__data {
+  padding: 0px 20px;
+}
+
+.cuopon__confirm {
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
 }
 
 .seats {
+  padding: 10px 5px;
+  margin-bottom: 5px;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  color: #454a53;
+
   &.red {
     background-color: rgba(179, 38, 30, 0.3);
   }
@@ -23,6 +110,33 @@
   &.green {
     background-color: rgba(93, 158, 7, 0.7);
   }
+}
+
+.price {
+  text-align: end;
+
+  p {
+    &:first-child {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 16px;
+      color: #74767a;
+    }
+
+    &:last-child {
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 36px;
+      color: $primary-blue;
+    }
+  }
+}
+
+.select-ticket-btn {
+  background: linear-gradient(108.75deg, #0090bd 59.91%, #073590 95.36%);
+  border: 1px solid #11397e;
+  border-radius: 4px;
+  color: white;
 }
 
 .no-ticket {

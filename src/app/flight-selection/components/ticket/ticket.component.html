@@ -1,6 +1,27 @@
 <div *ngIf="selectedDate.tickets[0] as ticket; else noTicket" class="ticket">
   <div class="flight-info">
-    {{ ticket.flightNum }}
+    <div class="departure">
+      <p class="date">{{ ticket.dates.departure | date : "EEE, d MMM y" }}</p>
+      <p class="time">{{ ticket.dates.departure | date : "H:mm" }}</p>
+      <p class="location">{{ ticket.locations.departure }}</p>
+    </div>
+    <div class="duration">
+      <p>
+        {{
+          calculateDuration(ticket.dates.arrival, ticket.dates.departure)
+            | duration
+        }}
+      </p>
+    </div>
+    <div class="arrival">
+      <p class="date">{{ ticket.dates.arrival | date : "EEE, d MMM y" }}</p>
+      <p class="time">{{ ticket.dates.arrival | date : "H:mm" }}</p>
+      <p class="location">{{ ticket.locations.arrival }}</p>
+    </div>
+    <div class="flight-number">
+      <span>Flight no.</span>
+      <span>FR {{ ticket.flightNum }}</span>
+    </div>
   </div>
   <div class="cuopon">
     <div class="cuopon__data">

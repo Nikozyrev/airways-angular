@@ -20,4 +20,9 @@ export class TicketComponent implements OnInit {
   public ngOnInit(): void {
     this.currencyCode$ = this.store.select(selectCurrency);
   }
+
+  public calculateDuration(arrival: Date, departure: Date) {
+    const durationNum = arrival.getTime() - departure.getTime();
+    return durationNum;
+  }
 }
