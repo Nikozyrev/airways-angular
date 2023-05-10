@@ -34,6 +34,7 @@ import {
 import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
 import { SecondMenuComponent } from './components/second-menu/second-menu.component';
 import { DurationPipe } from './pipes/duration.pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const materialModules = [
   MatRippleModule,
@@ -54,6 +55,7 @@ const materialModules = [
   MatRadioModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({
