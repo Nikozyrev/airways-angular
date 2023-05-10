@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+.arrows {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    z-index: 2;
+    cursor: pointer;
+  }
+}
+
+.cards {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-rows: 1fr;
+}
