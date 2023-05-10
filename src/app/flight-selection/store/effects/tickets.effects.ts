@@ -3,9 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
-import * as TicketsActions from './actions';
-import { TicketsService } from '../services/tickets.service';
-import { selectSearchParams } from '../../flight-search/store/selectors/tiket.selector';
+import * as TicketsActions from '../actions/tickets.actions';
+import { TicketsService } from '../../services/tickets.service';
+import { selectSearchParams } from '../../../flight-search/store/selectors/tiket.selector';
 
 @Injectable()
 export class TicketsEffects {

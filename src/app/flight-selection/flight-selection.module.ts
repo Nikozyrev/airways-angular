@@ -12,8 +12,8 @@ import { FlightSelectionComponent } from './components/flight-selection/flight-s
 import { SharedModule } from '../shared/shared.module';
 import { TicketSelectComponent } from './components/ticket-select/ticket-select.component';
 import { TicketComponent } from './components/ticket/ticket.component';
-import { ticketsReducers } from './store/reducers';
-import { TicketsEffects } from './store/effects';
+import { ticketsReducers } from './store/reducers/tickets.reducers';
+import { TicketsEffects } from './store/effects/tickets.effects';
 
 @NgModule({
   declarations: [

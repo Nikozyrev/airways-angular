@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectTripType } from '../../../flight-search/store/selectors/tiket.selector';
-import { fetchTickets } from '../../store/actions';
+import { fetchTickets } from '../../store/actions/tickets.actions';
 
 @Component({
   selector: 'app-flight-selection',

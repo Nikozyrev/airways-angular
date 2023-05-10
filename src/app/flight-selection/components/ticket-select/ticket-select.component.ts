@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest, map, take } from 'rxjs';
 import { ITicketsData, IViewDate, TicketType } from '../../models/ticket.model';
-import * as TicketSelectors from '../../store/selectors';
+import * as TicketSelectors from '../../store/selectors/tickets.selectors';
 import { DAY_MILLISECONDS } from '../../../common/date-time.constants';
 
 @Component({

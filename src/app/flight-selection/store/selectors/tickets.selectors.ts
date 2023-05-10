@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { TicketsStateInterface } from './tickets-state.model';
-import * as TicketInfo from '../../flight-search/store/selectors/tiket.selector';
-import { ITicketsData, TicketType } from '../models/ticket.model';
+import { TicketsStateInterface } from '../tickets-state.model';
+import * as TicketInfo from '../../../flight-search/store/selectors/tiket.selector';
+import { ITicketsData, TicketType } from '../../models/ticket.model';
 
 export const selectFeature =
   createFeatureSelector<TicketsStateInterface>('tickets');

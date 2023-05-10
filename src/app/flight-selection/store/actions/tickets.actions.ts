@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ITicket } from '../models/ticket.model';
+import { ITicket } from '../../models/ticket.model';
 
 const source = '[Tickets]';
 

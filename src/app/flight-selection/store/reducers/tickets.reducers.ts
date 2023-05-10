@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { TicketsStateInterface } from './tickets-state.model';
-import * as TicketsActions from './actions';
+import { TicketsStateInterface } from '../tickets-state.model';
+import * as TicketsActions from '../actions/tickets.actions';
 
 const initialState: TicketsStateInterface = {
   destinationTickets: [],
