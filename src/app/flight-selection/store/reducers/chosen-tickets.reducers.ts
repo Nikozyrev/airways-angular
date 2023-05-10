@@ -32,5 +32,9 @@ export const chosenTicketsReducers = createReducer(
       }
       return { ...state };
     }
+  ),
+  on(
+    ChosenTicketsActions.clearTickets,
+    (): ChosenTicketsStateInterface => initialState
   )
 );

@@ -12,3 +12,5 @@ export const removeTicket = createAction(
   `${source} Remove Ticket`,
   props<{ ticketType: TicketType }>()
 );
+
+export const clearTickets = createAction(`${source} Clear Tickets`);
