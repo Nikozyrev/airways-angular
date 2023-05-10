@@ -1,9 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest, map, take } from 'rxjs';
-import { ITicketsData, IViewDate, TicketType } from '../../models/ticket.model';
+import {
+  ITicket,
+  ITicketsData,
+  IViewDate,
+  TicketType,
+} from '../../models/ticket.model';
 import * as TicketSelectors from '../../store/selectors/tickets.selectors';
 import { DAY_MILLISECONDS } from '../../../common/date-time.constants';
+import * as ChosenTicketsActions from '../../store/actions/chosen-tickets.actions';
 
 @Component({
   selector: 'app-ticket-select',
@@ -27,6 +33,12 @@ export class TicketSelectComponent implements OnInit {
   public viewDates$!: Observable<IViewDate[]>;
 
   constructor(private store: Store) {}
+
+  public saveTicket(ticket: ITicket) {
+    this.store.dispatch(
+      ChosenTicketsActions.saveTicket({ ticket, ticketType: this.ticketType })
+    );
+  }
 
   public ngOnInit(): void {
     this.initState();

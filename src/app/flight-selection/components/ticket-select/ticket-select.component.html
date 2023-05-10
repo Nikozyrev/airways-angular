@@ -31,6 +31,7 @@
         class="ticket"
         *ngIf="selectedViewDate$ | async as viewDate"
         [selectedDate]="viewDate"
+        (saveTicket)="saveTicket($event)"
       ></app-ticket>
     </div>
   </ng-template>

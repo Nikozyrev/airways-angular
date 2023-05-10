@@ -34,7 +34,13 @@
       </div>
     </div>
     <div class="cuopon__confirm">
-      <button mat-button class="select-ticket-btn">Select</button>
+      <button
+        mat-button
+        class="select-ticket-btn"
+        (click)="handleSaveTicket(ticket)"
+      >
+        Select
+      </button>
     </div>
   </div>
 </div>

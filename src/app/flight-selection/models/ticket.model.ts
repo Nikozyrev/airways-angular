@@ -27,7 +27,6 @@ export interface ITicket {
   locations: ITicketLocations;
   seats: ITicketSeats;
   price: ITicketPrice;
-  selected?: boolean;
 }
 
 export interface ITicketResponse {
