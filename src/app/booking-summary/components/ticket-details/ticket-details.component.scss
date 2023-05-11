@@ -1,0 +1,88 @@
+.summary__info__details {
+  width: 551px;
+  height: 100px;
+  border-top: 3px solid #11397e;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 0;
+  z-index: 50;
+  height: auto;
+}
+
+.lastDetails {
+  margin-left: 25px;
+}
+
+.summary__info__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.details__flight {
+  width: 100%;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.details__flight__route {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.details__flight__route__number {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  color: #11397e;
+  margin-right: 20px;
+}
+
+.details__flight__route__way {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  color: #000000;
+}
+
+.details__flight__data {
+  display: flex;
+}
+
+.details__flight__data__date,
+.details__flight__data__time {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  color: #000000;
+}
+
+.details__flight__data__date {
+  margin-right: 36px;
+}
+
+.container-passengers {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.container-passengers :last-child {
+  border-radius: 0px 0px 8px 8px;
+}

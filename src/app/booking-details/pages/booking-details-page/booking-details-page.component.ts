@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { IPassengersState } from './../../store/passengers.state.model';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { countryCodes as data } from '../../../common/code.constants';
 import { Location } from '@angular/common';
@@ -6,6 +13,7 @@ import { Store } from '@ngrx/store';
 import { Subscription, map } from 'rxjs';
 import { setPassengers } from '../../store/actions/passengers.action';
 import { selectTiket } from '../../../flight-search/store/selectors/tiket.selector';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-details-page',
@@ -13,7 +21,9 @@ import { selectTiket } from '../../../flight-search/store/selectors/tiket.select
   styleUrls: ['./booking-details-page.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BookingDetailsPageComponent implements OnInit, OnDestroy {
+export class BookingDetailsPageComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   createCardForm!: FormGroup;
 
   countryCodes = data;
@@ -28,11 +38,21 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.createCardForm.markAllAsTouched();
-    console.log(this.createCardForm.value);
-    if (this.createCardForm.invalid) return;
+    // console.log(this.createCardForm.value.adult);
+    // if (this.createCardForm.invalid) return;
     this.store.dispatch(
       setPassengers({ passengers: this.createCardForm.value })
     );
+
+    localStorage.setItem(
+      'keyFormValue',
+      JSON.stringify(this.createCardForm.value)
+    );
+
+    this.router.navigateByUrl('/summary');
+    // setTimeout(() => {
+
+    // });
   }
 
   goBack(): void {
@@ -42,14 +62,26 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private location: Location,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {}
+
+  ngAfterViewInit(): void {
+    // console.log(this.createCardForm.value);
+    console.log('ngAfterViewInit', this.createCardForm.value);
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
+    const local = localStorage.getItem('keyFormValue');
+
+    let value: IPassengersState | null = null;
+
+    if (local) value = JSON.parse(local);
+
     const i = this.store.select(selectTiket);
     this.subscription = i.pipe(map((item) => item.toppings)).subscribe((item) =>
       item.forEach((person) => {
@@ -59,15 +91,18 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
       })
     );
 
-    console.log(this.adult);
+    // const local = JSON.parse(localStorage.getItem('keyFormValue') as string);
+    // console.log(this.createCardForm.value);
 
     this.createCardForm = this.fb.group({
       adult: this.fb.array([]),
       child: this.fb.array([]),
       infant: this.fb.array([]),
-      code: [''],
-      telephone: [''],
-      email: ['', [Validators.email]],
+      code: [value?.code || ''],
+      telephone: [value?.telephone || ''],
+      email: [value?.email || '', [Validators.email]],
     });
+
+    console.log(this.createCardForm.value);
   }
 }
