@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.flights {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  button {
+    width: 100px;
+    height: 50px;
+  }
+}

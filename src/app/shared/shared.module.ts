@@ -33,6 +33,7 @@ import {
 } from '@angular/material/core';
 import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
 import { SecondMenuComponent } from './components/second-menu/second-menu.component';
+import { DurationPipe } from './pipes/duration.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const materialModules = [
@@ -69,6 +70,7 @@ const materialModules = [
     CitizenshipInputComponent,
     SecondMenuComponent,
     DataPersonComponent,
+    DurationPipe,
   ],
   imports: [...materialModules, CommonModule, ReactiveFormsModule, FormsModule],
   exports: [
@@ -84,6 +86,7 @@ const materialModules = [
     PhoneNumberInputComponent,
     CitizenshipInputComponent,
     SecondMenuComponent,
+    DurationPipe,
   ],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },

@@ -1,0 +1,59 @@
+@import "../../../../styles/variables.scss";
+
+:host {
+  display: block;
+  text-align: center;
+  border-left: 1px solid #cecece;
+  background-color: white;
+}
+
+.date-card {
+  padding-top: 5px;
+  cursor: pointer;
+
+  &.selected {
+    cursor: auto;
+  }
+}
+
+.date {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  color: $primary-blue;
+}
+
+.weekday {
+  line-height: 1.3rem;
+  color: $light-gray;
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $primary-blue;
+  line-height: 2rem;
+}
+
+.no-flight {
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+}
+
+.indicator {
+  width: 100%;
+  height: 5px;
+
+  &.red {
+    background-color: $red;
+  }
+
+  &.orange {
+    background-color: $orange;
+  }
+
+  &.green {
+    background-color: $green;
+  }
+}
