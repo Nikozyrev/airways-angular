@@ -1,14 +1,21 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { setTiketInfoSuccess } from '../../store/actions/tiket.action';
-import { TiketStateInterface } from '../../store/tiket.state.model';
+import { setTicketInfoSuccess } from '../../store/actions/tiket.action';
+import { TicketStateInterface } from '../../store/tiket.state.model';
 import { dateValidator } from '../../../shared/validators/date.validator';
 import { tiketValidator } from '../../../shared/validators/tiket.validator';
 import { selectDate } from '../../../header/store/selectors/header-selector';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { selectTiket } from '../../store/selectors/tiket.selector';
+import { selectTicket } from '../../store/selectors/tiket.selector';
+import { Subscription } from 'rxjs';
 
 export interface Toppings {
   type: string;
@@ -20,19 +27,19 @@ export interface Toppings {
   templateUrl: './flight-search.component.html',
   styleUrls: ['./flight-search.component.scss'],
 })
-export class FlightSearchComponent implements OnInit {
+export class FlightSearchComponent implements OnInit, OnDestroy {
   selectedType!: string;
 
   tripType: string[] = ['Round Trip', 'One Way'];
 
   countries = [''];
 
-  toppings = new FormControl(['']);
+  toppings = new FormControl(['Adult']);
 
   toppingsObj: Toppings[] = [
     {
       type: 'Adult',
-      amount: 0,
+      amount: 1,
     },
     {
       type: 'Child',
@@ -48,7 +55,7 @@ export class FlightSearchComponent implements OnInit {
 
   angle = 0;
 
-  tiketForm = new FormGroup({
+  ticketForm = new FormGroup({
     tripType: new FormControl('', [Validators.required]),
     from: new FormControl('', [Validators.required]),
     to: new FormControl('', [Validators.required]),
@@ -56,6 +63,10 @@ export class FlightSearchComponent implements OnInit {
     endDate: new FormControl(''),
     toppings: new FormControl(this.toppingsObj, [tiketValidator]),
   });
+
+  tiket$: Subscription | undefined;
+
+  preLoad = true;
 
   @ViewChild('fromInput') btnInput!: ElementRef;
 
@@ -68,21 +79,23 @@ export class FlightSearchComponent implements OnInit {
   ngOnInit(): void {
     this.http.get<string[]>('/cities').subscribe((cities) => {
       this.countries = cities;
+      this.preLoad = false;
     });
+
+    localStorage.removeItem('keyFormValue');
 
     this.selectedType = this.tripType[0];
 
-    const tiket = this.store.select(selectTiket);
-    tiket.subscribe((value) => {
+    this.tiket$ = this.store.select(selectTicket).subscribe((value) => {
       if (value.tripType !== '') {
-        this.tiketForm.get('tripType')?.setValue(value.tripType);
-        this.tiketForm.get('from')?.setValue(value.from);
-        this.tiketForm.get('to')?.setValue(value.to);
-        this.tiketForm.get('startDate')?.setValue(value.startDate);
-        this.tiketForm.get('endDate')?.setValue(value.endDate);
+        this.ticketForm.get('tripType')?.setValue(value.tripType);
+        this.ticketForm.get('from')?.setValue(value.from);
+        this.ticketForm.get('to')?.setValue(value.to);
+        this.ticketForm.get('startDate')?.setValue(value.startDate);
+        this.ticketForm.get('endDate')?.setValue(value.endDate);
         this.selectedType = value.tripType;
         this.toppingsObj = value.toppings;
-        this.tiketForm.get('toppings')?.setValue(this.toppingsObj);
+        this.ticketForm.get('toppings')?.setValue(this.toppingsObj);
         const toppingsValue = this.toppingsObj
           .filter((v) => v.amount > 0)
           .map((el) => el.type);
@@ -92,12 +105,16 @@ export class FlightSearchComponent implements OnInit {
 
     const date$ = this.store.select(selectDate);
     date$.subscribe(() => {
-      const endDate = this.tiketForm.get('endDate')?.value;
-      const startDate = this.tiketForm.get('startDate')?.value;
-      this.tiketForm.get('endDate')?.setValue(endDate as string);
-      this.tiketForm.get('startDate')?.setValue(startDate as string);
+      const endDate = this.ticketForm.get('endDate')?.value;
+      const startDate = this.ticketForm.get('startDate')?.value;
+      this.ticketForm.get('endDate')?.setValue(endDate as string);
+      this.ticketForm.get('startDate')?.setValue(startDate as string);
     });
-    this.tiketForm.get('toppings')?.markAsTouched();
+    this.ticketForm.get('toppings')?.markAsTouched();
+  }
+
+  ngOnDestroy(): void {
+    this.tiket$?.unsubscribe();
   }
 
   change() {
@@ -138,25 +155,25 @@ export class FlightSearchComponent implements OnInit {
   }
 
   submit() {
-    if (this.tiketForm.valid) {
-      const formValue: TiketStateInterface = Object.assign(
+    if (this.ticketForm.valid) {
+      const formValue: TicketStateInterface = Object.assign(
         {},
-        this.tiketForm.value as TiketStateInterface
+        this.ticketForm.value as TicketStateInterface
       );
       if (this.clickCounter > 0) {
-        formValue.from = this.tiketForm.get('to')?.value as string;
-        formValue.to = this.tiketForm.get('from')?.value as string;
+        formValue.from = this.ticketForm.get('to')?.value as string;
+        formValue.to = this.ticketForm.get('from')?.value as string;
       }
       if (this.selectedType === 'Round Trip') {
         this.store.dispatch(
-          setTiketInfoSuccess({
-            tiketInfo: formValue,
+          setTicketInfoSuccess({
+            ticketInfo: formValue,
           })
         );
       } else {
         this.store.dispatch(
-          setTiketInfoSuccess({
-            tiketInfo: formValue,
+          setTicketInfoSuccess({
+            ticketInfo: formValue,
           })
         );
       }
@@ -188,7 +205,7 @@ export class FlightSearchComponent implements OnInit {
     });
     this.toppingsObj = newToppings;
 
-    this.tiketForm.get('toppings')?.setValue(newToppings);
+    this.ticketForm.get('toppings')?.setValue(newToppings);
   }
 
   decrease(event: Event) {
@@ -219,11 +236,11 @@ export class FlightSearchComponent implements OnInit {
     });
     this.toppingsObj = newToppings;
 
-    this.tiketForm.get('toppings')?.setValue(this.toppingsObj);
+    this.ticketForm.get('toppings')?.setValue(this.toppingsObj);
   }
 
   tripTypeChange() {
-    this.tiketForm.get('endDate')?.setValue(null);
-    this.tiketForm.get('startDate')?.setValue(null);
+    this.ticketForm.get('endDate')?.setValue(null);
+    this.ticketForm.get('startDate')?.setValue(null);
   }
 }

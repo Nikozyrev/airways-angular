@@ -1,0 +1,55 @@
+<div *ngIf="selectedDate.tickets[0] as ticket; else noTicket" class="ticket">
+  <div class="flight-info">
+    <div class="departure">
+      <p class="date">{{ ticket.dates.departure | date : "EEE, d MMM y" }}</p>
+      <p class="time">{{ ticket.dates.departure | date : "H:mm" }}</p>
+      <p class="location">{{ ticket.locations.departure }}</p>
+    </div>
+    <div class="duration">
+      <p>
+        {{
+          calculateDuration(ticket.dates.arrival, ticket.dates.departure)
+            | duration
+        }}
+      </p>
+    </div>
+    <div class="arrival">
+      <p class="date">{{ ticket.dates.arrival | date : "EEE, d MMM y" }}</p>
+      <p class="time">{{ ticket.dates.arrival | date : "H:mm" }}</p>
+      <p class="location">{{ ticket.locations.arrival }}</p>
+    </div>
+    <div class="flight-number">
+      <span>Flight no.</span>
+      <span>FR {{ ticket.flightNum }}</span>
+    </div>
+  </div>
+  <div class="cuopon">
+    <div class="cuopon__data">
+      <div class="seats" [appFlightSeatsAvailability]="ticket.seats">
+        {{ ticket.seats.available }} seats available
+      </div>
+      <div class="price" *ngIf="currencyCode$ | async as currencyCode">
+        <p>Price</p>
+        <p>{{ ticket.price[currencyCode] | currency : currencyCode }}</p>
+      </div>
+    </div>
+    <div class="cuopon__confirm">
+      <button
+        mat-button
+        class="select-ticket-btn"
+        (click)="handleSaveTicket(ticket)"
+      >
+        Select
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noTicket>
+  <div class="no-ticket">
+    <p>
+      There are no eligible tickets on
+      {{ selectedDate.date | date : "dd MMM yyyy" }}. Choose another date.
+    </p>
+  </div>
+</ng-template>

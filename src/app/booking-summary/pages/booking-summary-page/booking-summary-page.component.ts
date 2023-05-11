@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { selectTiket } from './../../../flight-search/store/selectors/tiket.selector';
-import { TiketStateInterface } from './../../../flight-search/store/tiket.state.model';
+import { selectTicket } from './../../../flight-search/store/selectors/tiket.selector';
+import { TicketStateInterface } from './../../../flight-search/store/tiket.state.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, map } from 'rxjs';
@@ -32,7 +32,7 @@ export interface ITicket {
 export class BookingSummaryPageComponent implements OnInit, OnDestroy {
   // ticket$!: Observable<TiketStateInterface>;
 
-  ticket!: TiketStateInterface;
+  ticket!: TicketStateInterface;
 
   flight$!: Observable<ITicket>;
 
@@ -57,7 +57,7 @@ export class BookingSummaryPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const ticket$ = this.store.select(selectTiket);
+    const ticket$ = this.store.select(selectTicket);
     this.subscription = ticket$.subscribe((item) => (this.ticket = item));
     this.flight$ = <Observable<ITicket>>(
       this.http

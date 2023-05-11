@@ -12,7 +12,9 @@ import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Subscription, map } from 'rxjs';
 import { setPassengers } from '../../store/actions/passengers.action';
-import { selectTiket } from '../../../flight-search/store/selectors/tiket.selector';
+import { selectTicket } from '../../../flight-search/store/selectors/tiket.selector';
+import { TicketStateInterface } from '../../../flight-search/store/tiket.state.model';
+import { Toppings } from '../../../flight-search/components/flight-search/flight-search.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -82,14 +84,16 @@ export class BookingDetailsPageComponent
 
     if (local) value = JSON.parse(local);
 
-    const i = this.store.select(selectTiket);
-    this.subscription = i.pipe(map((item) => item.toppings)).subscribe((item) =>
-      item.forEach((person) => {
-        if (person.type === 'Adult') this.adult = new Array(person.amount);
-        if (person.type === 'Child') this.child = new Array(person.amount);
-        if (person.type === 'Infant') this.infant = new Array(person.amount);
-      })
-    );
+    const i = this.store.select(selectTicket);
+    this.subscription = i
+      .pipe(map((item: TicketStateInterface) => item.toppings))
+      .subscribe((item) =>
+        item.forEach((person: Toppings) => {
+          if (person.type === 'Adult') this.adult = new Array(person.amount);
+          if (person.type === 'Child') this.child = new Array(person.amount);
+          if (person.type === 'Infant') this.infant = new Array(person.amount);
+        })
+      );
 
     // const local = JSON.parse(localStorage.getItem('keyFormValue') as string);
     // console.log(this.createCardForm.value);

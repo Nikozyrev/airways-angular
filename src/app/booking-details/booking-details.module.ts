@@ -1,7 +1,6 @@
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { BookingDetailsRoutingModule } from './booking-details-routing.module';
 import { BookingDetailsPageComponent } from './pages/booking-details-page/booking-details-page.component';
 import { MatButtonModule } from '@angular/material/button';

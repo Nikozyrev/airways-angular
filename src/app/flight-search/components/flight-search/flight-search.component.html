@@ -1,4 +1,7 @@
-<div class="component__wraper" [formGroup]="tiketForm">
+<div class="pre-loader" *ngIf="preLoad">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component__wraper" [formGroup]="ticketForm" *ngIf="!preLoad">
   <div class="radip__wrap">
     <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="tripType"
       [(ngModel)]="selectedType" class="radio" subscriptSizing="dynamic" (change)="tripTypeChange()">
@@ -11,8 +14,8 @@
     <mat-form-field appearance="fill" subscriptSizing="dynamic" class="country__input">
       <mat-label class="label">From</mat-label>
       <mat-select formControlName="from" name="food">
-        <mat-option *ngFor="let counry of countries" [value]="counry">
-          {{counry}}
+        <mat-option *ngFor="let country of countries" [value]="country">
+          {{country}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -25,8 +28,8 @@
     <mat-form-field appearance="fill" subscriptSizing="dynamic" class="country__input">
       <mat-label class="label">Destination</mat-label>
       <mat-select formControlName="to" name="food">
-        <mat-option *ngFor="let counry of countries" [value]="counry">
-          {{counry}}
+        <mat-option *ngFor="let country of countries" [value]="country">
+          {{country}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -42,8 +45,8 @@
       </mat-date-range-input>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
-      <mat-error *ngIf="tiketForm.get('startDate')!.invalid">Invalid start date</mat-error>
-      <mat-error *ngIf="tiketForm.get('endDate')!.invalid">Invalid end date</mat-error>
+      <mat-error *ngIf="ticketForm.get('startDate')!.invalid">Invalid start date</mat-error>
+      <mat-error *ngIf="ticketForm.get('endDate')!.invalid">Invalid end date</mat-error>
     </mat-form-field>
 
     <mat-form-field subscriptSizing="dynamic" appearance="fill" *ngIf="selectedType === 'One Way'" style="width: 311px">
@@ -51,7 +54,7 @@
       <input matInput [matDatepicker]="picker1" formControlName="startDate">
       <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
-      <mat-error *ngIf="tiketForm.get('startDate')!.invalid">Invalid start date</mat-error>
+      <mat-error *ngIf="ticketForm.get('startDate')!.invalid">Invalid start date</mat-error>
     </mat-form-field>
 
     <mat-form-field subscriptSizing="dynamic" appearance="fill" class="tiket__wraper">
@@ -84,13 +87,13 @@
         <mat-option *ngFor="let topping of toppingsObj" [value]="topping.type"
           style="display: none;">{{topping.type}}</mat-option>
       </mat-select>
-      <mat-error *ngIf="tiketForm.get('toppings')!.invalid">Invalid number of tickets</mat-error>
+      <mat-error *ngIf="ticketForm.get('toppings')!.invalid">Invalid number of tickets</mat-error>
     </mat-form-field>
 
   </div>
 
   <div class="btn__wraper">
-    <button class="search__btn" (click)="submit()" [disabled]="tiketForm.invalid">
+    <button class="search__btn" (click)="submit()" [disabled]="ticketForm.invalid">
       Search
     </button>
   </div>
