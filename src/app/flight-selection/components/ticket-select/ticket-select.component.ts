@@ -8,8 +8,8 @@ import {
   TicketType,
 } from '../../models/ticket.model';
 import * as TicketSelectors from '../../store/selectors/tickets.selectors';
+import * as ChosenTicketSelectors from '../../store/selectors/chosen-tickets.selectors';
 import { DAY_MILLISECONDS } from '../../../common/date-time.constants';
-import * as ChosenTicketsActions from '../../store/actions/chosen-tickets.actions';
 
 @Component({
   selector: 'app-ticket-select',
@@ -32,13 +32,9 @@ export class TicketSelectComponent implements OnInit {
 
   public viewDates$!: Observable<IViewDate[]>;
 
-  constructor(private store: Store) {}
+  public selectedTicket$!: Observable<ITicket | null>;
 
-  public saveTicket(ticket: ITicket) {
-    this.store.dispatch(
-      ChosenTicketsActions.saveTicket({ ticket, ticketType: this.ticketType })
-    );
-  }
+  constructor(private store: Store) {}
 
   public ngOnInit(): void {
     this.initState();
@@ -47,6 +43,10 @@ export class TicketSelectComponent implements OnInit {
   private initState() {
     this.ticketsData$ = this.store.select(
       TicketSelectors.selectTicketsData(this.ticketType)
+    );
+
+    this.selectedTicket$ = this.store.select(
+      ChosenTicketSelectors.selectChosenTicket(this.ticketType)
     );
 
     this.ticketsData$.pipe(take(2)).subscribe((data) => {

@@ -75,16 +75,16 @@
   }
 }
 
-.cuopon {
+.coupon {
   display: flex;
   border-left: 2px dashed #d0d9df;
 }
 
-.cuopon__data {
+.coupon__data {
   padding: 0px 20px;
 }
 
-.cuopon__confirm {
+.coupon__confirm {
   display: flex;
   align-items: center;
   padding: 0px 20px;
@@ -137,6 +137,32 @@
   border: 1px solid #11397e;
   border-radius: 4px;
   color: white;
+}
+
+.selected {
+  display: flex;
+}
+
+.selected__price {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+.selected__edit {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.edit-ticket-btn {
+  background: #f4f6f9;
+  border-radius: 4px;
+  color: $primary-blue;
+  font-weight: 500;
 }
 
 .no-ticket {
