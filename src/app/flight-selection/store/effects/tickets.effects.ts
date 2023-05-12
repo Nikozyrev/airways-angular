@@ -3,12 +3,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
+import * as TicketInfoActions from '../../../flight-search/store/actions/tiket.action';
 import * as TicketsActions from '../actions/tickets.actions';
 import { TicketsService } from '../../services/tickets.service';
 import { selectSearchParams } from '../../../flight-search/store/selectors/tiket.selector';
 
 @Injectable()
 export class TicketsEffects {
+  handleParamsChange$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TicketInfoActions.setTicketInfoSuccess),
+      mergeMap(() => of(TicketsActions.fetchTickets()))
+    );
+  });
+
   fetchTickets$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TicketsActions.fetchTickets),

@@ -75,6 +75,7 @@ const materialModules = [
   imports: [...materialModules, CommonModule, ReactiveFormsModule, FormsModule],
   exports: [
     ...materialModules,
+    CommonModule,
     DataPersonComponent,
     FormsModule,
     EmailInputComponent,
