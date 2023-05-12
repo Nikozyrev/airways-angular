@@ -1,0 +1,75 @@
+<div class="wrapper">
+  <h3 class="shopping-cart__title">
+    Cart
+  </h3>
+  <ul class="sort-elements__list">
+    <li class="sort-element__item">
+      No.
+      <div class="sort-b">
+        <div class="sort-up"></div>
+        <div class="sort-down"></div>
+      </div>
+    </li>
+    <li class="sort-element__item">
+      Flight
+      <div class="sort-b">
+        <div class="sort-up"></div>
+        <div class="sort-down"></div>
+      </div>
+    </li>
+    <li class="sort-element__item">
+      Type trip
+      <div class="sort-b">
+        <div class="sort-up"></div>
+        <div class="sort-down"></div>
+      </div>
+    </li>
+    <li class="sort-element__item">
+      Data & Time
+      <div class="sort-b">
+        <div class="sort-up"></div>
+        <div class="sort-down"></div>
+      </div>
+    </li>
+    <li class="sort-element__item">
+      Passengers
+    </li>
+    <li class="sort-element__item">
+      Price
+      <div class="sort-b">
+        <div class="sort-up"></div>
+        <div class="sort-down"></div>
+      </div>
+    </li>
+  </ul>
+  <div class="main__container">
+    <ul class="tickets__list">
+      <li class="tickets__item" *ngFor="let item of chosenTickets$ | async">
+        <app-cart-item [cartItem]="item"></app-cart-item>
+      </li>
+    </ul>
+    <div class="total__wrapper">
+      <button class="new-trip">
+        + Add new trip
+      </button>
+      <div class="total">
+        Total
+        <div class="sum">$572.34</div>
+      </div>
+    </div>
+    <div class="pay__section">
+      <div class="promo">
+        <input type="text" placeholder="Promo Code" class="promo-input">
+        <button class="apply">APPLY</button>
+      </div>
+      <div class="right-section">
+        <div class="selected-amount">
+          0 selected
+        </div>
+        <button class="pay-b">
+          Payment
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
