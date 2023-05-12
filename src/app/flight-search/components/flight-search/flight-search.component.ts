@@ -82,6 +82,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       this.preLoad = false;
     });
 
+    localStorage.removeItem('keyFormValue');
+
     this.selectedType = this.tripType[0];
 
     this.tiket$ = this.store.select(selectTicket).subscribe((value) => {

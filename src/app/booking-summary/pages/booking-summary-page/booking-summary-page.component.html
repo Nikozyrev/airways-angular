@@ -1,1 +1,27 @@
-<p>booking-summary-page works!</p>
+<div class="container-summary" *ngIf="flight$ | async as flight">
+  <div class="summary__header">
+    <img
+      src="../../../../assets/Vector-summary.svg"
+      alt="vector-summary"
+      class="summary__header__img"
+    />
+    <h2 class="summary__header__h2">Summary</h2>
+  </div>
+
+  <div
+    class="summary__info"
+    *ngIf="ticket.tripType === 'Round Trip'; else oneWay"
+  >
+    <app-ticket-details [round]="!round" [flight]="flight"></app-ticket-details>
+    <app-ticket-details [round]="round" [flight]="flight"></app-ticket-details>
+  </div>
+
+  <ng-template #oneWay>
+    <app-ticket-details [round]="!round" [flight]="flight"></app-ticket-details>
+  </ng-template>
+
+  <app-fare [flight]="flight"></app-fare>
+
+  <button (click)="goBack()">Back</button>
+  <button (click)="goCart()">Next</button>
+</div>

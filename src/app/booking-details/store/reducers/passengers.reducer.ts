@@ -13,11 +13,5 @@ export const initialState: IPassengersState = {
 
 export const reducers = createReducer(
   initialState,
-  on(
-    setPassengers,
-    (state, action): IPassengersState => ({
-      ...state,
-      ...action,
-    })
-  )
+  on(setPassengers, (state, action): IPassengersState => action.passengers)
 );

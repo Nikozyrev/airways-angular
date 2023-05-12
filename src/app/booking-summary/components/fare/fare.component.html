@@ -1,0 +1,7 @@
+<div class="summary__container-fare" *ngIf="ticket$ | async as ticket">
+  <app-fare-passenger
+    *ngFor="let pass of ticket.toppings"
+    [person]="pass"
+    [flight]="flight"
+  ></app-fare-passenger>
+</div>
