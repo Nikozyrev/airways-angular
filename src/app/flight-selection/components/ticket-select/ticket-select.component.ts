@@ -1,6 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, combineLatest, map, take } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subscription,
+  combineLatest,
+  map,
+} from 'rxjs';
 import {
   ITicket,
   ITicketsData,
@@ -16,7 +22,7 @@ import { DAY_MILLISECONDS } from '../../../common/date-time.constants';
   templateUrl: './ticket-select.component.html',
   styleUrls: ['./ticket-select.component.scss'],
 })
-export class TicketSelectComponent implements OnInit {
+export class TicketSelectComponent implements OnInit, OnDestroy {
   @Input()
   public ticketType!: TicketType;
 
@@ -34,22 +40,26 @@ export class TicketSelectComponent implements OnInit {
 
   public selectedTicket$!: Observable<ITicket | null>;
 
+  private subscription!: Subscription;
+
   constructor(private store: Store) {}
 
-  public ngOnInit(): void {
-    this.initState();
+  public selectDate(date: IViewDate) {
+    this.selectedViewDate$.next(date);
   }
 
-  private initState() {
-    this.ticketsData$ = this.store.select(
-      TicketSelectors.selectTicketsData(this.ticketType)
+  public moveDates(direction: -1 | 1) {
+    const currentDates = this.dates$.value;
+    const startDate = currentDates[0];
+    const newDates = this.createDatesArray(
+      this.getDateFrom(startDate, direction),
+      5
     );
+    this.dates$.next(newDates);
+  }
 
-    this.selectedTicket$ = this.store.select(
-      ChosenTicketSelectors.selectChosenTicket(this.ticketType)
-    );
-
-    this.ticketsData$.pipe(take(2)).subscribe((data) => {
+  private subscribeToTicketsData() {
+    this.subscription = this.ticketsData$.subscribe((data) => {
       const selectedDate = new Date(data.selectedDate || Date.now());
       const dates = this.createDatesArray(
         this.getDateFrom(selectedDate, -2),
@@ -66,7 +76,9 @@ export class TicketSelectComponent implements OnInit {
       });
       this.dates$.next(dates);
     });
+  }
 
+  private createViewDates() {
     this.viewDates$ = combineLatest([
       this.selectedViewDate$,
       this.dates$,
@@ -89,20 +101,6 @@ export class TicketSelectComponent implements OnInit {
     );
   }
 
-  public selectDate(date: IViewDate) {
-    this.selectedViewDate$.next(date);
-  }
-
-  public moveDates(direction: -1 | 1) {
-    const currentDates = this.dates$.value;
-    const startDate = currentDates[0];
-    const newDates = this.createDatesArray(
-      this.getDateFrom(startDate, direction),
-      5
-    );
-    this.dates$.next(newDates);
-  }
-
   private createDatesArray(date: Date, days: number) {
     const dateTime = date.getTime();
     const datesArr = Array.from(new Array(days));
@@ -112,5 +110,20 @@ export class TicketSelectComponent implements OnInit {
   private getDateFrom(date: Date, diffDays: number) {
     const dateTime = date.getTime();
     return new Date(dateTime + DAY_MILLISECONDS * diffDays);
+  }
+
+  public ngOnInit(): void {
+    this.ticketsData$ = this.store.select(
+      TicketSelectors.selectTicketsData(this.ticketType)
+    );
+    this.selectedTicket$ = this.store.select(
+      ChosenTicketSelectors.selectChosenTicket(this.ticketType)
+    );
+    this.subscribeToTicketsData();
+    this.createViewDates();
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 }
