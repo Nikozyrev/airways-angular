@@ -70,6 +70,9 @@ export class BookingSummaryPageComponent implements OnInit, OnDestroy {
         },
       })
     );
+    setTimeout(() => {
+      this.router.navigateByUrl('/cart');
+    });
   }
 
   ngOnDestroy(): void {
