@@ -1,6 +1,10 @@
 <div class="data" *ngIf="ticketsData$ | async as ticketsData">
   <div class="loader" *ngIf="ticketsData.isLoading; else container">
-    Loading...
+    <mat-progress-spinner
+      class="spinner"
+      color="primary"
+      mode="indeterminate"
+    ></mat-progress-spinner>
   </div>
 
   <ng-template #container>
@@ -20,19 +24,30 @@
       <h3 class="destination">
         {{ ticketsData.from }} to {{ ticketsData.to }}
       </h3>
-      <app-flight-date-select
-        class="date-select"
-        *ngIf="viewDates$ | async as viewDates"
-        [flightDates]="viewDates"
-        (moveDatesEmitter)="moveDates($event)"
-        (selectDateEmitter)="selectDate($event)"
-      ></app-flight-date-select>
+
       <app-ticket
-        class="ticket"
-        *ngIf="selectedViewDate$ | async as viewDate"
-        [selectedDate]="viewDate"
-        (saveTicket)="saveTicket($event)"
+        *ngIf="selectedTicket$ | async as selectedTicket; else ticketsSelector"
+        [ticket]="selectedTicket"
+        [ticketType]="ticketType"
+        [selected]="true"
       ></app-ticket>
+
+      <ng-template #ticketsSelector>
+        <app-flight-date-select
+          class="date-select"
+          *ngIf="viewDates$ | async as viewDates"
+          [flightDates]="viewDates"
+          (moveDatesEmitter)="moveDates($event)"
+          (selectDateEmitter)="selectDate($event)"
+        ></app-flight-date-select>
+        <app-ticket
+          class="ticket"
+          *ngIf="selectedViewDate$ | async as viewDate"
+          [ticket]="viewDate.tickets[0]"
+          [ticketType]="ticketType"
+          [selected]="false"
+        ></app-ticket>
+      </ng-template>
     </div>
   </ng-template>
 </div>

@@ -15,6 +15,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
 import { ticketsReducers } from './store/reducers/tickets.reducers';
 import { TicketsEffects } from './store/effects/tickets.effects';
 import { chosenTicketsReducers } from './store/reducers/chosen-tickets.reducers';
+import { ChosenTicketsEffects } from './store/effects/chosen-tickets.effects';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { chosenTicketsReducers } from './store/reducers/chosen-tickets.reducers'
     SharedModule,
     StoreModule.forFeature('tickets', ticketsReducers),
     StoreModule.forFeature('chosenTickets', chosenTicketsReducers),
-    EffectsModule.forFeature([TicketsEffects]),
+    EffectsModule.forFeature([TicketsEffects, ChosenTicketsEffects]),
   ],
 })
 export class FlightSelectionModule {}
