@@ -44,7 +44,9 @@
   </ul>
   <div class="main__container">
     <ul class="tickets__list">
-      <li class="tickets__item"></li>
+      <li class="tickets__item" *ngFor="let item of chosenTickets$ | async">
+        <app-cart-item [cartItem]="item"></app-cart-item>
+      </li>
     </ul>
     <div class="total__wrapper">
       <button class="new-trip">

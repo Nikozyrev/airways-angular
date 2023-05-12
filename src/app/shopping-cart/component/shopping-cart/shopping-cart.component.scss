@@ -85,7 +85,6 @@
 }
 
 .total__wrapper {
-  border-top: 1px solid #e1e5eb;
   padding-top: 38px;
   display: flex;
   justify-content: space-between;
@@ -190,4 +189,9 @@
   color: #ffffff;
   border: none;
   cursor: pointer;
+}
+
+.tickets__item{
+  border-bottom: 1px solid #e1e5eb;
+  height: 120px;
 }

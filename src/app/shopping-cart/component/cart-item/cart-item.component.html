@@ -1,0 +1,18 @@
+<section class="example-section" [formGroup]="checkboxGroup">
+  <mat-checkbox formControlName="checked"></mat-checkbox>
+</section>
+<section class="ticket-num__section">
+  <h4 class="tiketNum">FR {{cartItem?.tickets?.destinationTicket?.flightNum}}</h4>
+  <h4 class="tiketNum" *ngIf="cartItem?.tickets?.returnTicket">FR {{cartItem?.tickets?.returnTicket?.flightNum}}</h4>
+</section>
+<section class="flight__section">
+  <p class="flight">{{destinationLocation}}</p>
+  <p class="flight" *ngIf="cartItem?.tickets?.returnTicket">{{returnLocation}}</p>
+</section>
+<section class="trip-type">
+  <p>{{cartItem?.tickets?.returnTicket ? 'Round Trip' : 'One way'}}</p>
+</section>
+<section class="date-time__section">
+  <p>{{cartItem?.tickets?.destinationTicket?.dates?.departure |
+    dateRange:cartItem?.tickets?.destinationTicket?.dates?.arrival}}</p>
+</section>
