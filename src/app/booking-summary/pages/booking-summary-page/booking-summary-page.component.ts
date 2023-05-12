@@ -1,3 +1,6 @@
+import { selectPassengers } from './../../../booking-details/store/selectors/passengers.selector';
+import { IPassengersState } from './../../../booking-details/store/passengers.state.model';
+import { createShoppingCart } from './../../../shopping-cart/store/action/cart-action';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { selectTicket } from './../../../flight-search/store/selectors/tiket.selector';
@@ -8,6 +11,7 @@ import { Observable, Subscription, map } from 'rxjs';
 import { Location } from '@angular/common';
 import { ITicketResponse } from '../../../flight-selection/models/ticket.model';
 import { selectFeature } from '../../../flight-selection/store/selectors/chosen-tickets.selectors';
+import { ChosenTicketsStateInterface } from '../../../flight-selection/store/chosen-tickets-state.model';
 
 @Component({
   selector: 'app-booking-summary-page',
@@ -27,6 +31,12 @@ export class BookingSummaryPageComponent implements OnInit, OnDestroy {
 
   round = true;
 
+  subs = new Subscription();
+
+  ticketInfo!: ChosenTicketsStateInterface;
+
+  passengerstInfo!: IPassengersState;
+
   constructor(
     private store: Store,
     private http: HttpClient,
@@ -40,8 +50,31 @@ export class BookingSummaryPageComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
+  goCart() {
+    const subTicket = this.store
+      .select(selectFeature)
+      .subscribe((item) => (this.ticketInfo = item));
+
+    this.subs.add(subTicket);
+
+    const subPassengers = this.store
+      .select(selectPassengers)
+      .subscribe((item) => (this.passengerstInfo = item));
+
+    this.subs.add(subPassengers);
+    this.store.dispatch(
+      createShoppingCart({
+        cartList: {
+          tickets: this.ticketInfo,
+          passengers: this.passengerstInfo,
+        },
+      })
+    );
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.subs.unsubscribe();
   }
 
   ngOnInit(): void {
