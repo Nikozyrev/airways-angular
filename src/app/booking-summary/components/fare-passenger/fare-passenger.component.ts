@@ -1,7 +1,7 @@
 import { HeaderStateInterface } from './../../../header/store/header-state.model';
 import { Observable } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
-import { ITicket } from '../../pages/booking-summary-page/booking-summary-page.component';
+import { ITicketResponse } from '../../../flight-selection/models/ticket.model';
 import { Store } from '@ngrx/store';
 import { selectFeature } from '../../../header/store/selectors/header-selector';
 
@@ -16,7 +16,7 @@ interface Itopping {
   styleUrls: ['./fare-passenger.component.scss'],
 })
 export class FarePassengerComponent implements OnInit {
-  @Input() flight!: ITicket;
+  @Input() flight!: ITicketResponse;
 
   @Input() person!: Itopping;
 
@@ -26,7 +26,7 @@ export class FarePassengerComponent implements OnInit {
 
   constructor(private store: Store) {}
 
-  addCurrency(obj: ITicket, value: string) {
+  addCurrency(obj: ITicketResponse, value: string) {
     return (
       obj.price[value as keyof typeof obj.price] *
       this.current *

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { selectTicket } from './../../../flight-search/store/selectors/tiket.selector';
 import { TicketStateInterface } from './../../../flight-search/store/tiket.state.model';
@@ -5,24 +6,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, map } from 'rxjs';
 import { Location } from '@angular/common';
-
-export interface ITicket {
-  from: string;
-  to: string;
-  departure: string;
-  arrival: string;
-  price: {
-    EUR: number;
-    USA: number;
-    RUB: number;
-    PLN: number;
-  };
-  flightNum: number;
-  seats: {
-    total: number;
-    available: number;
-  };
-}
+import { ITicketResponse } from '../../../flight-selection/models/ticket.model';
+import { selectFeature } from '../../../flight-selection/store/selectors/chosen-tickets.selectors';
 
 @Component({
   selector: 'app-booking-summary-page',
@@ -34,9 +19,9 @@ export class BookingSummaryPageComponent implements OnInit, OnDestroy {
 
   ticket!: TicketStateInterface;
 
-  flight$!: Observable<ITicket>;
+  flight$!: Observable<ITicketResponse>;
 
-  flightAway$!: Observable<ITicket>;
+  flightAway$!: Observable<ITicketResponse>;
 
   subscription!: Subscription;
 
@@ -45,8 +30,11 @@ export class BookingSummaryPageComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private http: HttpClient,
-    private location: Location
-  ) {}
+    private location: Location,
+    private router: Router
+  ) {
+    console.log('router', this.router.getCurrentNavigation()?.extras.state);
+  }
 
   goBack(): void {
     this.location.back();
@@ -58,10 +46,11 @@ export class BookingSummaryPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const ticket$ = this.store.select(selectTicket);
+    this.store.select(selectFeature).subscribe((item) => console.log(item));
     this.subscription = ticket$.subscribe((item) => (this.ticket = item));
-    this.flight$ = <Observable<ITicket>>(
+    this.flight$ = <Observable<ITicketResponse>>(
       this.http
-        .get<ITicket[]>('/tikets')
+        .get<ITicketResponse[]>('/tikets')
         .pipe(
           map((i) =>
             i.find(

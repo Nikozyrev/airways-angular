@@ -2,7 +2,7 @@ import { selectTicket } from './../../../flight-search/store/selectors/tiket.sel
 import { TicketStateInterface } from './../../../flight-search/store/tiket.state.model';
 import { Observable } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
-import { ITicket } from '../../pages/booking-summary-page/booking-summary-page.component';
+import { ITicketResponse } from '../../../flight-selection/models/ticket.model';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./fare.component.scss'],
 })
 export class FareComponent implements OnInit {
-  @Input() flight!: ITicket;
+  @Input() flight!: ITicketResponse;
 
   ticket$!: Observable<TicketStateInterface>;
 

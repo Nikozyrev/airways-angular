@@ -51,7 +51,9 @@ export class BookingDetailsPageComponent
       JSON.stringify(this.createCardForm.value)
     );
 
-    this.router.navigateByUrl('/summary');
+    this.router.navigateByUrl('/summary', {
+      state: this.createCardForm.value,
+    });
     // setTimeout(() => {
 
     // });
