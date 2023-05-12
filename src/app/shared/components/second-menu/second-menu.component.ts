@@ -48,7 +48,6 @@ export class SecondMenuComponent implements OnInit, OnDestroy {
   toppings = new FormControl(['Adult']);
 
   ticketForm = new FormGroup({
-    tripType: new FormControl('', [Validators.required]),
     from: new FormControl('', [Validators.required]),
     to: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required, dateValidator]),

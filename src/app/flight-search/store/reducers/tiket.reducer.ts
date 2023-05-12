@@ -34,7 +34,10 @@ export const reducers = createReducer(
     TiketAction.setTicketInfoSuccess,
     (state, action): AppTicketState => ({
       ...state,
-      ticketInfo: action.ticketInfo,
+      ticketInfo: {
+        ...state.ticketInfo,
+        ...action.ticketInfo,
+      },
     })
   )
 );
