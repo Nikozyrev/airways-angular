@@ -1,6 +1,10 @@
 <div class="data" *ngIf="ticketsData$ | async as ticketsData">
   <div class="loader" *ngIf="ticketsData.isLoading; else container">
-    Loading...
+    <mat-progress-spinner
+      class="spinner"
+      color="primary"
+      mode="indeterminate"
+    ></mat-progress-spinner>
   </div>
 
   <ng-template #container>
