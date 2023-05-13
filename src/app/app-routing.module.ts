@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from './common/routes.constants';
+import { ticketInfoGuard } from './flight-selection/guards/ticket-info.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       import('./flight-selection/flight-selection.module').then(
         (m) => m.FlightSelectionModule
       ),
+    canMatch: [ticketInfoGuard],
   },
   {
     path: AppRoutes.details,
