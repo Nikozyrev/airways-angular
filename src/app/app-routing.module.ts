@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from './common/routes.constants';
 import { ticketInfoGuard } from './flight-selection/guards/ticket-info.guard';
+import { authGuard } from './auth/guards/auth.guard';
+import { chosenTicketsGuard } from './flight-selection/guards/chosen-tickets.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +19,7 @@ const routes: Routes = [
       import('./flight-selection/flight-selection.module').then(
         (m) => m.FlightSelectionModule
       ),
-    canMatch: [ticketInfoGuard],
+    canActivate: [ticketInfoGuard],
   },
   {
     path: AppRoutes.details,
@@ -25,6 +27,7 @@ const routes: Routes = [
       import('./booking-details/booking-details.module').then(
         (m) => m.BookingDetailsModule
       ),
+    canActivate: [chosenTicketsGuard, authGuard],
   },
   {
     path: AppRoutes.summary,
@@ -32,6 +35,7 @@ const routes: Routes = [
       import('./booking-summary/booking-summary.module').then(
         (m) => m.BookingSummaryModule
       ),
+    canActivate: [chosenTicketsGuard, authGuard],
   },
   {
     path: AppRoutes.cart,
@@ -39,6 +43,7 @@ const routes: Routes = [
       import('./shopping-cart/shopping-cart.module').then(
         (m) => m.ShoppingCartModule
       ),
+    canActivate: [authGuard],
   },
   {
     path: AppRoutes.account,
@@ -46,6 +51,7 @@ const routes: Routes = [
       import('./user-account/user-account.module').then(
         (m) => m.UserAccountModule
       ),
+    canActivate: [authGuard],
   },
   {
     path: '**',
