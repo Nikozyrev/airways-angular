@@ -39,6 +39,23 @@ export const reducers = createReducer(
         ...action.ticketInfo,
       },
     })
+  ),
+  on(
+    TiketAction.updateTicketDates,
+    (state, { ticket, ticketType }): AppTicketState => ({
+      ...state,
+      ticketInfo: {
+        ...state.ticketInfo,
+        startDate:
+          ticketType === 'destination'
+            ? ticket.dates.departure.toISOString()
+            : state.ticketInfo.startDate,
+        endDate:
+          ticketType === 'return'
+            ? ticket.dates.departure.toISOString()
+            : state.ticketInfo.endDate,
+      },
+    })
   )
 );
 

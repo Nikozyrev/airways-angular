@@ -14,5 +14,12 @@ export class ChosenTicketsEffects {
     );
   });
 
+  updateTicketInfoDates$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ChosenTicketsActions.saveTicket),
+      mergeMap((val) => of(TicketInfoActions.updateTicketDates(val)))
+    );
+  });
+
   constructor(private actions$: Actions) {}
 }
