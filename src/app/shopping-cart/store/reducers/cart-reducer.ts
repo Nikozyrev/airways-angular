@@ -132,5 +132,8 @@ export const shoppingCartReducers = createReducer(
   on(cartActions.createShoppingCart, (state, action): CartListInterface[] => [
     ...state,
     action.cartList,
+  ]),
+  on(cartActions.updateShoppingCart, (state, action): CartListInterface[] => [
+    ...action.cartList,
   ])
 );

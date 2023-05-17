@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { selectCurrency } from '../../../header/store/selectors/header-selector';
 import { Subscription } from 'rxjs';
 import { ShoppingCartService } from '../../services/shopping-cart.services';
+import { selectCartFeature } from '../../store/selectors/cart-selector';
+import { updateShoppingCart } from '../../store/action/cart-action';
 
 @Component({
   selector: 'app-cart-item',
@@ -25,6 +27,8 @@ export class CartItemComponent implements OnInit, OnDestroy {
   price = '';
 
   currency$: Subscription | undefined;
+
+  ticketsList: Subscription | undefined;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -72,5 +76,19 @@ export class CartItemComponent implements OnInit, OnDestroy {
 
   createFlight(from: string | undefined, to: string | undefined) {
     return `${from?.split(' ')[0]} - ${to?.split(' ')[0]}`;
+  }
+
+  deleteTicket() {
+    this.ticketsList = this.store.select(selectCartFeature).subscribe((val) => {
+      if (val.includes(this.cartItem as CartListInterface)) {
+        this.store.dispatch(
+          updateShoppingCart({
+            cartList: val.filter((v) => v !== this.cartItem),
+          })
+        );
+      }
+    });
+    this.shoppingCartService.decrement(this.cartItem as CartListInterface);
+    this.ticketsList.unsubscribe();
   }
 }

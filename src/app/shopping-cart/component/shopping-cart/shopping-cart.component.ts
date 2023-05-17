@@ -32,7 +32,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   selectedTicketsAmount = 0;
 
-  ticketsListActive;
+  ticketsListActive: Subscription | undefined;
 
   promoActive = 0;
 
@@ -40,9 +40,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     private store: Store,
     private shoppingCartService: ShoppingCartService,
     private cdr: ChangeDetectorRef
-  ) {
-    this.ticketsListActive = this.shoppingCartService.select$;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.chosenTickets = this.store.select(selectCartFeature);
@@ -52,7 +50,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
       this.currency = v;
     });
 
-    this.ticketsListActive.subscribe((v) => {
+    this.ticketsListActive = this.shoppingCartService.select$.subscribe((v) => {
       let totalPrice = 0;
       v.forEach((ticket) => {
         totalPrice += ticket.tickets.destinationTicket?.price[this.currency]
@@ -77,6 +75,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.currency$?.unsubscribe();
     this.chosenTickets$?.unsubscribe();
+    this.shoppingCartService.reset();
+    this.ticketsListActive?.unsubscribe();
   }
 
   applyPromo() {

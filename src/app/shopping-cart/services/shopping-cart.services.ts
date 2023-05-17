@@ -36,4 +36,8 @@ export class ShoppingCartService {
     const updatedArray = currentArray.filter((v) => v !== el);
     this.select$.next(updatedArray);
   }
+
+  reset() {
+    this.select$.next([]);
+  }
 }
