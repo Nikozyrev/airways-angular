@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DateRangePipe } from './pipe/dates.pipe';
 import { DatePipe } from '@angular/common';
+import { ShoppingCartService } from './services/shopping-cart.services';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,6 @@ import { DatePipe } from '@angular/common';
     ReactiveFormsModule,
     StoreModule.forFeature('shoppingCart', shoppingCartReducers),
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, ShoppingCartService],
 })
 export class ShoppingCartModule {}

@@ -44,7 +44,7 @@
   </ul>
   <div class="main__container">
     <ul class="tickets__list">
-      <li class="tickets__item" *ngFor="let item of chosenTickets$ | async">
+      <li class="tickets__item" *ngFor="let item of chosenTickets | async">
         <app-cart-item [cartItem]="item"></app-cart-item>
       </li>
     </ul>
@@ -54,17 +54,17 @@
       </button>
       <div class="total">
         Total
-        <div class="sum">$572.34</div>
+        <div class="sum">{{currencyIcon}}{{totalCost}}</div>
       </div>
     </div>
     <div class="pay__section">
       <div class="promo">
-        <input type="text" placeholder="Promo Code" class="promo-input">
-        <button class="apply">APPLY</button>
+        <input type="text" placeholder="Promo Code" class="promo-input" [(ngModel)]="promoValue">
+        <button class="apply" (click)="applyPromo()">APPLY</button>
       </div>
       <div class="right-section">
         <div class="selected-amount">
-          0 selected
+          {{selectedTicketsAmount}} selected
         </div>
         <button class="pay-b">
           Payment

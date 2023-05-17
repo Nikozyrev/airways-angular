@@ -4,8 +4,57 @@
   align-items: center;
 }
 
-.example-section {
+.example-section,
+.info__content {
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+.info__content {
+  gap: 1.75rem;
+}
+
+.example-section {
+  margin-right: 18px;
+}
+
+.info__content {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.5px;
+  color: #000000;
+}
+
+.ticket-num__section {
+  color: #0090bd;
+  font-weight: 700;
+}
+
+.info-section:first-child {
+  width: 118px;
+}
+.info-section:nth-child(2) {
+  width: 178px;
+}
+.info-section:nth-child(3) {
+  width: 100px;
+}
+.info-section:nth-child(4) {
+  width: 260px;
+}
+.info-section:nth-child(5) {
+  width: 105px;
+}
+.info-section:last-child {
+  width: 80px;
+}
+
+.editing{
+  margin-left: 12px;
+}
+
+.price__section{
+  color: #7F8906;
 }
