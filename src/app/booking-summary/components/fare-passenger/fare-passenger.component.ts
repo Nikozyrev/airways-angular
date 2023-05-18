@@ -1,14 +1,14 @@
+import { CartListInterface } from './../../../shopping-cart/store/cart.model';
 import { HeaderStateInterface } from './../../../header/store/header-state.model';
 import { Observable } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
-import { ITicketResponse } from '../../../flight-selection/models/ticket.model';
 import { Store } from '@ngrx/store';
 import { selectFeature } from '../../../header/store/selectors/header-selector';
-
-interface Itopping {
-  type: string;
-  amount: number;
-}
+import {
+  TypePassenger,
+  RateTypePassenger,
+} from '../../../common/passengers.constants';
+import { Toppings } from '../../../flight-search/components/flight-search/flight-search.component';
 
 @Component({
   selector: 'app-fare-passenger',
@@ -16,9 +16,9 @@ interface Itopping {
   styleUrls: ['./fare-passenger.component.scss'],
 })
 export class FarePassengerComponent implements OnInit {
-  @Input() flight!: ITicketResponse;
+  @Input() flight!: CartListInterface;
 
-  @Input() person!: Itopping;
+  @Input() person!: Toppings;
 
   global$!: Observable<HeaderStateInterface>;
 
@@ -26,19 +26,29 @@ export class FarePassengerComponent implements OnInit {
 
   constructor(private store: Store) {}
 
-  addCurrency(obj: ITicketResponse, value: string) {
-    return (
-      obj.price[value as keyof typeof obj.price] *
-      this.current *
-      this.person.amount
-    );
+  addCurrency(obj: CartListInterface, value: string) {
+    const priceThere = obj.tickets.destinationTicket?.price;
+    const priceBack = obj.tickets.returnTicket?.price;
+
+    const currentThere = priceThere
+      ? priceThere[value as keyof typeof priceThere]
+      : 0;
+
+    const currentBack = priceBack
+      ? priceBack[value as keyof typeof priceBack]
+      : 0;
+
+    return (currentThere + currentBack) * this.current * this.person.amount;
   }
 
   ngOnInit(): void {
     this.global$ = this.store.select(selectFeature);
 
-    if (this.person.type === 'Adult') this.current = 1;
-    if (this.person.type === 'Child') this.current = 0.75;
-    if (this.person.type === 'Infant') this.current = 0.4;
+    if (this.person.type === TypePassenger.Adult)
+      this.current = RateTypePassenger.Adult;
+    if (this.person.type === TypePassenger.Child)
+      this.current = RateTypePassenger.Child;
+    if (this.person.type === TypePassenger.Infant)
+      this.current = RateTypePassenger.Infant;
   }
 }

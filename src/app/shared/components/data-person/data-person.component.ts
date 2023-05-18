@@ -11,7 +11,7 @@ import {
   styleUrls: ['./data-person.component.scss'],
 })
 export class DataPersonComponent implements OnInit {
-  @Input() createCardForm111!: FormGroup;
+  @Input() createCardFormParents!: FormGroup;
 
   @Input() index!: number;
 
@@ -22,11 +22,9 @@ export class DataPersonComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   get controlsInput() {
-    return (this.createCardForm111.get(this.typePassenger) as FormArray)
+    return (this.createCardFormParents.get(this.typePassenger) as FormArray)
       .controls[this.index] as FormGroup;
   }
-
-  // writeValue(value: IPassenger) {}
 
   objKey(obj: IPassengersState, value: string) {
     return obj[value as keyof typeof obj][this.index] as IPassenger;
@@ -38,8 +36,6 @@ export class DataPersonComponent implements OnInit {
     let value: IPassengersState | null = null;
 
     if (local) value = JSON.parse(local);
-    // this.objKey(value, this.typePassenger)?.[this.index]?.firstName || ''
-    // console.log(value[this.typePassenger], typeof value);
 
     this.createCardForm = this.fb.group({
       firstName: [
@@ -69,7 +65,7 @@ export class DataPersonComponent implements OnInit {
       ],
     });
 
-    (this.createCardForm111.controls[this.typePassenger] as FormArray).push(
+    (this.createCardFormParents.controls[this.typePassenger] as FormArray).push(
       this.createCardForm
     );
   }
