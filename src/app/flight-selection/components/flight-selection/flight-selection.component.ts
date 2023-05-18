@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectTripType } from '../../../flight-search/store/selectors/tiket.selector';
 import { selectAreTicketsChosen } from '../../store/selectors/chosen-tickets.selectors';
+import { fetchTickets } from '../../store/actions/tickets.actions';
 
 @Component({
   selector: 'app-flight-selection',
@@ -19,5 +20,6 @@ export class FlightSelectionComponent implements OnInit {
   public ngOnInit(): void {
     this.tripType$ = this.store.select(selectTripType);
     this.areTicketsChosen$ = this.store.select(selectAreTicketsChosen);
+    this.store.dispatch(fetchTickets());
   }
 }
