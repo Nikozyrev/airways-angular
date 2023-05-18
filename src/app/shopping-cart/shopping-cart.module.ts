@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DateRangePipe } from './pipe/dates.pipe';
 import { DatePipe } from '@angular/common';
 import { ShoppingCartService } from './services/shopping-cart.services';
+import { SortCartPipe } from './pipe/sort-cart.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ShoppingCartService } from './services/shopping-cart.services';
     ShoppingCartComponent,
     CartItemComponent,
     DateRangePipe,
+    SortCartPipe,
   ],
   imports: [
     SharedModule,

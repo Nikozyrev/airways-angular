@@ -47,14 +47,14 @@ export class CartItemComponent implements OnInit, OnDestroy {
     );
 
     this.currency$ = this.store.select(selectCurrency).subscribe((val) => {
-      this.price = `${this.shoppingCartService.createPrice(val)}${
+      this.price = `${this.shoppingCartService.createPrice(val)}${(
         (this.cartItem?.tickets?.returnTicket?.price[val]
           ? this.cartItem?.tickets?.returnTicket?.price[val]
           : 0) +
         (this.cartItem?.tickets?.destinationTicket?.price[val]
           ? this.cartItem?.tickets?.destinationTicket?.price[val]
           : 0)
-      }`;
+      ).toFixed(2)}`;
     });
 
     if (this.checkboxGroup.get('checked')?.value === true) {

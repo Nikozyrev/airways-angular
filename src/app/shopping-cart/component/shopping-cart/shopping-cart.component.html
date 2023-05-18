@@ -6,29 +6,29 @@
     <li class="sort-element__item">
       No.
       <div class="sort-b">
-        <div class="sort-up"></div>
-        <div class="sort-down"></div>
+        <div class="sort-up" (click)="changeSortOrder('No', 'Up')"></div>
+        <div class="sort-down" (click)="changeSortOrder('No', 'Down')"></div>
       </div>
     </li>
     <li class="sort-element__item">
       Flight
       <div class="sort-b">
-        <div class="sort-up"></div>
-        <div class="sort-down"></div>
+        <div class="sort-up" (click)="changeSortOrder('Flight', 'Up')"></div>
+        <div class="sort-down" (click)="changeSortOrder('Flight', 'Down')"></div>
       </div>
     </li>
     <li class="sort-element__item">
       Type trip
       <div class="sort-b">
-        <div class="sort-up"></div>
-        <div class="sort-down"></div>
+        <div class="sort-up" (click)="changeSortOrder('Trip', 'Up')"></div>
+        <div class="sort-down" (click)="changeSortOrder('Trip', 'Down')"></div>
       </div>
     </li>
     <li class="sort-element__item">
       Data & Time
       <div class="sort-b">
-        <div class="sort-up"></div>
-        <div class="sort-down"></div>
+        <div class="sort-up" (click)="changeSortOrder('Data', 'Up')"></div>
+        <div class="sort-down" (click)="changeSortOrder('Data', 'Down')"></div>
       </div>
     </li>
     <li class="sort-element__item">
@@ -37,14 +37,14 @@
     <li class="sort-element__item">
       Price
       <div class="sort-b">
-        <div class="sort-up"></div>
-        <div class="sort-down"></div>
+        <div class="sort-up" (click)="changeSortOrder('Price', 'Up')"></div>
+        <div class="sort-down" (click)="changeSortOrder('Price', 'Down')"></div>
       </div>
     </li>
   </ul>
   <div class="main__container">
     <ul class="tickets__list">
-      <li class="tickets__item" *ngFor="let item of chosenTickets | async">
+      <li class="tickets__item" *ngFor="let item of chosenTickets | async | sortCart: sortName: sortDirection">
         <app-cart-item [cartItem]="item"></app-cart-item>
       </li>
     </ul>

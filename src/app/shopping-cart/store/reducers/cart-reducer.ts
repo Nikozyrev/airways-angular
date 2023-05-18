@@ -6,13 +6,13 @@ const initialState: CartListInterface[] = [
   {
     tickets: {
       destinationTicket: {
-        flightNum: 1942,
+        flightNum: 1972,
         dates: {
           arrival: new Date('2023-05-15T12:50:00.000Z'),
           departure: new Date('2023-05-15T06:00:00.000Z'),
         },
         locations: {
-          departure: 'Dublin',
+          departure: 'Aublin',
           arrival: 'Berlin',
         },
         seats: {
@@ -40,13 +40,13 @@ const initialState: CartListInterface[] = [
   {
     tickets: {
       destinationTicket: {
-        flightNum: 1942,
+        flightNum: 1912,
         dates: {
           arrival: new Date('2023-05-15T12:50:00.000Z'),
           departure: new Date('2023-05-15T06:00:00.000Z'),
         },
         locations: {
-          departure: 'Dublin',
+          departure: 'Eublin',
           arrival: 'Berlin',
         },
         seats: {
@@ -54,7 +54,7 @@ const initialState: CartListInterface[] = [
           available: 58,
         },
         price: {
-          EUR: 521.59,
+          EUR: 721.59,
           USA: 564.88,
           RUB: 47636.81,
           PLN: 2378.45,
@@ -74,7 +74,7 @@ const initialState: CartListInterface[] = [
   {
     tickets: {
       destinationTicket: {
-        flightNum: 1942,
+        flightNum: 1952,
         dates: {
           arrival: new Date('2023-05-15T12:50:00.000Z'),
           departure: new Date('2023-05-15T06:00:00.000Z'),
@@ -88,7 +88,7 @@ const initialState: CartListInterface[] = [
           available: 58,
         },
         price: {
-          EUR: 521.59,
+          EUR: 121.59,
           USA: 564.88,
           RUB: 47636.81,
           PLN: 2378.45,

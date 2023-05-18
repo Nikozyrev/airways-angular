@@ -36,6 +36,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   promoActive = 0;
 
+  sortDirection = '';
+
+  sortName = '';
+
   constructor(
     private store: Store,
     private shoppingCartService: ShoppingCartService,
@@ -66,7 +70,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
           (totalPrice * this.promoActive) / 100
         ).toFixed(2);
       }
-      this.totalCost = totalPrice.toString();
+      this.totalCost = totalPrice.toFixed(2);
       this.selectedTicketsAmount = v.length;
       this.cdr.detectChanges();
     });
@@ -87,5 +91,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
       this.promoActive += 10;
       this.promoList = this.promoList.filter((v) => v !== this.promoValue);
     }
+  }
+
+  changeSortOrder(name: string, direction: string) {
+    this.sortDirection = direction;
+    this.sortName = name;
   }
 }
