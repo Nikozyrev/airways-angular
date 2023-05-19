@@ -1,10 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { CartListInterface } from '../store/cart.model';
+import { ShoppingCartService } from '../services/shopping-cart.services';
 
 @Pipe({
   name: 'sortCart',
 })
 export class SortCartPipe implements PipeTransform {
+  constructor(private shoppingCartService: ShoppingCartService) {}
+
   transform(
     array: CartListInterface[] | null,
     sortBy: string,
@@ -28,8 +31,8 @@ export class SortCartPipe implements PipeTransform {
         valueA = a.tickets.destinationTicket?.dates.arrival as Date;
         valueB = b.tickets.destinationTicket?.dates.arrival as Date;
       } else if (sortBy === 'Price') {
-        valueA = a.tickets.destinationTicket?.price.EUR?.toFixed() as string;
-        valueB = b.tickets.destinationTicket?.price.EUR?.toFixed() as string;
+        valueA = this.shoppingCartService.countPrice(a, 'EUR');
+        valueB = this.shoppingCartService.countPrice(b, 'EUR');
       }
 
       if (valueA < valueB) {
@@ -40,9 +43,6 @@ export class SortCartPipe implements PipeTransform {
         return 0;
       }
     });
-
-    console.log(sortedArray);
-
     return sortedArray;
   }
 }

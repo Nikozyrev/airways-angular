@@ -6,29 +6,37 @@
     <li class="sort-element__item">
       No.
       <div class="sort-b">
-        <div class="sort-up" (click)="changeSortOrder('No', 'Up')"></div>
-        <div class="sort-down" (click)="changeSortOrder('No', 'Down')"></div>
+        <div class="sort-up" [class.active-sort--btn]="sortName === 'No' && sortDirection === 'Up'"
+          (click)="changeSortOrder('No', 'Up')"></div>
+        <div class="sort-down" [class.active-sort--btn]="sortName === 'No' && sortDirection === 'Down'"
+          (click)="changeSortOrder('No', 'Down')"></div>
       </div>
     </li>
     <li class="sort-element__item">
       Flight
       <div class="sort-b">
-        <div class="sort-up" (click)="changeSortOrder('Flight', 'Up')"></div>
-        <div class="sort-down" (click)="changeSortOrder('Flight', 'Down')"></div>
+        <div class="sort-up" [class.active-sort--btn]="sortName === 'Flight' && sortDirection === 'Up'"
+          (click)="changeSortOrder('Flight', 'Up')"></div>
+        <div class="sort-down" [class.active-sort--btn]="sortName === 'Flight' && sortDirection === 'Down'"
+          (click)="changeSortOrder('Flight', 'Down')"></div>
       </div>
     </li>
     <li class="sort-element__item">
       Type trip
       <div class="sort-b">
-        <div class="sort-up" (click)="changeSortOrder('Trip', 'Up')"></div>
-        <div class="sort-down" (click)="changeSortOrder('Trip', 'Down')"></div>
+        <div class="sort-up" [class.active-sort--btn]="sortName === 'Trip' && sortDirection === 'Up'"
+          (click)="changeSortOrder('Trip', 'Up')"></div>
+        <div class="sort-down" [class.active-sort--btn]="sortName === 'Trip' && sortDirection === 'Down'"
+          (click)="changeSortOrder('Trip', 'Down')"></div>
       </div>
     </li>
     <li class="sort-element__item">
       Data & Time
       <div class="sort-b">
-        <div class="sort-up" (click)="changeSortOrder('Data', 'Up')"></div>
-        <div class="sort-down" (click)="changeSortOrder('Data', 'Down')"></div>
+        <div class="sort-up" [class.active-sort--btn]="sortName === 'Data' && sortDirection === 'Up'"
+          (click)="changeSortOrder('Data', 'Up')"></div>
+        <div class="sort-down" [class.active-sort--btn]="sortName === 'Data' && sortDirection === 'Down'"
+          (click)="changeSortOrder('Data', 'Down')"></div>
       </div>
     </li>
     <li class="sort-element__item">
@@ -37,8 +45,10 @@
     <li class="sort-element__item">
       Price
       <div class="sort-b">
-        <div class="sort-up" (click)="changeSortOrder('Price', 'Up')"></div>
-        <div class="sort-down" (click)="changeSortOrder('Price', 'Down')"></div>
+        <div class="sort-up" [class.active-sort--btn]="sortName === 'Price' && sortDirection === 'Up'"
+          (click)="changeSortOrder('Price', 'Up')"></div>
+        <div class="sort-down" [class.active-sort--btn]="sortName === 'Price' && sortDirection === 'Down'"
+          (click)="changeSortOrder('Price', 'Down')"></div>
       </div>
     </li>
   </ul>

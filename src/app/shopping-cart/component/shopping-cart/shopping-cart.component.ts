@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, combineLatest } from 'rxjs';
 import { selectCartFeature } from '../../store/selectors/cart-selector';
 import { CartListInterface } from '../../store/cart.model';
 import { ShoppingCartService } from '../../services/shopping-cart.services';
@@ -18,7 +18,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   chosenTickets$: Subscription | undefined;
 
-  currency$: Subscription | undefined;
+  currency$: Observable<any> | undefined;
 
   promoValue = '';
 
@@ -32,13 +32,13 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   selectedTicketsAmount = 0;
 
-  ticketsListActive: Subscription | undefined;
-
   promoActive = 0;
 
-  sortDirection = '';
+  sortDirection = 'Up';
 
-  sortName = '';
+  sortName = 'No';
+
+  combineStream$: Subscription | undefined;
 
   constructor(
     private store: Store,
@@ -49,20 +49,17 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.chosenTickets = this.store.select(selectCartFeature);
 
-    this.currency$ = this.store.select(selectCurrency).subscribe((v) => {
-      this.currencyIcon = this.shoppingCartService.createPrice(v);
-      this.currency = v;
-    });
+    this.currency$ = this.store.select(selectCurrency);
 
-    this.ticketsListActive = this.shoppingCartService.select$.subscribe((v) => {
+    this.combineStream$ = combineLatest(
+      this.currency$,
+      this.shoppingCartService.select$
+    ).subscribe(([currency, tickets]) => {
+      this.currencyIcon = this.shoppingCartService.createPrice(currency);
+      this.currency = currency;
       let totalPrice = 0;
-      v.forEach((ticket) => {
-        totalPrice += ticket.tickets.destinationTicket?.price[this.currency]
-          ? ticket.tickets.destinationTicket?.price[this.currency]
-          : 0;
-        totalPrice += ticket.tickets.returnTicket?.price[this.currency]
-          ? ticket.tickets.returnTicket?.price[this.currency]
-          : 0;
+      tickets.forEach((ticket: CartListInterface) => {
+        totalPrice += +this.shoppingCartService.countPrice(ticket, currency);
       });
       if (this.promoActive > 0) {
         totalPrice = +(
@@ -71,16 +68,15 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
         ).toFixed(2);
       }
       this.totalCost = totalPrice.toFixed(2);
-      this.selectedTicketsAmount = v.length;
+      this.selectedTicketsAmount = tickets.length;
       this.cdr.detectChanges();
     });
   }
 
   ngOnDestroy(): void {
-    this.currency$?.unsubscribe();
     this.chosenTickets$?.unsubscribe();
     this.shoppingCartService.reset();
-    this.ticketsListActive?.unsubscribe();
+    this.combineStream$?.unsubscribe();
   }
 
   applyPromo() {

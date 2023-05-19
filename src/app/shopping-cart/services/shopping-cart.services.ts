@@ -1,3 +1,4 @@
+import { RateTypePassenger } from './../../common/passengers.constants';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CartListInterface } from '../store/cart.model';
@@ -23,6 +24,24 @@ export class ShoppingCartService {
         break;
     }
     return currencyIcon;
+  }
+
+  countPrice(cartItem: CartListInterface, currency: string) {
+    let price = cartItem.tickets.destinationTicket?.price[currency] as number;
+    if (cartItem.tickets.returnTicket) {
+      console.log(cartItem.tickets);
+      price += cartItem.tickets.returnTicket?.price[currency];
+    }
+    if (cartItem.passengers.adult.length > 1) {
+      price += price * RateTypePassenger.Adult;
+    }
+    if (cartItem.passengers.child.length > 0) {
+      price += price * RateTypePassenger.Child;
+    }
+    if (cartItem.passengers.infant.length > 0) {
+      price += price * RateTypePassenger.Infant;
+    }
+    return price.toFixed(2);
   }
 
   increment(el: CartListInterface) {

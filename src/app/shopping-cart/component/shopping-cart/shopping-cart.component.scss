@@ -193,7 +193,12 @@
   cursor: pointer;
 }
 
-.tickets__item{
+.tickets__item {
   border-bottom: 1px solid #e1e5eb;
   height: 120px;
+}
+
+.active-sort--btn {
+  border-top-color: #d0d9df;
+  border-bottom-color: #d0d9df;
 }
