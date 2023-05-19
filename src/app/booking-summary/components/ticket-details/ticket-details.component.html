@@ -1,34 +1,25 @@
-<div
-  class="summary__info__details"
-  [ngClass]="{
-    lastDetails: round
-  }"
->
+<div class="summary__info__details" *ngIf="flight">
   <div class="details__flight">
     <div class="details__flight__route">
       <span class="details__flight__route__number">
         FR {{ flight.flightNum }}
       </span>
       <span class="details__flight__route__way">
-        {{
-          round
-            ? flight.from + " - " + flight.to
-            : flight.from + " - " + flight.to
-        }}
+        {{ flight.locations.departure + " - " + flight.locations.arrival }}
       </span>
     </div>
     <div class="details__flight__data">
       <span class="details__flight__data__date">
-        {{ flight.departure | date : "EEEE, d MMMM, y'" }}
+        {{ flight.dates.departure | date : "EEEE, d MMMM, y'" }}
       </span>
       <span class="details__flight__data__time">
-        {{ flight.departure | date : "h:mm" }} —
-        {{ flight.arrival | date : "h:mm" }}
+        {{ flight.dates.departure | date : "h:mm" }} —
+        {{ flight.dates.arrival | date : "h:mm" }}
       </span>
     </div>
   </div>
 
-  <div class="container-passengers" *ngIf="passengers$ | async as passengers">
+  <div class="container-passengers">
     <app-passenger
       *ngFor="let passenger of passengers.adult"
       [passenger]="passenger"

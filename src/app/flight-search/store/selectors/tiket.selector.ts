@@ -10,6 +10,11 @@ export const selectTicket = createSelector(
   (state) => state.ticketInfo
 );
 
+export const selectTicketToppings = createSelector(
+  selectFeature,
+  (state) => state.ticketInfo.toppings
+);
+
 export const selectSearchParams = createSelector(selectFeature, (state) => {
   const departureGte = state.ticketInfo.startDate
     ? new Date(Date.parse(state.ticketInfo.startDate) - daysShift)

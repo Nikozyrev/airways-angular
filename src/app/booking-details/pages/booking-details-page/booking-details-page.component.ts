@@ -1,21 +1,17 @@
+import { ChosenTicketsStateInterface } from './../../../flight-selection/store/chosen-tickets-state.model';
+import { selectFeature } from './../../../flight-selection/store/selectors/chosen-tickets.selectors';
 import { IPassengersState } from './../../store/passengers.state.model';
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { countryCodes as data } from '../../../common/code.constants';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Subscription, map } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { setPassengers } from '../../store/actions/passengers.action';
-import { selectTicket } from '../../../flight-search/store/selectors/tiket.selector';
-import { TicketStateInterface } from '../../../flight-search/store/tiket.state.model';
+import { selectTicketToppings } from '../../../flight-search/store/selectors/tiket.selector';
 import { Toppings } from '../../../flight-search/components/flight-search/flight-search.component';
 import { Router } from '@angular/router';
+import { TypePassenger } from '../../../common/passengers.constants';
 
 @Component({
   selector: 'app-booking-details-page',
@@ -23,9 +19,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./booking-details-page.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BookingDetailsPageComponent
-  implements OnInit, OnDestroy, AfterViewInit
-{
+export class BookingDetailsPageComponent implements OnInit, OnDestroy {
   createCardForm!: FormGroup;
 
   countryCodes = data;
@@ -36,12 +30,26 @@ export class BookingDetailsPageComponent
 
   infant!: null | number[];
 
-  subscription!: Subscription;
+  subscription = new Subscription();
+
+  ticketAll!: ChosenTicketsStateInterface;
+
+  get typePassenger(): typeof TypePassenger {
+    return TypePassenger;
+  }
 
   onSubmit() {
     this.createCardForm.markAllAsTouched();
-    // console.log(this.createCardForm.value.adult);
+
+    // !!!!!!Обязательно разкомитить!!!!
     // if (this.createCardForm.invalid) return;
+
+    const ticket = this.store
+      .select(selectFeature)
+      .subscribe((item) => (this.ticketAll = item));
+
+    this.subscription.add(ticket);
+
     this.store.dispatch(
       setPassengers({ passengers: this.createCardForm.value })
     );
@@ -52,11 +60,11 @@ export class BookingDetailsPageComponent
     );
 
     this.router.navigateByUrl('/summary', {
-      state: this.createCardForm.value,
+      state: {
+        tickets: this.ticketAll,
+        passengers: this.createCardForm.value,
+      },
     });
-    // setTimeout(() => {
-
-    // });
   }
 
   goBack(): void {
@@ -70,35 +78,28 @@ export class BookingDetailsPageComponent
     private router: Router
   ) {}
 
-  ngAfterViewInit(): void {
-    // console.log(this.createCardForm.value);
-    console.log('ngAfterViewInit', this.createCardForm.value);
-  }
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {
     const local = localStorage.getItem('keyFormValue');
-
     let value: IPassengersState | null = null;
 
     if (local) value = JSON.parse(local);
 
-    const i = this.store.select(selectTicket);
-    this.subscription = i
-      .pipe(map((item: TicketStateInterface) => item.toppings))
-      .subscribe((item) =>
-        item.forEach((person: Toppings) => {
-          if (person.type === 'Adult') this.adult = new Array(person.amount);
-          if (person.type === 'Child') this.child = new Array(person.amount);
-          if (person.type === 'Infant') this.infant = new Array(person.amount);
-        })
-      );
+    const sub = this.store.select(selectTicketToppings).subscribe((item) =>
+      item.forEach((person: Toppings) => {
+        if (person.type === TypePassenger.Adult)
+          this.adult = new Array(person.amount);
+        if (person.type === TypePassenger.Child)
+          this.child = new Array(person.amount);
+        if (person.type === TypePassenger.Infant)
+          this.infant = new Array(person.amount);
+      })
+    );
 
-    // const local = JSON.parse(localStorage.getItem('keyFormValue') as string);
-    // console.log(this.createCardForm.value);
+    this.subscription.add(sub);
 
     this.createCardForm = this.fb.group({
       adult: this.fb.array([]),
@@ -108,7 +109,5 @@ export class BookingDetailsPageComponent
       telephone: [value?.telephone || ''],
       email: [value?.email || '', [Validators.email]],
     });
-
-    console.log(this.createCardForm.value);
   }
 }
