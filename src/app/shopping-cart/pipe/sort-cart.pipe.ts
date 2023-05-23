@@ -35,12 +35,22 @@ export class SortCartPipe implements PipeTransform {
         valueB = this.shoppingCartService.countPrice(b, 'EUR');
       }
 
-      if (valueA < valueB) {
-        return sortDirection === 'Up' ? -1 : 1;
-      } else if (valueA > valueB) {
-        return sortDirection === 'Down' ? -1 : 1;
+      if (typeof +valueA === 'number') {
+        if (+valueA < +valueB) {
+          return sortDirection === 'Up' ? -1 : 1;
+        } else if (+valueA > +valueB) {
+          return sortDirection === 'Down' ? -1 : 1;
+        } else {
+          return 0;
+        }
       } else {
-        return 0;
+        if (valueA < valueB) {
+          return sortDirection === 'Up' ? -1 : 1;
+        } else if (valueA > valueB) {
+          return sortDirection === 'Down' ? -1 : 1;
+        } else {
+          return 0;
+        }
       }
     });
     return sortedArray;

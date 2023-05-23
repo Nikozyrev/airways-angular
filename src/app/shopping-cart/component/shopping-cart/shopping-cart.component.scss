@@ -30,30 +30,32 @@
 }
 
 .sort-element__item:first-child {
-  width: 118px;
+  width: 5em;
 }
 .sort-element__item:nth-child(2) {
-  width: 178px;
+  width: 7.5em;
 }
 .sort-element__item:nth-child(3) {
-  width: 100px;
+  width: 5em;
 }
 .sort-element__item:nth-child(4) {
-  width: 260px;
+  width: 13em;
 }
 .sort-element__item:nth-child(5) {
-  width: 105px;
+  width: 5.5em;
 }
 .sort-element__item:last-child {
-  width: 80px;
+  width: 3em;
 }
 
 .sort-element__item {
   display: flex;
+  align-items: center;
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
   color: #000000;
+  width: min-content;
 }
 
 .sort-b {
@@ -201,4 +203,10 @@
 .active-sort--btn {
   border-top-color: #d0d9df;
   border-bottom-color: #d0d9df;
+}
+
+@media (max-width: 840px) {
+  .sort-element__item:nth-child(5) {
+    display: none;
+  }
 }

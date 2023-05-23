@@ -27,19 +27,30 @@ export class ShoppingCartService {
   }
 
   countPrice(cartItem: CartListInterface, currency: string) {
-    let price = cartItem.tickets.destinationTicket?.price[currency] as number;
+    let totalPrice = cartItem.tickets.destinationTicket?.price[
+      currency
+    ] as number;
     if (cartItem.tickets.returnTicket) {
-      console.log(cartItem.tickets);
-      price += cartItem.tickets.returnTicket?.price[currency];
+      totalPrice += cartItem.tickets.returnTicket?.price[currency];
     }
-    if (cartItem.passengers.adult.length > 1) {
-      price += price * RateTypePassenger.Adult;
+    let price = 0;
+    if (cartItem.passengers.adult.length > 0) {
+      price +=
+        (totalPrice as number) *
+        RateTypePassenger.Adult *
+        cartItem.passengers.adult.length;
     }
     if (cartItem.passengers.child.length > 0) {
-      price += price * RateTypePassenger.Child;
+      price +=
+        (totalPrice as number) *
+        RateTypePassenger.Child *
+        cartItem.passengers.child.length;
     }
     if (cartItem.passengers.infant.length > 0) {
-      price += price * RateTypePassenger.Infant;
+      price +=
+        (totalPrice as number) *
+        RateTypePassenger.Infant *
+        cartItem.passengers.infant.length;
     }
     return price.toFixed(2);
   }
