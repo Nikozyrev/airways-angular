@@ -11,6 +11,7 @@ import { TicketStateInterface } from '../../../flight-search/store/tiket.state.m
 import { setTicketInfoSuccess } from '../../../flight-search/store/actions/tiket.action';
 import { Router } from '@angular/router';
 import { AppRoutes } from '../../../common/routes.constants';
+import { KeyLocalStorage } from '../../../common/passengers.constants';
 
 @Component({
   selector: 'app-second-menu',
@@ -112,7 +113,7 @@ export class SecondMenuComponent implements OnInit, OnDestroy {
   }
 
   increase(event: Event) {
-    localStorage.removeItem('keyFormValue');
+    localStorage.removeItem(KeyLocalStorage.Passengers);
     this.formTouched = true;
     const elValue = (event.target as HTMLElement)
       .nextElementSibling as HTMLElement;
@@ -141,7 +142,7 @@ export class SecondMenuComponent implements OnInit, OnDestroy {
   }
 
   decrease(event: Event) {
-    localStorage.removeItem('keyFormValue');
+    localStorage.removeItem(KeyLocalStorage.Passengers);
     this.formTouched = true;
     const elValue = (event.target as HTMLElement)
       .previousElementSibling as HTMLElement;

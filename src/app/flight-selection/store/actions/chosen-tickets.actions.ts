@@ -8,6 +8,11 @@ export const saveTicket = createAction(
   props<{ ticket: ITicket; ticketType: TicketType }>()
 );
 
+export const saveAllTicket = createAction(
+  `${source} Save All Ticket`,
+  props<{ ticketTo: ITicket; ticketBack: ITicket | null }>()
+);
+
 export const removeTicket = createAction(
   `${source} Remove Ticket`,
   props<{ ticketType: TicketType }>()
