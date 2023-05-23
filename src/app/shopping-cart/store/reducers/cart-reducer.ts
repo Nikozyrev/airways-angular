@@ -6,75 +6,30 @@ const initialState: CartListInterface[] = [
   {
     tickets: {
       destinationTicket: {
-        flightNum: 1522,
+        flightNum: 1972,
         dates: {
-          arrival: new Date(
-            'Sun May 21 2023 21:20:00 GMT+0300 (Москва, стандартное время)'
-          ),
-          departure: new Date(
-            'Sun May 21 2023 17:00:00 GMT+0300 (Москва, стандартное время)'
-          ),
+          arrival: new Date('2023-05-15T12:50:00.000Z'),
+          departure: new Date('2023-05-15T06:00:00.000Z'),
         },
         locations: {
-          arrival: 'Warsaw Modlin',
-          departure: 'Dublin',
+          departure: 'Aublin',
+          arrival: 'Berlin',
         },
         seats: {
-          available: 11,
-          total: 76,
+          total: 135,
+          available: 58,
         },
         price: {
-          EUR: 362.63,
-          PLN: 1653.59,
-          RUB: 33119,
-          USA: 392.73,
+          EUR: 521.59,
+          USA: 564.88,
+          RUB: 47636.81,
+          PLN: 2378.45,
         },
       },
-      returnTicket: {
-        flightNum: 1522,
-        dates: {
-          arrival: new Date(
-            'Sun May 21 2023 21:20:00 GMT+0300 (Москва, стандартное время)'
-          ),
-          departure: new Date(
-            'Sun May 21 2023 17:00:00 GMT+0300 (Москва, стандартное время)'
-          ),
-        },
-        locations: {
-          arrival: 'Dublin',
-          departure: 'Warsaw Modlin',
-        },
-        seats: {
-          available: 11,
-          total: 76,
-        },
-        price: {
-          EUR: 362.63,
-          PLN: 1653.59,
-          RUB: 33119,
-          USA: 392.73,
-        },
-      },
+      returnTicket: null,
     },
     passengers: {
-      adult: [
-        {
-          baggageChecked: null,
-          date: '',
-          firstName: '',
-          gender: 'Male',
-          help: false,
-          lastName: '',
-        },
-        {
-          baggageChecked: null,
-          date: '',
-          firstName: '',
-          gender: 'Male',
-          help: false,
-          lastName: '',
-        },
-      ],
+      adult: [],
       child: [],
       code: '',
       email: '',
@@ -85,65 +40,84 @@ const initialState: CartListInterface[] = [
   {
     tickets: {
       destinationTicket: {
-        flightNum: 1218,
+        flightNum: 1912,
         dates: {
-          arrival: new Date('Tue May 30 2023 03:40:00 GMT+0300'),
-          departure: new Date(
-            'Mon May 29 2023 21:00:00 GMT+0300 (Москва, стандартное время)'
-          ),
+          arrival: new Date('2023-05-15T12:50:00.000Z'),
+          departure: new Date('2023-05-15T06:00:00.000Z'),
         },
         locations: {
+          departure: 'Eublin',
           arrival: 'Berlin',
-          departure: 'Paris',
         },
         seats: {
-          available: 49,
-          total: 61,
+          total: 135,
+          available: 58,
         },
         price: {
-          EUR: 350.64,
-          PLN: 1598.92,
-          RUB: 32023.95,
-          USA: 379.74,
+          EUR: 721.59,
+          USA: 564.88,
+          RUB: 47636.81,
+          PLN: 2378.45,
+        },
+      },
+      returnTicket: null,
+    },
+    passengers: {
+      adult: [],
+      child: [],
+      code: '',
+      email: '',
+      infant: [],
+      telephone: '',
+    },
+  },
+  {
+    tickets: {
+      destinationTicket: {
+        flightNum: 1952,
+        dates: {
+          arrival: new Date('2023-05-15T12:50:00.000Z'),
+          departure: new Date('2023-05-15T06:00:00.000Z'),
+        },
+        locations: {
+          departure: 'Dublin',
+          arrival: 'Berlin',
+        },
+        seats: {
+          total: 135,
+          available: 58,
+        },
+        price: {
+          EUR: 121.59,
+          USA: 564.88,
+          RUB: 47636.81,
+          PLN: 2378.45,
         },
       },
       returnTicket: {
-        flightNum: 1723,
+        flightNum: 1942,
         dates: {
-          arrival: new Date(
-            'Tue May 30 2023 10:10:00 GMT+0300 (Москва, стандартное время)'
-          ),
-          departure: new Date(
-            'Tue May 30 2023 06:00:00 GMT+0300 (Москва, стандартное время)'
-          ),
+          arrival: new Date('2023-05-15T12:50:00.000Z'),
+          departure: new Date('2023-05-15T06:00:00.000Z'),
         },
         locations: {
-          arrival: 'Paris',
-          departure: 'Berlin',
+          departure: 'Dublin',
+          arrival: 'Berlin',
         },
         seats: {
-          available: 7,
-          total: 100,
+          total: 135,
+          available: 58,
         },
         price: {
-          EUR: 501.19,
-          PLN: 2285.43,
-          RUB: 45773.68,
-          USA: 542.79,
+          EUR: 521.59,
+          USA: 564.88,
+          RUB: 47636.81,
+          PLN: 2378.45,
         },
       },
     },
     passengers: {
-      adult: [
-        {
-          baggageChecked: null,
-          date: '',
-          firstName: '',
-          gender: 'Male',
-          help: false,
-          lastName: '',
-        },
-      ],
+      adult: [],
       child: [],
       code: '',
       email: '',
@@ -158,5 +132,8 @@ export const shoppingCartReducers = createReducer(
   on(cartActions.createShoppingCart, (state, action): CartListInterface[] => [
     ...state,
     action.cartList,
+  ]),
+  on(cartActions.updateShoppingCart, (state, action): CartListInterface[] => [
+    ...action.cartList,
   ])
 );

@@ -30,30 +30,32 @@
 }
 
 .sort-element__item:first-child {
-  width: 118px;
+  width: 5em;
 }
 .sort-element__item:nth-child(2) {
-  width: 178px;
+  width: 7.5em;
 }
 .sort-element__item:nth-child(3) {
-  width: 100px;
+  width: 5em;
 }
 .sort-element__item:nth-child(4) {
-  width: 260px;
+  width: 13em;
 }
 .sort-element__item:nth-child(5) {
-  width: 105px;
+  width: 5.5em;
 }
 .sort-element__item:last-child {
-  width: 80px;
+  width: 3em;
 }
 
 .sort-element__item {
   display: flex;
+  align-items: center;
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
   color: #000000;
+  width: min-content;
 }
 
 .sort-b {
@@ -69,6 +71,7 @@
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-bottom: 7px solid #454a53;
+  cursor: pointer;
 }
 
 .sort-down {
@@ -77,10 +80,11 @@
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 7px solid #454a53;
+  cursor: pointer;
 }
 
 .main__container {
-  max-width: 1060px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -191,7 +195,18 @@
   cursor: pointer;
 }
 
-.tickets__item{
+.tickets__item {
   border-bottom: 1px solid #e1e5eb;
   height: 120px;
+}
+
+.active-sort--btn {
+  border-top-color: #d0d9df;
+  border-bottom-color: #d0d9df;
+}
+
+@media (max-width: 840px) {
+  .sort-element__item:nth-child(5) {
+    display: none;
+  }
 }

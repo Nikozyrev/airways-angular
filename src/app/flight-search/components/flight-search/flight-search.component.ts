@@ -69,6 +69,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   preLoad = true;
 
+  date$: Subscription | undefined;
+
   @ViewChild('fromInput') btnInput!: ElementRef;
 
   constructor(
@@ -104,8 +106,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       }
     });
 
-    const date$ = this.store.select(selectDate);
-    date$.subscribe(() => {
+    this.date$ = this.store.select(selectDate).subscribe(() => {
       const endDate = this.ticketForm.get('endDate')?.value;
       const startDate = this.ticketForm.get('startDate')?.value;
       this.ticketForm.get('endDate')?.setValue(endDate as string);
@@ -116,6 +117,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.tiket$?.unsubscribe();
+    this.date$?.unsubscribe();
   }
 
   change() {
