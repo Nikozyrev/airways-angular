@@ -1,7 +1,17 @@
-<section class="example-section" [formGroup]="checkboxGroup">
+<section
+  class="example-section"
+  [formGroup]="checkboxGroup"
+  *ngIf="checkPage()"
+>
   <mat-checkbox formControlName="checked"></mat-checkbox>
 </section>
-<div class="info__content">
+<div
+  class="info__content"
+  [ngClass]="{
+    marginLeft: !checkPage()
+  }"
+  (click)="goToSummary()"
+>
   <section class="ticket-num__section info-section">
     <h4 class="tiketNum">
       FR {{ cartItem?.tickets?.destinationTicket?.flightNum }}
@@ -48,7 +58,7 @@
     {{ price }}
   </section>
 </div>
-<section class="editing">
+<section class="editing" *ngIf="checkPage()">
   <button
     mat-icon-button
     [matMenuTriggerFor]="menu"
@@ -60,9 +70,8 @@
     <button mat-menu-item (click)="deleteTicket()">
       <span>Delete</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="goToPassenger()">
       <span>Edit</span>
     </button>
   </mat-menu>
 </section>
-<button (click)="goToPassenger()">to passenger page</button>

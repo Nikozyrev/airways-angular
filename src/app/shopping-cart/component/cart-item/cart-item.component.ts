@@ -1,11 +1,10 @@
+import { AppRoutes } from './../../../common/routes.constants';
 import {
   TypePassenger,
   KeyLocalStorage,
 } from './../../../common/passengers.constants';
 import { setTicketInfoSuccess } from '../../../flight-search/store/actions/tiket.action';
 import { TicketStateInterface } from '../../../flight-search/store/tiket.state.model';
-// import * as ChosenTicketsActions from '../../../flight-selection/store/actions/chosen-tickets.actions';
-// import { ITicket } from '../../../flight-selection/models/ticket.model';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CartListInterface } from '../../store/cart.model';
 import { FormBuilder } from '@angular/forms';
@@ -36,6 +35,8 @@ export class CartItemComponent implements OnInit, OnDestroy {
   price = '';
 
   currency$: Subscription | undefined;
+
+  subs!: Subscription;
 
   ticketsList: Subscription | undefined;
 
@@ -86,19 +87,13 @@ export class CartItemComponent implements OnInit, OnDestroy {
       JSON.stringify(this.cartItem?.passengers)
     );
 
-    this.changeTicketState();
-    this.router.navigateByUrl('/flights');
+    localStorage.setItem(
+      KeyLocalStorage.UpdateTicket,
+      JSON.stringify(this.cartItem)
+    );
 
-    // setTimeout(() => {
-    //   this.store.dispatch(
-    //     ChosenTicketsActions.saveAllTicket({
-    //       ticketTo: this.cartItem?.tickets.destinationTicket as ITicket,
-    //       ticketBack: this.cartItem?.tickets.returnTicket
-    //         ? this.cartItem?.tickets.returnTicket
-    //         : null,
-    //     })
-    //   );
-    // });
+    this.changeTicketState();
+    this.router.navigateByUrl(`/${AppRoutes.flights}`);
   }
 
   ngOnInit() {
@@ -153,5 +148,20 @@ export class CartItemComponent implements OnInit, OnDestroy {
     });
     this.shoppingCartService.decrement(this.cartItem as CartListInterface);
     this.ticketsList.unsubscribe();
+  }
+
+  checkPage() {
+    return this.router.url.slice(1) === AppRoutes.cart ? true : false;
+  }
+
+  goToSummary() {
+    if (this.router.url.slice(1) === AppRoutes.cart) return;
+    this.router.navigateByUrl(`/${AppRoutes.summary}`, {
+      state: {
+        tickets: this.cartItem?.tickets,
+        passengers: this.cartItem?.passengers,
+        path: this.router.url.slice(1),
+      },
+    });
   }
 }
