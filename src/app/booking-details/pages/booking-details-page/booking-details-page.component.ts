@@ -15,6 +15,7 @@ import {
   TypePassenger,
   KeyLocalStorage,
 } from '../../../common/passengers.constants';
+import { AppRoutes } from '../../../common/routes.constants';
 
 @Component({
   selector: 'app-booking-details-page',
@@ -32,6 +33,8 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
   child!: null | number[];
 
   infant!: null | number[];
+
+  appRoutes!: AppRoutes;
 
   subscription = new Subscription();
 
@@ -66,6 +69,7 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
       state: {
         tickets: this.ticketAll,
         passengers: this.createCardForm.value,
+        path: this.router.url.slice(1),
       },
     });
   }
