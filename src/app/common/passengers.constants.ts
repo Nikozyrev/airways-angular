@@ -12,4 +12,5 @@ export enum RateTypePassenger {
 
 export enum KeyLocalStorage {
   Passengers = 'keyFormValue',
+  UpdateTicket = 'keyUpdateTicket',
 }

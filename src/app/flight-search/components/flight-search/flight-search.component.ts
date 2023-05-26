@@ -86,6 +86,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     });
 
     localStorage.removeItem(KeyLocalStorage.Passengers);
+    localStorage.removeItem(KeyLocalStorage.UpdateTicket);
 
     this.selectedType = this.tripType[0];
 
