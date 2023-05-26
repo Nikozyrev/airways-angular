@@ -120,6 +120,25 @@
   justify-content: flex-end;
 }
 
+.header__shopping_basket-link{
+  position: relative;
+}
+
+.count {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #b3261e;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  color: #ffffff;
+  text-align: center;
+  position: absolute;
+  right: -6px;
+  top: -6px;
+}
+
 @media (max-width: 1130px) {
   .header__wraper {
     gap: 0.8rem;

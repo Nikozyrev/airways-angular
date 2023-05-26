@@ -141,6 +141,11 @@
 
 <ng-template #cartButton>
   <a routerLink="/cart" class="header__shopping_basket-link">
+    <<<<<<< HEAD =======
+    <div *ngIf="shoppingCartAmount !== 0" class="count">
+      {{ shoppingCartAmount }}
+    </div>
+    >>>>>>> 05d71db444a35a731b2abe4f160b78a4f3f9258d
     <img
       [src]="
         activeRout

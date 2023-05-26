@@ -31,26 +31,16 @@ export class SortCartPipe implements PipeTransform {
         valueA = a.tickets.destinationTicket?.dates.arrival as Date;
         valueB = b.tickets.destinationTicket?.dates.arrival as Date;
       } else if (sortBy === 'Price') {
-        valueA = this.shoppingCartService.countPrice(a, 'EUR');
-        valueB = this.shoppingCartService.countPrice(b, 'EUR');
+        valueA = +this.shoppingCartService.countPrice(a, 'EUR');
+        valueB = +this.shoppingCartService.countPrice(b, 'EUR');
       }
 
-      if (typeof +valueA === 'number') {
-        if (+valueA < +valueB) {
-          return sortDirection === 'Up' ? -1 : 1;
-        } else if (+valueA > +valueB) {
-          return sortDirection === 'Down' ? -1 : 1;
-        } else {
-          return 0;
-        }
+      if (valueA < valueB) {
+        return sortDirection === 'Up' ? -1 : 1;
+      } else if (valueA > valueB) {
+        return sortDirection === 'Down' ? -1 : 1;
       } else {
-        if (valueA < valueB) {
-          return sortDirection === 'Up' ? -1 : 1;
-        } else if (valueA > valueB) {
-          return sortDirection === 'Down' ? -1 : 1;
-        } else {
-          return 0;
-        }
+        return 0;
       }
     });
     return sortedArray;
