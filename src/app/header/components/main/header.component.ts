@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FormsArray } from '../../models/header.models';
 import { AuthModalService } from '../../../auth/services/auth-modal.service';
 import * as UserSelectors from '../../../auth/store/selectors';
+import { selectCartFeature } from '../../../shopping-cart/store/selectors/cart-selector';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,10 @@ export class HeaderComponent implements OnInit {
   activeRout!: string | boolean;
 
   elColor!: boolean;
+
+  shoppingCartAmount = 0;
+
+  shoppingCart$: Subscription | undefined;
 
   dates: FormsArray[] = [
     { value: 'MM/DD/YYYY', viewValue: 'MM/DD/YYYY' },
@@ -47,6 +52,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.isLogged$ = this.store.select(UserSelectors.selectIsLogged);
     this.currentUserName$ = this.store.select(UserSelectors.selectUserName);
+    this.shoppingCart$ = this.store
+      .select(selectCartFeature)
+      .subscribe((v) => (this.shoppingCartAmount = v.length));
 
     this.activeRout = this.router.url;
     this.router.events.subscribe((event) => {
