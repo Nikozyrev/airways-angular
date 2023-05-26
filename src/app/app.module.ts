@@ -8,6 +8,11 @@ import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { StoreModule } from '@ngrx/store';
+import {
+  shoppingCartReducers,
+  shoppingHistoryReducers,
+} from './shopping-cart/store/reducers/cart-reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +25,8 @@ import { AuthModule } from './auth/auth.module';
     FooterModule,
     SharedModule,
     AuthModule,
+    StoreModule.forFeature('shoppingCart', shoppingCartReducers),
+    StoreModule.forFeature('shoppingHistory', shoppingHistoryReducers),
   ],
   providers: [],
   bootstrap: [AppComponent],
