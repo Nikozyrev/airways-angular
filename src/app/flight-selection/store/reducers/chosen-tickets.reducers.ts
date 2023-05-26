@@ -36,5 +36,15 @@ export const chosenTicketsReducers = createReducer(
   on(
     ChosenTicketsActions.clearTickets,
     (): ChosenTicketsStateInterface => initialState
+  ),
+  on(
+    ChosenTicketsActions.saveAllTicket,
+    (state, { ticketTo, ticketBack }): ChosenTicketsStateInterface => {
+      return {
+        ...state,
+        destinationTicket: ticketTo,
+        returnTicket: ticketBack,
+      };
+    }
   )
 );

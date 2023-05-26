@@ -1,10 +1,16 @@
+import { Router } from '@angular/router';
+import { AppRoutes } from './../../../common/routes.constants';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, combineLatest } from 'rxjs';
-import { selectCartFeature } from '../../store/selectors/cart-selector';
+import {
+  selectCartFeature,
+  selectShoppingHistory,
+} from '../../store/selectors/cart-selector';
 import { CartListInterface } from '../../store/cart.model';
 import { ShoppingCartService } from '../../services/shopping-cart.services';
 import { selectCurrency } from '../../../header/store/selectors/header-selector';
+import { KeyLocalStorage } from '../../../common/passengers.constants';
 
 @Component({
   selector: 'app-shopping-cart-component',
@@ -43,11 +49,17 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store,
     private shoppingCartService: ShoppingCartService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.chosenTickets = this.store.select(selectCartFeature);
+    localStorage.removeItem(KeyLocalStorage.UpdateTicket);
+
+    if (this.router.url.slice(1) === AppRoutes.cart)
+      this.chosenTickets = this.store.select(selectCartFeature);
+    if (this.router.url.slice(1) === AppRoutes.account)
+      this.chosenTickets = this.store.select(selectShoppingHistory);
 
     this.currency$ = this.store.select(selectCurrency);
 
@@ -92,5 +104,9 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   changeSortOrder(name: string, direction: string) {
     this.sortDirection = direction;
     this.sortName = name;
+  }
+
+  checkPage() {
+    return this.router.url.slice(1) === AppRoutes.cart ? true : false;
   }
 }

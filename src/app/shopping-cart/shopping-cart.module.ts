@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
 import { ShoppingCartComponent } from './component/shopping-cart/shopping-cart.component';
-import { StoreModule } from '@ngrx/store';
-import { shoppingCartReducers } from './store/reducers/cart-reducer';
 import { CartItemComponent } from './component/cart-item/cart-item.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,12 +19,7 @@ import { SortCartPipe } from './pipe/sort-cart.pipe';
     DateRangePipe,
     SortCartPipe,
   ],
-  imports: [
-    SharedModule,
-    ShoppingCartRoutingModule,
-    ReactiveFormsModule,
-    StoreModule.forFeature('shoppingCart', shoppingCartReducers),
-  ],
+  imports: [SharedModule, ShoppingCartRoutingModule, ReactiveFormsModule],
   providers: [DatePipe, ShoppingCartService],
 })
 export class ShoppingCartModule {}

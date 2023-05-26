@@ -10,3 +10,8 @@ export const updateShoppingCart = createAction(
   '[ShoppingCart] Update',
   props<{ cartList: CartListInterface[] }>()
 );
+
+export const createShoppingHistory = createAction(
+  '[ShoppingHistory] Success',
+  props<{ cartList: CartListInterface }>()
+);

@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
-  public developers = ['nikozyrev', 'mikaleinik', 'inanimate631'];
+  public developers = ['nikozyrev', 'gutsstas', 'inanimate631'];
 }

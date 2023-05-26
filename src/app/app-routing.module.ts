@@ -35,7 +35,7 @@ const routes: Routes = [
       import('./booking-summary/booking-summary.module').then(
         (m) => m.BookingSummaryModule
       ),
-    canActivate: [chosenTicketsGuard, authGuard],
+    canActivate: [authGuard],
   },
   {
     path: AppRoutes.cart,
@@ -48,8 +48,8 @@ const routes: Routes = [
   {
     path: AppRoutes.account,
     loadChildren: () =>
-      import('./user-account/user-account.module').then(
-        (m) => m.UserAccountModule
+      import('./shopping-cart/shopping-cart.module').then(
+        (m) => m.ShoppingCartModule
       ),
     canActivate: [authGuard],
   },

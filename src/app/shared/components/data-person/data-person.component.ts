@@ -1,16 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { selectDate } from './../../../header/store/selectors/header-selector';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   IPassengersState,
   IPassenger,
 } from '../../../booking-details/store/passengers.state.model';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-data-person',
   templateUrl: './data-person.component.html',
   styleUrls: ['./data-person.component.scss'],
+  providers: [DatePipe],
 })
-export class DataPersonComponent implements OnInit {
+export class DataPersonComponent implements OnInit, OnDestroy {
   @Input() createCardFormParents!: FormGroup;
 
   @Input() index!: number;
@@ -19,7 +24,15 @@ export class DataPersonComponent implements OnInit {
 
   createCardForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  date!: string;
+
+  subscription!: Subscription;
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private datePipe: DatePipe
+  ) {}
 
   get controlsInput() {
     return (this.createCardFormParents.get(this.typePassenger) as FormArray)
@@ -28,6 +41,10 @@ export class DataPersonComponent implements OnInit {
 
   objKey(obj: IPassengersState, value: string) {
     return obj[value as keyof typeof obj][this.index] as IPassenger;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   ngOnInit() {
@@ -57,7 +74,14 @@ export class DataPersonComponent implements OnInit {
         ],
       ],
       gender: [value ? this.objKey(value, this.typePassenger).gender : 'Male'],
-      date: [value ? this.objKey(value, this.typePassenger).date : ''],
+      date: [
+        value
+          ? this.datePipe.transform(
+              this.objKey(value, this.typePassenger).date,
+              this.date
+            )
+          : '',
+      ],
       help: [value ? this.objKey(value, this.typePassenger).help : false],
       baggageChecked: [
         value ? this.objKey(value, this.typePassenger).baggageChecked : null,
@@ -68,5 +92,12 @@ export class DataPersonComponent implements OnInit {
     (this.createCardFormParents.controls[this.typePassenger] as FormArray).push(
       this.createCardForm
     );
+
+    this.subscription = this.store.select(selectDate).subscribe((i) => {
+      this.date = i;
+      this.createCardForm.patchValue({
+        date: new Date(this.createCardForm.get('date')?.value),
+      });
+    });
   }
 }

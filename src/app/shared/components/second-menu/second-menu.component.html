@@ -3,92 +3,159 @@
     <div class="second__menu-wrapper">
       <div class="second__menu-route">
         <div class="from">
-          {{from}}
+          {{ from }}
         </div>
-        <img src="assets/images/route.svg" alt="route" class="route-image">
+        <img src="assets/images/route.svg" alt="route" class="route-image" />
         <div class="to">
-          {{to}}
+          {{ to }}
         </div>
       </div>
       <div class="return-time">
         Return
         <div class="separator"></div>
         <div class="time">
-          {{startDate | date: 'd MMMM'}} - {{endDate | date: 'd MMMM'}}
+          {{ startDate | date : "d MMMM" }} - {{ endDate | date : "d MMMM" }}
         </div>
         <div class="separator"></div>
         <div class="tickets-amount">
-          {{ticketsAmount}}
-          <img src="assets//images//tikets-usser.svg" alt="user">
+          {{ ticketsAmount }}
+          <img src="assets//images//tikets-usser.svg" alt="user" />
         </div>
       </div>
-      <button class="edit-btn" (click)="editActive = !editActive">
+      <button
+        class="edit-btn"
+        (click)="editActive = !editActive"
+        *ngIf="checkPage()"
+      >
         Edit
       </button>
     </div>
-    <div class="second__menu-forms" [formGroup]="ticketForm"
-      [ngClass]="{'open': editActive}">
-      <mat-form-field appearance="fill" subscriptSizing="dynamic" class="country__input" (click)="formTouched = true">
+    <div
+      class="second__menu-forms"
+      [formGroup]="ticketForm"
+      [ngClass]="{ open: editActive }"
+    >
+      <mat-form-field
+        appearance="fill"
+        subscriptSizing="dynamic"
+        class="country__input"
+        (click)="formTouched = true"
+      >
         <mat-label class="label">From</mat-label>
         <mat-select formControlName="from">
           <mat-option *ngFor="let country of countries" [value]="country">
-            {{country}}
+            {{ country }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" subscriptSizing="dynamic" class="country__input" (click)="formTouched = true">
+      <mat-form-field
+        appearance="fill"
+        subscriptSizing="dynamic"
+        class="country__input"
+        (click)="formTouched = true"
+      >
         <mat-label class="label">Destination</mat-label>
         <mat-select formControlName="to">
           <mat-option *ngFor="let country of countries" [value]="country">
-            {{country}}
+            {{ country }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field subscriptSizing="dynamic" appearance="fill" style="width: 311px">
+      <mat-form-field
+        subscriptSizing="dynamic"
+        appearance="fill"
+        style="width: 311px"
+      >
         <mat-label>Dates</mat-label>
         <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate formControlName="startDate" placeholder="Start date">
-          <input matEndDate formControlName="endDate" (dateInput)="onFormClick()" placeholder="End date">
+          <input
+            matStartDate
+            formControlName="startDate"
+            placeholder="Start date"
+          />
+          <input
+            matEndDate
+            formControlName="endDate"
+            (dateInput)="onFormClick()"
+            placeholder="End date"
+          />
         </mat-date-range-input>
-        <mat-datepicker-toggle matIconSuffix [for]="picker" (click)="dateTouched = true"></mat-datepicker-toggle>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+          (click)="dateTouched = true"
+        ></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
-        <mat-error *ngIf="ticketForm.get('startDate')!.invalid">Invalid start date</mat-error>
-        <mat-error *ngIf="ticketForm.get('endDate')!.invalid">Invalid end date</mat-error>
+        <mat-error *ngIf="ticketForm.get('startDate')!.invalid">
+          Invalid start date
+        </mat-error>
+        <mat-error *ngIf="ticketForm.get('endDate')!.invalid">
+          Invalid end date
+        </mat-error>
       </mat-form-field>
 
-      <mat-form-field subscriptSizing="dynamic" appearance="fill" class="tiket__wraper">
+      <mat-form-field
+        subscriptSizing="dynamic"
+        appearance="fill"
+        class="tiket__wraper"
+      >
         <mat-label>Toppings</mat-label>
         <mat-select [formControl]="toppings" multiple>
           <div class="tiket__element">
             <div class="tiket__title">Adult</div>
             <div class="tiket-control__panel">
-              <button class="tiket__btn plus" (click)="increase($event)"></button>
-              <div class="tiket__amount">{{toppingsObj[0].amount}}</div>
-              <button class="tiket__btn minus" (click)="decrease($event)"></button>
+              <button
+                class="tiket__btn plus"
+                (click)="increase($event)"
+              ></button>
+              <div class="tiket__amount">{{ toppingsObj[0].amount }}</div>
+              <button
+                class="tiket__btn minus"
+                (click)="decrease($event)"
+              ></button>
             </div>
           </div>
           <div class="tiket__element">
             <div class="tiket__title">Child</div>
             <div class="tiket-control__panel">
-              <button class="tiket__btn plus" (click)="increase($event)"></button>
-              <div class="tiket__amount">{{toppingsObj[1].amount}}</div>
-              <button class="tiket__btn minus" (click)="decrease($event)"></button>
+              <button
+                class="tiket__btn plus"
+                (click)="increase($event)"
+              ></button>
+              <div class="tiket__amount">{{ toppingsObj[1].amount }}</div>
+              <button
+                class="tiket__btn minus"
+                (click)="decrease($event)"
+              ></button>
             </div>
           </div>
           <div class="tiket__element">
             <div class="tiket__title">Infant</div>
             <div class="tiket-control__panel">
-              <button class="tiket__btn plus" (click)="increase($event)"></button>
-              <div class="tiket__amount">{{toppingsObj[2].amount}}</div>
-              <button class="tiket__btn minus" (click)="decrease($event)"></button>
+              <button
+                class="tiket__btn plus"
+                (click)="increase($event)"
+              ></button>
+              <div class="tiket__amount">{{ toppingsObj[2].amount }}</div>
+              <button
+                class="tiket__btn minus"
+                (click)="decrease($event)"
+              ></button>
             </div>
           </div>
-          <mat-option *ngFor="let topping of toppingsObj" [value]="topping.type"
-            style="display: none;">{{topping.type}}</mat-option>
+          <mat-option
+            *ngFor="let topping of toppingsObj"
+            [value]="topping.type"
+            style="display: none"
+          >
+            {{ topping.type }}
+          </mat-option>
         </mat-select>
-        <mat-error *ngIf="ticketForm.get('toppings')!.invalid">Invalid number of tickets</mat-error>
+        <mat-error *ngIf="ticketForm.get('toppings')!.invalid">
+          Invalid number of tickets
+        </mat-error>
       </mat-form-field>
     </div>
   </div>

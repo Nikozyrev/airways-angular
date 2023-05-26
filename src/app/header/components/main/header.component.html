@@ -89,7 +89,9 @@
         [matMenuTriggerFor]="menu"
         aria-label="Example icon-button with a menu"
         class="menu-btn"
-        [ngClass]="{ 'menu-btn-block ': activeRout && activeRout !== '/cart' }"
+        [ngClass]="{
+          'menu-btn-block ': activeRout && activeRout !== '/cart',
+        }"
       >
         <mat-icon>more_vert</mat-icon>
       </button>

@@ -1,3 +1,4 @@
+<app-second-menu></app-second-menu>
 <div class="container-summary">
   <div class="summary__header">
     <img
@@ -25,10 +26,20 @@
   </div>
 
   <div class="container-button">
-    <button class="container-button__back" (click)="goBack()">Back</button>
-    <button class="container-button__toCart" (click)="goCart()">
+    <button class="container-button__back" (click)="goToBack()">Back</button>
+    <button
+      class="container-button__toCart"
+      (click)="goToCart()"
+      *ngIf="this.flight.path !== appRoutes.account"
+    >
       Add to order cart
     </button>
-    <button class="container-button__buy" (click)="goBuy()">Buy now</button>
+    <button
+      class="container-button__buy"
+      (click)="goToBuy()"
+      *ngIf="this.flight.path !== appRoutes.account"
+    >
+      Buy now
+    </button>
   </div>
 </div>
