@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +17,6 @@ import { FarePassengerComponent } from './components/fare-passenger/fare-passeng
     FareComponent,
     FarePassengerComponent,
   ],
-  imports: [CommonModule, BookingSummaryRoutingModule],
+  imports: [CommonModule, BookingSummaryRoutingModule, SharedModule],
 })
 export class BookingSummaryModule {}

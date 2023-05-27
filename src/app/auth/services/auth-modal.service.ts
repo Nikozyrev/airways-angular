@@ -12,7 +12,9 @@ export class AuthModalService {
   constructor(private modalService: ModalService) {}
 
   public openDialog() {
-    this.dialogRef = this.modalService.openDialog(AuthDialogComponent);
+    this.dialogRef = this.modalService.openDialog(AuthDialogComponent, {
+      maxWidth: '90vw',
+    });
     return this.dialogRef;
   }
 

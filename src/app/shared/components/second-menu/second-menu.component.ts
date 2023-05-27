@@ -9,6 +9,9 @@ import { tiketValidator } from '../../validators/tiket.validator';
 import { HttpClient } from '@angular/common/http';
 import { TicketStateInterface } from '../../../flight-search/store/tiket.state.model';
 import { setTicketInfoSuccess } from '../../../flight-search/store/actions/tiket.action';
+import { Router } from '@angular/router';
+import { AppRoutes } from '../../../common/routes.constants';
+import { KeyLocalStorage } from '../../../common/passengers.constants';
 
 @Component({
   selector: 'app-second-menu',
@@ -61,7 +64,15 @@ export class SecondMenuComponent implements OnInit, OnDestroy {
 
   editActive = false;
 
-  constructor(private store: Store, private http: HttpClient) {}
+  constructor(
+    private store: Store,
+    private http: HttpClient,
+    private router: Router
+  ) {}
+
+  checkPage() {
+    return this.router.url.slice(1) === AppRoutes.flights ? true : false;
+  }
 
   ngOnInit() {
     const ticket$ = this.store.select(selectTicket);
@@ -102,6 +113,7 @@ export class SecondMenuComponent implements OnInit, OnDestroy {
   }
 
   increase(event: Event) {
+    localStorage.removeItem(KeyLocalStorage.Passengers);
     this.formTouched = true;
     const elValue = (event.target as HTMLElement)
       .nextElementSibling as HTMLElement;
@@ -130,6 +142,7 @@ export class SecondMenuComponent implements OnInit, OnDestroy {
   }
 
   decrease(event: Event) {
+    localStorage.removeItem(KeyLocalStorage.Passengers);
     this.formTouched = true;
     const elValue = (event.target as HTMLElement)
       .previousElementSibling as HTMLElement;

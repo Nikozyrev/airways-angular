@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { selectTicket } from '../../store/selectors/tiket.selector';
 import { Subscription } from 'rxjs';
+import { KeyLocalStorage } from '../../../common/passengers.constants';
 
 export interface Toppings {
   type: string;
@@ -84,7 +85,8 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
       this.preLoad = false;
     });
 
-    localStorage.removeItem('keyFormValue');
+    localStorage.removeItem(KeyLocalStorage.Passengers);
+    localStorage.removeItem(KeyLocalStorage.UpdateTicket);
 
     this.selectedType = this.tripType[0];
 

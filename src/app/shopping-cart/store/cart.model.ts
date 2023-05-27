@@ -4,4 +4,5 @@ import { ChosenTicketsStateInterface } from '../../../app/flight-selection/store
 export interface CartListInterface {
   tickets: ChosenTicketsStateInterface;
   passengers: IPassengersState;
+  path?: string;
 }

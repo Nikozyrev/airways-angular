@@ -9,7 +9,10 @@ import { FooterModule } from './footer/footer.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { StoreModule } from '@ngrx/store';
-import { shoppingCartReducers } from './shopping-cart/store/reducers/cart-reducer';
+import {
+  shoppingCartReducers,
+  shoppingHistoryReducers,
+} from './shopping-cart/store/reducers/cart-reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +26,7 @@ import { shoppingCartReducers } from './shopping-cart/store/reducers/cart-reduce
     SharedModule,
     AuthModule,
     StoreModule.forFeature('shoppingCart', shoppingCartReducers),
+    StoreModule.forFeature('shoppingHistory', shoppingHistoryReducers),
   ],
   providers: [],
   bootstrap: [AppComponent],

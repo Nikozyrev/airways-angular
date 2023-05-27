@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ChosenTicketsStateInterface } from '../chosen-tickets-state.model';
 import * as TicketInfo from '../../../flight-search/store/selectors/tiket.selector';
-import { TicketType } from '../../models/ticket.model';
+import { ITicket, TicketType } from '../../models/ticket.model';
 
 export const selectFeature =
   createFeatureSelector<ChosenTicketsStateInterface>('chosenTickets');
@@ -26,3 +26,25 @@ export const selectAreTicketsChosen = createSelector(
     return false;
   }
 );
+
+export const selectCanSelectTicket = (
+  ticketType: TicketType,
+  ticket: ITicket
+) =>
+  createSelector(selectFeature, (state) => {
+    if (ticketType === 'destination') {
+      const oppositeTicket = state.returnTicket;
+      if (!oppositeTicket) return true;
+      const selectedDateNum = ticket.dates.arrival.getTime();
+      const oppositeDateNum = oppositeTicket.dates.departure.getTime();
+      return selectedDateNum < oppositeDateNum;
+    }
+    if (ticketType === 'return') {
+      const oppositeTicket = state.destinationTicket;
+      if (!oppositeTicket) return true;
+      const selectedDateNum = ticket.dates.departure.getTime();
+      const oppositeDateNum = oppositeTicket.dates.arrival.getTime();
+      return selectedDateNum > oppositeDateNum;
+    }
+    return false;
+  });

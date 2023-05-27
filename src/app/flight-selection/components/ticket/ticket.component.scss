@@ -137,6 +137,11 @@
   border: 1px solid #11397e;
   border-radius: 4px;
   color: white;
+
+  &:disabled {
+    background: rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
 }
 
 .selected {

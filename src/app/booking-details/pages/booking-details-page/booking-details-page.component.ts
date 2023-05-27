@@ -11,7 +11,11 @@ import { setPassengers } from '../../store/actions/passengers.action';
 import { selectTicketToppings } from '../../../flight-search/store/selectors/tiket.selector';
 import { Toppings } from '../../../flight-search/components/flight-search/flight-search.component';
 import { Router } from '@angular/router';
-import { TypePassenger } from '../../../common/passengers.constants';
+import {
+  TypePassenger,
+  KeyLocalStorage,
+} from '../../../common/passengers.constants';
+import { AppRoutes } from '../../../common/routes.constants';
 
 @Component({
   selector: 'app-booking-details-page',
@@ -29,6 +33,8 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
   child!: null | number[];
 
   infant!: null | number[];
+
+  appRoutes!: AppRoutes;
 
   subscription = new Subscription();
 
@@ -55,7 +61,7 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
     );
 
     localStorage.setItem(
-      'keyFormValue',
+      KeyLocalStorage.Passengers,
       JSON.stringify(this.createCardForm.value)
     );
 
@@ -63,6 +69,7 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
       state: {
         tickets: this.ticketAll,
         passengers: this.createCardForm.value,
+        path: this.router.url.slice(1),
       },
     });
   }
@@ -83,7 +90,7 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const local = localStorage.getItem('keyFormValue');
+    const local = localStorage.getItem(KeyLocalStorage.Passengers);
     let value: IPassengersState | null = null;
 
     if (local) value = JSON.parse(local);
