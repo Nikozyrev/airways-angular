@@ -18,7 +18,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   chosenTickets$: Subscription | undefined;
 
-  currency$: Observable<any> | undefined;
+  currency$: Observable<string> | undefined;
 
   promoValue = '';
 
@@ -74,7 +74,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.chosenTickets$?.unsubscribe();
     this.shoppingCartService.reset();
     this.combineStream$?.unsubscribe();
   }
