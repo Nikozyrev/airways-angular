@@ -4,7 +4,7 @@
 <div class="component__wraper" [formGroup]="ticketForm" *ngIf="!preLoad">
   <div class="radip__wrap">
     <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="tripType"
-      [(ngModel)]="selectedType" class="radio" subscriptSizing="dynamic" (change)="tripTypeChange()">
+     class="radio" subscriptSizing="dynamic" (change)="tripTypeChange()">
       <mat-radio-button class="example-radio-button" *ngFor="let type of tripType" [value]="type">
         {{type}}
       </mat-radio-button>
@@ -36,7 +36,7 @@
   </div>
 
   <div class="date__wraper">
-    <mat-form-field subscriptSizing="dynamic" appearance="fill" *ngIf="selectedType === 'Round Trip'"
+    <mat-form-field subscriptSizing="dynamic" appearance="fill" *ngIf="ticketForm.get('tripType')?.value === 'Round Trip'"
       style="width: 311px">
       <mat-label>Dates</mat-label>
       <mat-date-range-input [rangePicker]="picker">
@@ -49,7 +49,7 @@
       <mat-error *ngIf="ticketForm.get('endDate')!.invalid">Invalid end date</mat-error>
     </mat-form-field>
 
-    <mat-form-field subscriptSizing="dynamic" appearance="fill" *ngIf="selectedType === 'One Way'" style="width: 311px">
+    <mat-form-field subscriptSizing="dynamic" appearance="fill" *ngIf="ticketForm.get('tripType')?.value === 'One Way'" style="width: 311px">
       <mat-label>Dates</mat-label>
       <input matInput [matDatepicker]="picker1" formControlName="startDate">
       <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>

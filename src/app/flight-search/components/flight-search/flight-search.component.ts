@@ -29,8 +29,6 @@ export interface Toppings {
   styleUrls: ['./flight-search.component.scss'],
 })
 export class FlightSearchComponent implements OnInit, OnDestroy {
-  selectedType!: string;
-
   tripType: string[] = ['Round Trip', 'One Way'];
 
   countries = [''];
@@ -57,7 +55,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   angle = 0;
 
   ticketForm = new FormGroup({
-    tripType: new FormControl('', [Validators.required]),
+    tripType: new FormControl(this.tripType[0], [Validators.required]),
     from: new FormControl('', [Validators.required]),
     to: new FormControl('', [Validators.required]),
     startDate: new FormControl('', [Validators.required, dateValidator]),
@@ -88,8 +86,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     localStorage.removeItem(KeyLocalStorage.Passengers);
     localStorage.removeItem(KeyLocalStorage.UpdateTicket);
 
-    this.selectedType = this.tripType[0];
-
     this.tiket$ = this.store.select(selectTicket).subscribe((value) => {
       if (value.tripType !== '') {
         this.ticketForm.get('tripType')?.setValue(value.tripType);
@@ -97,7 +93,6 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         this.ticketForm.get('to')?.setValue(value.to);
         this.ticketForm.get('startDate')?.setValue(value.startDate);
         this.ticketForm.get('endDate')?.setValue(value.endDate);
-        this.selectedType = value.tripType;
         this.toppingsObj = value.toppings;
         this.ticketForm.get('toppings')?.setValue(this.toppingsObj);
         const toppingsValue = this.toppingsObj
@@ -168,19 +163,11 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         formValue.from = this.ticketForm.get('to')?.value as string;
         formValue.to = this.ticketForm.get('from')?.value as string;
       }
-      if (this.selectedType === 'Round Trip') {
-        this.store.dispatch(
-          setTicketInfoSuccess({
-            ticketInfo: formValue,
-          })
-        );
-      } else {
-        this.store.dispatch(
-          setTicketInfoSuccess({
-            ticketInfo: formValue,
-          })
-        );
-      }
+      this.store.dispatch(
+        setTicketInfoSuccess({
+          ticketInfo: formValue,
+        })
+      );
       this.router.navigate(['./flights']);
     }
   }
