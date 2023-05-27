@@ -3,14 +3,12 @@ import { AppRoutes } from './../../../common/routes.constants';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, combineLatest } from 'rxjs';
-import {
-  selectCartFeature,
-  selectShoppingHistory,
-} from '../../store/selectors/cart-selector';
+import { selectCartFeature } from '../../store/selectors/cart-selector';
 import { CartListInterface } from '../../store/cart.model';
 import { ShoppingCartService } from '../../services/shopping-cart.services';
 import { selectCurrency } from '../../../header/store/selectors/header-selector';
 import { KeyLocalStorage } from '../../../common/passengers.constants';
+import { updateShoppingCart } from '../../store/action/cart-action';
 
 @Component({
   selector: 'app-shopping-cart-component',
@@ -18,7 +16,7 @@ import { KeyLocalStorage } from '../../../common/passengers.constants';
   styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
-  chosenTickets: Observable<CartListInterface[]> | undefined;
+  chosenTickets: CartListInterface[] = [];
 
   totalCost = '';
 
@@ -55,11 +53,44 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     localStorage.removeItem(KeyLocalStorage.UpdateTicket);
+    const storageTickets = JSON.parse(
+      localStorage.getItem('Tickets') as string
+    );
 
-    if (this.router.url.slice(1) === AppRoutes.cart)
-      this.chosenTickets = this.store.select(selectCartFeature);
-    if (this.router.url.slice(1) === AppRoutes.account)
-      this.chosenTickets = this.store.select(selectShoppingHistory);
+    if (this.router.url.slice(1) === AppRoutes.cart) {
+      this.chosenTickets$ = this.store
+        .select(selectCartFeature)
+        .subscribe((v) => {
+          if (v.length === 0) {
+            if (storageTickets.length > 0) {
+              this.store.dispatch(
+                updateShoppingCart({
+                  cartList: storageTickets,
+                })
+              );
+            }
+          } else {
+            this.chosenTickets = v;
+          }
+        });
+    }
+    if (this.router.url.slice(1) === AppRoutes.account) {
+      this.chosenTickets$ = this.store
+        .select(selectCartFeature)
+        .subscribe((v) => {
+          if (v.length === 0) {
+            if (storageTickets.length > 0) {
+              this.store.dispatch(
+                updateShoppingCart({
+                  cartList: storageTickets,
+                })
+              );
+            }
+          } else {
+            this.chosenTickets = v;
+          }
+        });
+    }
 
     this.currency$ = this.store.select(selectCurrency);
 
@@ -83,10 +114,13 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
       this.selectedTicketsAmount = tickets.length;
       this.cdr.detectChanges();
     });
+
+    localStorage.setItem('Tickets', JSON.stringify(this.chosenTickets));
   }
 
   ngOnDestroy(): void {
     this.shoppingCartService.reset();
+    this.chosenTickets$?.unsubscribe();
     this.combineStream$?.unsubscribe();
   }
 

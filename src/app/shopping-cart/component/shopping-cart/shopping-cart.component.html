@@ -102,11 +102,7 @@
     <ul class="tickets__list">
       <li
         class="tickets__item"
-        *ngFor="
-          let item of chosenTickets
-            | async
-            | sortCart : sortName : sortDirection
-        "
+        *ngFor="let item of chosenTickets | sortCart : sortName : sortDirection"
       >
         <app-cart-item [cartItem]="item"></app-cart-item>
       </li>
