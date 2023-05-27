@@ -51,6 +51,7 @@
           mat-button
           class="select-ticket-btn"
           (click)="saveTicket(ticket)"
+          [disabled]="(canSelect$ | async) === false"
         >
           Select
         </button>

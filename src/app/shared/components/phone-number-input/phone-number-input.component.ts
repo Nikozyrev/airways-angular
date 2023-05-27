@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ISelectOption } from '../../models/select-option.model';
+import { countryCodes } from '../../../common/code.constants';
 
 @Component({
   selector: 'app-phone-number-input',
@@ -15,10 +16,10 @@ export class PhoneNumberInputComponent {
   });
 
   @Input()
-  public countryCodes: ISelectOption[] = [
-    { value: '+375', viewValue: 'Belarus (+375)' },
-    { value: '+7', viewValue: 'Russia (+7)' },
-  ];
+  public countryCodes: ISelectOption[] = countryCodes.map((code) => ({
+    value: code.dial_code,
+    viewValue: `${code.name} (${code.dial_code})`,
+  }));
 
   public getErrorMessage() {
     if (this.group.controls.phoneNumber.hasError('required')) {
