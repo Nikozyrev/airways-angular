@@ -137,16 +137,23 @@ export class CartItemComponent implements OnInit, OnDestroy {
   }
 
   deleteTicket() {
+    let filterCart: CartListInterface[] = [];
     this.ticketsList = this.store.select(selectCartFeature).subscribe((val) => {
       if (val.includes(this.cartItem as CartListInterface)) {
-        this.store.dispatch(
-          updateShoppingCart({
-            cartList: val.filter((v) => v !== this.cartItem),
-          })
-        );
+        filterCart = [...val.filter((v) => v !== this.cartItem)];
+        console.log('filterCart', filterCart);
+        localStorage.setItem('Tickets', JSON.stringify(filterCart));
+        setTimeout(() => {
+          this.store.dispatch(
+            updateShoppingCart({
+              cartList: filterCart,
+            })
+          );
+        });
       }
     });
     this.shoppingCartService.decrement(this.cartItem as CartListInterface);
+
     this.ticketsList.unsubscribe();
   }
 

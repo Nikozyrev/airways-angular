@@ -15,3 +15,13 @@ export const createShoppingHistory = createAction(
   '[ShoppingHistory] Success',
   props<{ cartList: CartListInterface }>()
 );
+
+export const updateShoppingHistory = createAction(
+  '[ShoppingHistory] Update',
+  props<{ cartList: CartListInterface[] }>()
+);
+
+export const updateShoppingArrayHistory = createAction(
+  '[ShoppingArrayHistory] Update',
+  props<{ cartList: CartListInterface[] }>()
+);

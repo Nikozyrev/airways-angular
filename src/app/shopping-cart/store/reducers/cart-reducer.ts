@@ -22,5 +22,13 @@ export const shoppingHistoryReducers = createReducer(
   on(
     cartActions.createShoppingHistory,
     (state, action): CartListInterface[] => [...state, action.cartList]
+  ),
+  on(
+    cartActions.updateShoppingArrayHistory,
+    (state, action): CartListInterface[] => [...state, ...action.cartList]
+  ),
+  on(
+    cartActions.updateShoppingHistory,
+    (state, action): CartListInterface[] => [...action.cartList]
   )
 );

@@ -44,8 +44,6 @@ export class BookingSummaryPageComponent implements OnDestroy {
     this.flight = this.router.getCurrentNavigation()?.extras
       .state as CartListInterface;
 
-    console.log(this.flight);
-
     if (!this.flight) this.router.navigateByUrl('/');
   }
 
@@ -82,6 +80,7 @@ export class BookingSummaryPageComponent implements OnDestroy {
             (v) => JSON.stringify(v) !== saveTicket
           );
         });
+      localStorage.setItem('Tickets', JSON.stringify(this.currentCart));
       ticketsList.unsubscribe();
       this.store.dispatch(
         updateShoppingCart({
