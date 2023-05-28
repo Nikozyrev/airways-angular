@@ -61,3 +61,9 @@ select {
   padding: 0;
   font: inherit;
 }
+
+@media (max-width: 345px) {
+  body {
+    overflow-x: hidden;
+  }
+}

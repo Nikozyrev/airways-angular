@@ -86,3 +86,21 @@
 .container-passengers :last-child {
   border-radius: 0px 0px 8px 8px;
 }
+
+@media screen and (max-width: 1640px) {
+  .summary__info__details {
+    width: 455px;
+  }
+}
+
+@media screen and (max-width: 975px) {
+  .summary__info__details {
+    width: 380px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .summary__info__details {
+    width: 285px;
+  }
+}

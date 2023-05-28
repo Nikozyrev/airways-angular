@@ -75,12 +75,14 @@
 .booking-contact__form {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: flex-start;
+  row-gap: 27px;
   padding: 32px 44px;
   margin-top: 20px;
 
   width: 1128px;
-  height: 120px;
+  height: auto;
 
   background: #ffffff;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
@@ -150,4 +152,55 @@
 
 .button-control__back:active {
   color: #0b2654;
+}
+
+@media screen and (max-width: 1160px) {
+  .container-booking {
+    width: 855px;
+    row-gap: 20px;
+  }
+
+  .data-person__baggage-checked.ng-star-inserted,
+  .data-person__help {
+    margin-top: 0;
+  }
+
+  .booking-contact__form {
+    width: 855px;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .container-booking {
+    width: 610px;
+  }
+  .booking-contact__form {
+    width: 610px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .container-booking {
+    width: 340px;
+  }
+  .booking-contact__form {
+    width: 340px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .container-booking {
+    width: 285px;
+  }
+  .booking-contact__form {
+    width: 285px;
+  }
+
+  .booking-passengers__adult {
+    padding: 20px 15px;
+  }
+
+  .booking-contact__form {
+    padding: 20px 15px;
+  }
 }
