@@ -35,6 +35,7 @@ import { APP_DATE_FORMATS, AppDateAdapter } from './adapter/date-adapter';
 import { SecondMenuComponent } from './components/second-menu/second-menu.component';
 import { DurationPipe } from './pipes/duration.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SignOutButtonComponent } from './components/sign-out-button/sign-out-button.component';
 
 const materialModules = [
   MatRippleModule,
@@ -71,6 +72,7 @@ const materialModules = [
     SecondMenuComponent,
     DataPersonComponent,
     DurationPipe,
+    SignOutButtonComponent,
   ],
   imports: [...materialModules, CommonModule, ReactiveFormsModule, FormsModule],
   exports: [
@@ -88,6 +90,7 @@ const materialModules = [
     CitizenshipInputComponent,
     SecondMenuComponent,
     DurationPipe,
+    SignOutButtonComponent,
   ],
   providers: [
     { provide: DateAdapter, useClass: AppDateAdapter },

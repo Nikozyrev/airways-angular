@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
@@ -34,11 +35,23 @@ export class AuthEffects {
     );
   });
 
+  logout$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.logout),
+      mergeMap(() => {
+        this.authService.logout();
+        this.router.navigate(['/']);
+        return of(AuthActions.setUser({ user: null }));
+      })
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,
     private authModalService: AuthModalService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {}
 
   private handleSuccessAuth(res: IAuthResponse) {
