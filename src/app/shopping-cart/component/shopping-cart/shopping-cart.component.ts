@@ -3,12 +3,19 @@ import { AppRoutes } from './../../../common/routes.constants';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, combineLatest } from 'rxjs';
-import { selectCartFeature } from '../../store/selectors/cart-selector';
+import {
+  selectCartFeature,
+  selectShoppingHistory,
+} from '../../store/selectors/cart-selector';
 import { CartListInterface } from '../../store/cart.model';
 import { ShoppingCartService } from '../../services/shopping-cart.services';
 import { selectCurrency } from '../../../header/store/selectors/header-selector';
 import { KeyLocalStorage } from '../../../common/passengers.constants';
-import { updateShoppingCart } from '../../store/action/cart-action';
+import {
+  updateShoppingArrayHistory,
+  updateShoppingCart,
+  updateShoppingHistory,
+} from '../../store/action/cart-action';
 
 @Component({
   selector: 'app-shopping-cart-component',
@@ -21,6 +28,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   totalCost = '';
 
   chosenTickets$: Subscription | undefined;
+
+  chosenTicketsByu$: Subscription | undefined;
 
   currency$: Observable<string> | undefined;
 
@@ -53,74 +62,92 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     localStorage.removeItem(KeyLocalStorage.UpdateTicket);
-    const storageTickets = JSON.parse(
-      localStorage.getItem('Tickets') as string
-    );
 
     if (this.router.url.slice(1) === AppRoutes.cart) {
       this.chosenTickets$ = this.store
         .select(selectCartFeature)
         .subscribe((v) => {
           if (v.length === 0) {
+            const storageTickets =
+              JSON.parse(localStorage.getItem('Tickets') as string) || '';
             if (storageTickets.length > 0) {
               this.store.dispatch(
                 updateShoppingCart({
                   cartList: storageTickets,
                 })
               );
+            } else {
+              this.chosenTickets = [];
             }
           } else {
-            this.chosenTickets = v;
+            if (this.router.url.slice(1) === AppRoutes.cart) {
+              this.chosenTickets = v;
+            }
           }
         });
+      setTimeout(() => {
+        localStorage.setItem('Tickets', JSON.stringify(this.chosenTickets));
+      });
+
+      this.currency$ = this.store.select(selectCurrency);
+
+      this.combineStream$ = combineLatest(
+        this.currency$,
+        this.shoppingCartService.select$
+      ).subscribe(([currency, tickets]) => {
+        this.currencyIcon = this.shoppingCartService.createPrice(currency);
+        this.currency = currency;
+        let totalPrice = 0;
+        tickets.forEach((ticket: CartListInterface) => {
+          totalPrice += +this.shoppingCartService.countPrice(ticket, currency);
+        });
+        if (this.promoActive > 0) {
+          totalPrice = +(
+            totalPrice -
+            (totalPrice * this.promoActive) / 100
+          ).toFixed(2);
+        }
+        this.totalCost = totalPrice.toFixed(2);
+        this.selectedTickets = tickets;
+        this.selectedTicketsAmount = tickets.length;
+        this.cdr.detectChanges();
+      });
     }
+
     if (this.router.url.slice(1) === AppRoutes.account) {
-      this.chosenTickets$ = this.store
-        .select(selectCartFeature)
+      const storageTicketsBuy = JSON.parse(
+        localStorage.getItem('TicketsBuy') as string
+      );
+
+      this.chosenTicketsByu$ = this.store
+        .select(selectShoppingHistory)
         .subscribe((v) => {
           if (v.length === 0) {
-            if (storageTickets.length > 0) {
+            if (storageTicketsBuy.length > 0) {
               this.store.dispatch(
-                updateShoppingCart({
-                  cartList: storageTickets,
+                updateShoppingHistory({
+                  cartList: storageTicketsBuy,
                 })
               );
             }
           } else {
             this.chosenTickets = v;
           }
+
+          setTimeout(() => {
+            localStorage.setItem(
+              'TicketsBuy',
+              JSON.stringify(this.chosenTickets)
+            );
+          });
         });
     }
-
-    this.currency$ = this.store.select(selectCurrency);
-
-    this.combineStream$ = combineLatest(
-      this.currency$,
-      this.shoppingCartService.select$
-    ).subscribe(([currency, tickets]) => {
-      this.currencyIcon = this.shoppingCartService.createPrice(currency);
-      this.currency = currency;
-      let totalPrice = 0;
-      tickets.forEach((ticket: CartListInterface) => {
-        totalPrice += +this.shoppingCartService.countPrice(ticket, currency);
-      });
-      if (this.promoActive > 0) {
-        totalPrice = +(
-          totalPrice -
-          (totalPrice * this.promoActive) / 100
-        ).toFixed(2);
-      }
-      this.totalCost = totalPrice.toFixed(2);
-      this.selectedTicketsAmount = tickets.length;
-      this.cdr.detectChanges();
-    });
-
-    localStorage.setItem('Tickets', JSON.stringify(this.chosenTickets));
   }
 
   ngOnDestroy(): void {
     this.shoppingCartService.reset();
     this.chosenTickets$?.unsubscribe();
+    this.chosenTicketsByu$?.unsubscribe();
     this.combineStream$?.unsubscribe();
   }
 
@@ -141,5 +168,35 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
   checkPage() {
     return this.router.url.slice(1) === AppRoutes.cart ? true : false;
+  }
+
+  buyCheckedTickets() {
+    if (this.selectedTickets.length) {
+      this.store.dispatch(
+        updateShoppingArrayHistory({
+          cartList: this.selectedTickets,
+        })
+      );
+    }
+
+    const filterArr = this.chosenTickets.filter(
+      (ticket) => !this.selectedTickets.includes(ticket)
+    );
+
+    localStorage.setItem('Tickets', JSON.stringify(filterArr));
+
+    const storageTicketsBuy = JSON.parse(
+      localStorage.getItem('TicketsBuy') as string
+    );
+
+    storageTicketsBuy.push(...this.selectedTickets);
+
+    localStorage.setItem('TicketsBuy', JSON.stringify(storageTicketsBuy));
+
+    this.store.dispatch(
+      updateShoppingCart({
+        cartList: filterArr,
+      })
+    );
   }
 }

@@ -47,8 +47,7 @@ export class BookingDetailsPageComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.createCardForm.markAllAsTouched();
 
-    // !!!!!!Обязательно разкомитить!!!!
-    // if (this.createCardForm.invalid) return;
+    if (this.createCardForm.invalid) return;
 
     const ticket = this.store
       .select(selectFeature)
