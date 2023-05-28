@@ -1,6 +1,9 @@
 .data-person {
   width: 105%;
   margin-top: 24px;
+  row-gap: 27px;
+  display: flex;
+  justify-content: flex-start;
 }
 .data-person__form-field {
   display: flex;
@@ -32,18 +35,9 @@
 }
 
 .mdc-tooltip__surface.mdc-tooltip__surface-animation {
-  // font-family: "Roboto";
-  // font-style: normal;
-  // font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  // width: 163px;
-  // /* or 133% */
-
-  // letter-spacing: 0.4px;
   background-color: #ffffff;
-  /* Neutral/neutral0 */
-
   color: #1c1b1f;
 }
 
@@ -142,7 +136,6 @@
 .data-person__help {
   display: flex;
   align-items: center;
-  margin-top: 27px;
   width: 252px;
 }
 
@@ -162,7 +155,6 @@
 
 .data-person__baggage-checked {
   display: flex;
-  margin-top: 27px;
   align-items: center;
 }
 

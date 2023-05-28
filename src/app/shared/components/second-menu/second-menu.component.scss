@@ -183,3 +183,13 @@
     z-index: -2;
   }
 }
+
+@media screen and (max-width: 380px) {
+  .second__menu-wrapper {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  body {
+    overflow-x: hidden !important;
+  }
+}
