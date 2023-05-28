@@ -1,0 +1,41 @@
+.summary__container-fare {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 551px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid #e1e5eb;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 24px 72px 20px 40px;
+}
+
+.summary__total {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  border-top: 1px solid #e1e5eb;
+  padding-top: 20px;
+
+  .summary__total__value {
+    color: #11397e;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .summary__container-fare {
+    width: 380px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .summary__container-fare {
+    width: 285px;
+    padding: 20px;
+  }
+}

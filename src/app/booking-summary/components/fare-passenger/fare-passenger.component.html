@@ -1,0 +1,32 @@
+<div class="fare__passenger-container" *ngIf="person.amount">
+  <div class="fare__passenger" *ngIf="global$ | async as global">
+    <div class="fare__passenger__total">
+      <span class="fare__passenger__total-name">
+        {{ person.amount }} x {{ person.type }} Fare
+      </span>
+      <span class="fare__passenger__total-sum">
+        {{ addCurrency(flight, global.currency) | currency : global.currency }}
+      </span>
+    </div>
+
+    <div class="fare__passenger__fare">
+      <span class="fare__passenger__fare-name">Fare</span>
+      <span class="fare__passenger__fare-sum">
+        {{
+          0.65 * addCurrency(flight, global.currency)
+            | currency : global.currency
+        }}
+      </span>
+    </div>
+
+    <div class="fare__passenger__tax">
+      <span class="fare__passenger__tax-name">Tax & Service Charge</span>
+      <span class="fare__passenger__tax-sum">
+        {{
+          0.35 * addCurrency(flight, global.currency)
+            | currency : global.currency
+        }}
+      </span>
+    </div>
+  </div>
+</div>

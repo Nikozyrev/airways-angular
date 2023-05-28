@@ -1,0 +1,13 @@
+<div class="summary__container-fare" *ngIf="ticket$ | async as ticket">
+  <app-fare-passenger
+    *ngFor="let pass of ticket.toppings"
+    [person]="pass"
+    [flight]="flight"
+  ></app-fare-passenger>
+  <div class="summary__total">
+    <div class="summary__total__text">Total:</div>
+    <div class="summary__total__value" *ngIf="global$ | async as global">
+      {{ totalSummary(flight, global.currency) | currency : global.currency }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,195 @@
+@import "../../../../styles/variables.scss";
+
+.second__menu {
+  background-color: #fafafa;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  height: 66px;
+}
+
+.second__menu-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  height: 66px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.second__menu-route {
+  display: flex;
+  gap: 1rem;
+}
+
+.route-image {
+  height: 16px;
+}
+
+.return-time {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.separator {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  background-color: #0090bd;
+}
+
+.tickets-amount {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.edit-btn {
+  width: 44px;
+  height: 28px;
+  padding: 4px 8px;
+  background: #f4f6f9;
+  border-radius: 4px;
+  color: #11397e;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-btn:hover {
+  transform: translateY(-5px);
+}
+
+.second__menu-forms {
+  margin-top: 2px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+.mat-mdc-form-field {
+  background-color: #f4f6f9;
+  height: 56px;
+}
+
+.tiket__wraper {
+  width: 201px;
+}
+
+.btn__wraper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tiket__element {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.tiket-control__panel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tiket__title,
+.tiket__element {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $blue;
+}
+
+.tiket__btn {
+  color: $light-gray;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.plus {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient($light-gray, $light-gray),
+    linear-gradient($light-gray, $light-gray), $white;
+  background-position: center;
+  background-size: 100% 2px, 2px 100%;
+  background-repeat: no-repeat;
+}
+
+.minus {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: linear-gradient($light-gray, $light-gray), $white;
+  background-position: center;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+}
+
+.country__input {
+  width: 255px;
+}
+
+.second__menu-forms {
+  animation-duration: 0.3s;
+  animation-name: slideof;
+  transform: translateY(-100px);
+  transition: all 0.3s;
+  background-color: #fff;
+  position: relative;
+  z-index: -2;
+}
+
+.second__menu-forms.open {
+  display: flex;
+  animation-duration: 0.3s;
+  animation-name: slidein;
+  transform: translateY(0px);
+  z-index: 1;
+}
+
+.mat-mdc-form-field-subscript-dynamic-size .mat-mdc-form-field-hint-wrapper,
+.mat-mdc-form-field-subscript-dynamic-size .mat-mdc-form-field-error-wrapper {
+  position: absolute !important;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateY(-100px);
+  }
+
+  to {
+    transform: translateY(0px);
+    z-index: 1;
+  }
+}
+
+@keyframes slideof {
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(-100px);
+    position: relative;
+    z-index: -2;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .second__menu-wrapper {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  body {
+    overflow-x: hidden !important;
+  }
+}

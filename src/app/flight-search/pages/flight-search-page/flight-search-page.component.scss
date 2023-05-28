@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  min-height: 100%;
+  background-image: url("/assets/images/background.jpg");
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding-top: 90px;
+
+  @media screen and (max-width: 1200px) {
+    background-size: cover;
+  }
+}

@@ -1,0 +1,14 @@
+<div class="details__passengers">
+  <span class="details__passengers__name">
+    {{ passenger.firstName + " " + passenger.lastName }}
+  </span>
+  <span
+    class="details__passengers__checked-bag"
+    *ngIf="passenger.baggageChecked"
+  >
+    {{ passenger.baggageChecked }} checked bag (total 23 kg) included
+  </span>
+  <span class="details__passengers__cabin-bag">
+    1 cabin bag + 1 personal item (max. 8 kg) included
+  </span>
+</div>

@@ -1,0 +1,7 @@
+.content {
+  width: 90vw;
+
+  @media screen and (min-width: 540px) {
+    max-width: 500px;
+  }
+}

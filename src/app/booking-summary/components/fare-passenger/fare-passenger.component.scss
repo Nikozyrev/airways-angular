@@ -1,0 +1,28 @@
+.fare__passenger {
+  width: 100%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 0.5px;
+  color: #000000;
+}
+
+.fare__passenger__total,
+.fare__passenger__fare,
+.fare__passenger__tax {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fare__passenger__fare,
+.fare__passenger__tax {
+  margin-left: 40px;
+}
+
+.fare__passenger__total-name {
+  font-weight: 700;
+}

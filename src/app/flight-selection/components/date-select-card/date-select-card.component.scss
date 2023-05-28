@@ -1,0 +1,112 @@
+@import "../../../../styles/variables.scss";
+
+:host {
+  max-height: 83px;
+  align-self: flex-end;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  border-left: 1px solid #cecece;
+}
+
+.date-card {
+  flex-basis: 100%;
+  background-color: white;
+  padding-top: 5px;
+  cursor: pointer;
+
+  &.selected {
+    cursor: auto;
+  }
+}
+
+.date {
+  font-weight: 700;
+  line-height: 1.5rem;
+  color: rgba(0, 144, 189, 1);
+}
+
+.weekday {
+  font-size: 0.8rem;
+  line-height: 1.3rem;
+  color: $light-gray;
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $primary-blue;
+  line-height: 2rem;
+}
+
+.no-flight {
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+}
+
+.indicator {
+  width: 100%;
+  height: 5px;
+
+  &.red {
+    background-color: $red;
+  }
+
+  &.orange {
+    background-color: $orange;
+  }
+
+  &.green {
+    background-color: $green;
+  }
+}
+
+.selected {
+  .date {
+    font-size: 1.25rem;
+    color: $primary-blue;
+    line-height: 1.7rem;
+
+    @media screen and (max-width: 800px) {
+      font-size: 1.2rem;
+      line-height: 1.75rem;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 1rem;
+      line-height: 1.6rem;
+    }
+  }
+
+  .weekday {
+    font-size: 1rem;
+    line-height: 1.7rem;
+
+    @media screen and (max-width: 800px) {
+      font-size: 1rem;
+      line-height: 1.75rem;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 0.8rem;
+      line-height: 1.6rem;
+    }
+  }
+
+  .price {
+    color: $primary-blue;
+    font-size: 1.8rem;
+    line-height: 2rem;
+
+    @media screen and (max-width: 800px) {
+      font-size: 1.5rem;
+      line-height: 1.75rem;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+    }
+  }
+}

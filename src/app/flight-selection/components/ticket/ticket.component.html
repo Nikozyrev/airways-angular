@@ -1,0 +1,68 @@
+<div *ngIf="ticket; else noTicket" class="ticket">
+  <div class="flight-info">
+    <div class="departure">
+      <p class="date">{{ ticket.dates.departure | date : "EEE, d MMM y" }}</p>
+      <p class="time">{{ ticket.dates.departure | date : "H:mm" }}</p>
+      <p class="location">{{ ticket.locations.departure }}</p>
+    </div>
+    <div class="duration">
+      <app-divider
+        class="divider"
+        [text]="
+          calculateDuration(ticket.dates.arrival, ticket.dates.departure)
+            | duration
+        "
+      ></app-divider>
+    </div>
+    <div class="arrival">
+      <p class="date">{{ ticket.dates.arrival | date : "EEE, d MMM y" }}</p>
+      <p class="time">{{ ticket.dates.arrival | date : "H:mm" }}</p>
+      <p class="location">{{ ticket.locations.arrival }}</p>
+    </div>
+    <div class="flight-number">
+      <span>Flight no.</span>
+      <span>FR {{ ticket.flightNum }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="selected; else coupon" class="selected">
+    <div class="selected__price" *ngIf="currencyCode$ | async as currencyCode">
+      <p>{{ ticket.price[currencyCode] | currency : currencyCode }}</p>
+    </div>
+    <div class="selected__edit">
+      <button mat-button class="edit-ticket-btn" (click)="editTicket()">
+        Edit
+      </button>
+    </div>
+  </div>
+
+  <ng-template #coupon>
+    <div class="coupon">
+      <div class="coupon__data">
+        <div class="seats" [appFlightSeatsAvailability]="ticket.seats">
+          {{ ticket.seats.available }} seats available
+        </div>
+        <div class="price" *ngIf="currencyCode$ | async as currencyCode">
+          <p>Price</p>
+          <p>{{ ticket.price[currencyCode] | currency : currencyCode }}</p>
+        </div>
+      </div>
+      <div class="coupon__confirm">
+        <button
+          mat-button
+          class="select-ticket-btn"
+          (click)="saveTicket(ticket)"
+          [disabled]="(canSelect$ | async) === false"
+        >
+          Select
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #noTicket>
+  <div class="no-ticket">
+    <p>There are no eligible tickets. Choose another date.</p>
+  </div>
+</ng-template>

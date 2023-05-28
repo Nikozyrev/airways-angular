@@ -1,0 +1,18 @@
+<div class="flights">
+  <app-ticket-select ticketType="destination"></app-ticket-select>
+  <app-ticket-select
+    ticketType="return"
+    *ngIf="(tripType$ | async) === 'Round Trip'"
+  ></app-ticket-select>
+</div>
+<div class="buttons">
+  <button mat-button color="primary" routerLink="/">Back</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="(areTicketsChosen$ | async) === false"
+    routerLink="/details"
+  >
+    Continue
+  </button>
+</div>

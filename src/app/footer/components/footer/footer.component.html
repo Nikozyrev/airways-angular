@@ -1,0 +1,24 @@
+<div class="_container">
+  <div class="copyright">
+    <span>© 2023, AIRWAY. All rights reserved.</span>
+    <div class="developers">
+      <a
+        *ngFor="let dev of developers"
+        href="https://github.com/{{ dev }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img class="gh-logo" src="assets/images/icon_github.svg" alt="" />
+      </a>
+    </div>
+  </div>
+  <div class="payment">
+    <span class="payment__text">We accept these payment methods</span>
+    <div class="payment__images">
+      <img src="assets/images/icon_mastercard.svg" alt="" />
+      <img src="assets/images/icon_amazon_pay.svg" alt="" />
+      <img src="assets/images/icon_american_express.svg" alt="" />
+      <img src="assets/images/icon_visa.svg" alt="" />
+    </div>
+  </div>
+</div>

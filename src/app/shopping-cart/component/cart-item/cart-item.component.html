@@ -1,0 +1,77 @@
+<section
+  class="example-section"
+  [formGroup]="checkboxGroup"
+  *ngIf="checkPage()"
+>
+  <mat-checkbox formControlName="checked"></mat-checkbox>
+</section>
+<div
+  class="info__content"
+  [ngClass]="{
+    marginLeft: !checkPage()
+  }"
+  (click)="goToSummary()"
+>
+  <section class="ticket-num__section info-section">
+    <h4 class="tiketNum">
+      FR {{ cartItem?.tickets?.destinationTicket?.flightNum }}
+    </h4>
+    <h4 class="tiketNum" *ngIf="cartItem?.tickets?.returnTicket">
+      FR {{ cartItem?.tickets?.returnTicket?.flightNum }}
+    </h4>
+  </section>
+  <section class="flight__section info-section">
+    <p class="flight">{{ destinationLocation }}</p>
+    <p class="flight" *ngIf="cartItem?.tickets?.returnTicket">
+      {{ returnLocation }}
+    </p>
+  </section>
+  <section class="trip-type info-section">
+    <p>{{ cartItem?.tickets?.returnTicket ? "Round Trip" : "One way" }}</p>
+  </section>
+  <section class="date-time__section info-section">
+    <p>
+      {{
+        cartItem?.tickets?.destinationTicket?.dates?.departure
+          | dateRange : cartItem?.tickets?.destinationTicket?.dates?.arrival
+      }}
+    </p>
+    <p *ngIf="cartItem?.tickets?.returnTicket">
+      {{
+        cartItem?.tickets?.returnTicket?.dates?.departure
+          | dateRange : cartItem?.tickets?.returnTicket?.dates?.arrival
+      }}
+    </p>
+  </section>
+  <section class="passengers__section info-section">
+    <p class="passengers-item">
+      {{ cartItem?.passengers?.adult?.length }} x Adult
+    </p>
+    <p class="passengers-item">
+      {{ cartItem?.passengers?.child?.length }} x Child
+    </p>
+    <p class="passengers-item">
+      {{ cartItem?.passengers?.infant?.length }} x Infant
+    </p>
+  </section>
+  <section class="price__section info-section">
+    {{ price }}
+  </section>
+</div>
+<section class="editing" *ngIf="checkPage()">
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu"
+  >
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="deleteTicket()">
+      <span>Delete</span>
+    </button>
+    <button mat-menu-item (click)="goToPassenger()">
+      <span>Edit</span>
+    </button>
+  </mat-menu>
+</section>

@@ -1,0 +1,101 @@
+<div class="pre-loader" *ngIf="preLoad">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="component__wraper" [formGroup]="ticketForm" *ngIf="!preLoad">
+  <div class="radip__wrap">
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="tripType"
+     class="radio" subscriptSizing="dynamic" (change)="tripTypeChange()">
+      <mat-radio-button class="example-radio-button" *ngFor="let type of tripType" [value]="type">
+        {{type}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="forms__wraper">
+    <mat-form-field appearance="fill" subscriptSizing="dynamic" class="country__input">
+      <mat-label class="label">From</mat-label>
+      <mat-select formControlName="from" name="food">
+        <mat-option *ngFor="let country of countries" [value]="country">
+          {{country}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button class="forms-change__btn" (click)="change()" #fromInput
+      [ngStyle]="{'transform': 'rotate(' + angle + 'deg)'}">
+      <img src="/assets/images/change.svg" alt="change" class="change-img">
+    </button>
+
+    <mat-form-field appearance="fill" subscriptSizing="dynamic" class="country__input">
+      <mat-label class="label">Destination</mat-label>
+      <mat-select formControlName="to" name="food">
+        <mat-option *ngFor="let country of countries" [value]="country">
+          {{country}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="date__wraper">
+    <mat-form-field subscriptSizing="dynamic" appearance="fill" *ngIf="ticketForm.get('tripType')?.value === 'Round Trip'"
+      style="width: 311px">
+      <mat-label>Dates</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate formControlName="startDate" placeholder="Start date">
+        <input matEndDate formControlName="endDate" placeholder="End date">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+      <mat-error *ngIf="ticketForm.get('startDate')!.invalid">Invalid start date</mat-error>
+      <mat-error *ngIf="ticketForm.get('endDate')!.invalid">Invalid end date</mat-error>
+    </mat-form-field>
+
+    <mat-form-field subscriptSizing="dynamic" appearance="fill" *ngIf="ticketForm.get('tripType')?.value === 'One Way'" style="width: 311px">
+      <mat-label>Dates</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="startDate">
+      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+      <mat-error *ngIf="ticketForm.get('startDate')!.invalid">Invalid start date</mat-error>
+    </mat-form-field>
+
+    <mat-form-field subscriptSizing="dynamic" appearance="fill" class="tiket__wraper">
+      <mat-label>Toppings</mat-label>
+      <mat-select [formControl]="toppings" multiple>
+        <div class="tiket__element">
+          <div class="tiket__title">Adult</div>
+          <div class="tiket-control__panel">
+            <button class="tiket__btn plus" (click)="increase($event)"></button>
+            <div class="tiket__amount">{{toppingsObj[0].amount}}</div>
+            <button class="tiket__btn minus" (click)="decrease($event)"></button>
+          </div>
+        </div>
+        <div class="tiket__element">
+          <div class="tiket__title">Child</div>
+          <div class="tiket-control__panel">
+            <button class="tiket__btn plus" (click)="increase($event)"></button>
+            <div class="tiket__amount">{{toppingsObj[1].amount}}</div>
+            <button class="tiket__btn minus" (click)="decrease($event)"></button>
+          </div>
+        </div>
+        <div class="tiket__element">
+          <div class="tiket__title">Infant</div>
+          <div class="tiket-control__panel">
+            <button class="tiket__btn plus" (click)="increase($event)"></button>
+            <div class="tiket__amount">{{toppingsObj[2].amount}}</div>
+            <button class="tiket__btn minus" (click)="decrease($event)"></button>
+          </div>
+        </div>
+        <mat-option *ngFor="let topping of toppingsObj" [value]="topping.type"
+          style="display: none;">{{topping.type}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="ticketForm.get('toppings')!.invalid">Invalid number of tickets</mat-error>
+    </mat-form-field>
+
+  </div>
+
+  <div class="btn__wraper">
+    <button class="search__btn" (click)="submit()" [disabled]="ticketForm.invalid">
+      Search
+    </button>
+  </div>
+
+</div>

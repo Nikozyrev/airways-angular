@@ -1,0 +1,45 @@
+<app-second-menu></app-second-menu>
+<div class="container-summary">
+  <div class="summary__header">
+    <img
+      src="../../../../assets/Vector-summary.svg"
+      alt="vector-summary"
+      class="summary__header__img"
+    />
+    <h2 class="summary__header__h2">Summary</h2>
+  </div>
+
+  <div class="summary__info">
+    <app-ticket-details
+      [passengers]="flight.passengers"
+      [flight]="flight.tickets.destinationTicket"
+    ></app-ticket-details>
+    <app-ticket-details
+      [passengers]="flight.passengers"
+      [flight]="flight.tickets.returnTicket"
+      *ngIf="flight.tickets.returnTicket"
+    ></app-ticket-details>
+  </div>
+
+  <div class="container-fare">
+    <app-fare [flight]="flight"></app-fare>
+  </div>
+
+  <div class="container-button">
+    <button class="container-button__back" (click)="goToBack()">Back</button>
+    <button
+      class="container-button__toCart"
+      (click)="goToCart()"
+      *ngIf="this.flight.path !== appRoutes.account"
+    >
+      Add to order cart
+    </button>
+    <button
+      class="container-button__buy"
+      (click)="goToBuy()"
+      *ngIf="this.flight.path !== appRoutes.account"
+    >
+      Buy now
+    </button>
+  </div>
+</div>

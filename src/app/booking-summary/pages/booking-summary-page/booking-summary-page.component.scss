@@ -1,0 +1,120 @@
+.container-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 50px auto;
+  max-width: 1128px;
+}
+
+.summary__header {
+  display: flex;
+  margin-bottom: 28px;
+  margin-left: 10px;
+}
+
+.summary__header__h2 {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #11397e;
+  margin-left: 14px;
+}
+
+.summary__info {
+  display: flex;
+  height: auto;
+  justify-content: center;
+  width: 100%;
+  :nth-child(2) {
+    margin-left: 25px;
+  }
+}
+
+.container-button {
+  display: flex;
+  align-self: flex-end;
+}
+
+.container-button {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.1px;
+  margin-top: 40px;
+}
+
+.container-button__back {
+  width: 126px;
+  height: 60px;
+  color: #11397e;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.container-button__back:active {
+  color: #081b3c;
+}
+
+.container-button__toCart {
+  width: 146px;
+  height: 60px;
+  border: 1px solid #11397e;
+  border-radius: 4px;
+  color: #11397e;
+  cursor: pointer;
+  padding: 0 10px;
+  margin: 0 30px;
+}
+
+.container-button__toCart:active {
+  border: 1px solid #081b3c;
+  color: #081b3c;
+}
+
+.container-button__buy {
+  width: 126px;
+  height: 60px;
+  background: #11397e;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.container-button__buy:active {
+  background: #081b3c;
+}
+
+.container-fare {
+  align-self: center;
+  margin-top: 30px;
+}
+
+@media screen and (max-width: 810px) {
+  .summary__info {
+    flex-wrap: wrap;
+    row-gap: 30px;
+    :nth-child(2) {
+      margin-left: 0;
+    }
+  }
+  .container-button__toCart {
+    margin: 0 10px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .container-button {
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    row-gap: 15px;
+  }
+}

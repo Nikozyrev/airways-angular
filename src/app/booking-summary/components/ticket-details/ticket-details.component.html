@@ -1,0 +1,36 @@
+<div class="summary__info__details" *ngIf="flight">
+  <div class="details__flight">
+    <div class="details__flight__route">
+      <span class="details__flight__route__number">
+        FR {{ flight.flightNum }}
+      </span>
+      <span class="details__flight__route__way">
+        {{ flight.locations.departure + " - " + flight.locations.arrival }}
+      </span>
+    </div>
+    <div class="details__flight__data">
+      <span class="details__flight__data__date">
+        {{ flight.dates.departure | date : "EEEE, d MMMM, y'" }}
+      </span>
+      <span class="details__flight__data__time">
+        {{ flight.dates.departure | date : "h:mm" }} —
+        {{ flight.dates.arrival | date : "h:mm" }}
+      </span>
+    </div>
+  </div>
+
+  <div class="container-passengers">
+    <app-passenger
+      *ngFor="let passenger of passengers.adult"
+      [passenger]="passenger"
+    ></app-passenger>
+    <app-passenger
+      *ngFor="let passenger of passengers.child"
+      [passenger]="passenger"
+    ></app-passenger>
+    <app-passenger
+      *ngFor="let passenger of passengers.infant"
+      [passenger]="passenger"
+    ></app-passenger>
+  </div>
+</div>

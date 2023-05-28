@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.divider-line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #e1e5eb;
+}
+
+.divider-text {
+  flex: 0 1 auto;
+  margin: 0 5px;
+}
