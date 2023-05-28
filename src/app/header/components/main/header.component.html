@@ -8,7 +8,7 @@
     <div
       class="header__wraper"
       [ngStyle]="
-        !activeRout || activeRout === '/cart'
+        !activeRout || activeRout === '/cart' || activeRout === '/account'
           ? { 'justify-content': 'space-between' }
           : {}
       "
@@ -16,7 +16,12 @@
       <a routerLink="/" class="header__logo-link">
         <img src="assets/Logo.svg" alt="logo" class="header-logo" />
       </a>
-      <ul *ngIf="activeRout && activeRout !== '/cart'" class="page__menu">
+      <ul
+        *ngIf="
+          activeRout && activeRout !== '/cart' && activeRout !== '/account'
+        "
+        class="page__menu"
+      >
         <li class="page__menu-item">
           <div
             class="page__num"
