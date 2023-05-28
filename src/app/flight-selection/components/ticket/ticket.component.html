@@ -6,12 +6,13 @@
       <p class="location">{{ ticket.locations.departure }}</p>
     </div>
     <div class="duration">
-      <p>
-        {{
+      <app-divider
+        class="divider"
+        [text]="
           calculateDuration(ticket.dates.arrival, ticket.dates.departure)
             | duration
-        }}
-      </p>
+        "
+      ></app-divider>
     </div>
     <div class="arrival">
       <p class="date">{{ ticket.dates.arrival | date : "EEE, d MMM y" }}</p>

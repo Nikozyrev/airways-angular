@@ -67,16 +67,46 @@
     font-size: 1.25rem;
     color: $primary-blue;
     line-height: 1.7rem;
+
+    @media screen and (max-width: 800px) {
+      font-size: 1.2rem;
+      line-height: 1.75rem;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 1rem;
+      line-height: 1.6rem;
+    }
   }
 
   .weekday {
     font-size: 1rem;
     line-height: 1.7rem;
+
+    @media screen and (max-width: 800px) {
+      font-size: 1rem;
+      line-height: 1.75rem;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 0.8rem;
+      line-height: 1.6rem;
+    }
   }
 
   .price {
     color: $primary-blue;
     font-size: 1.8rem;
     line-height: 2rem;
+
+    @media screen and (max-width: 800px) {
+      font-size: 1.5rem;
+      line-height: 1.75rem;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+    }
   }
 }
