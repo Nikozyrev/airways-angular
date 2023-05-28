@@ -5,7 +5,7 @@ const source = '[Auth]';
 
 export const setUser = createAction(
   `${source} Set User`,
-  props<{ user: IUser }>()
+  props<{ user: IUser | null }>()
 );
 
 export const setError = createAction(
@@ -22,3 +22,5 @@ export const login = createAction(
   `${source} Login`,
   props<{ userData: IUserLogIn }>()
 );
+
+export const logout = createAction(`${source} Logout`);
